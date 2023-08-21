@@ -1,7 +1,8 @@
-import { Layout, Card, Button, Tag, Image, Tabs, Badge } from 'antd'
+import { Layout, Card, Button, Tag, Image, Tabs } from 'antd'
 import headerImage from './images/city-white-background.png'
 import footerImage from './images/city-blue-background.png'
 import vancouverImage from './images/vancouver-zoning.png'
+import { EyeOutlined } from '@ant-design/icons'
 const { Header, Content, Footer } = Layout
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
               </p>
             </div>
             <div className='col-md-6'>
+
+              <div className='text-muted mb-4'>
+                <EyeOutlined /> Your city watchlist (3)
+              </div>
 
               <Tabs defaultActiveKey='1' type='card' items={[
                 {
@@ -118,6 +123,9 @@ function App() {
             <div className='col-md-6'>
               <h2>Track municipal capital projects</h2>
               <br />
+              <p className='lead'>
+                Municipal governments are a powerful force in driving major investment projects.
+              </p>
               <p className='lead'>
                 Understand where major government capital is being deployed on large projects such as entertainment districts, stadiums, community centers, parks, and more. Get ahead of everyone else by following the political conversations and measuring risk years in advance.
               </p>
