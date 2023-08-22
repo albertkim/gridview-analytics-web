@@ -37,9 +37,18 @@
   }
 }
 
+/* No <a></a> tag underlines */
+a {
+  text-decoration: none !important;
+}
+
+/* Class to darken a background image */
 .dark-img {
   position: relative;
   z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .dark-img::before {
@@ -60,8 +69,10 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   z-index: -1; /* Above the darkened layer but below the content */
+}
+
+/* Otherwise ant icons are aligned too low */
+.anticon {
+  vertical-align: 0px;
 }
