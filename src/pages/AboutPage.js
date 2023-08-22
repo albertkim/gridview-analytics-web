@@ -66,12 +66,9 @@ export function AboutPage() {
               <h1 className='display-4 fw-bold mb-4'>Ready to get started?</h1>
               <p className='lead mb-4'>Be on the cutting edge of municipal land zoning, development, and political intelligence. Never miss an opportunity. Win deals before competitors. Our team is here to help.</p>
               <div>
-                <Button className='mr-4' type='primary' size='large' style={{ marginRight: 15 }}>
-                  Book a demo
-                </Button>
-                <Link to='/about'>
-                  <Button size='large'>
-                    About us
+                <Link to='/demo'>
+                  <Button className='mr-4' type='primary' size='large'>
+                    Book a demo
                   </Button>
                 </Link>
               </div>

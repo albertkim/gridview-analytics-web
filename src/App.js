@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
+import { DemoPage } from './pages/DemoPage'
 const { Header, Content, Footer } = Layout
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
 
           <div className='container'>
             <Link className='text-white' to='/' style={{marginRight: 30}}>Home</Link>
-            <Link className='text-white' to='/about'>About</Link>
+            <Link className='text-white' to='/about' style={{marginRight: 30}}>About</Link>
+            <Link className='text-white' to='/demo'>Demo</Link>
           </div>
           
         </Header>
@@ -31,6 +33,7 @@ function App() {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/about' element={<AboutPage />} />
+              <Route path='/demo' element={<DemoPage />} />
             </Routes>
 
         </Content>
