@@ -7,10 +7,11 @@ export function DemoPage() {
       <p className='lead mb-4'>We're excited to connect!</p>
 
       <iframe 
-          src="https://xas7x0zd620.typeform.com/to/dGe4YCWH" 
+          src='https://xas7x0zd620.typeform.com/to/dGe4YCWH' 
           style={{ width: '100%', height: '500px', border: '0' }} 
-          frameborder="0" 
-          allowfullscreen="true"
+          frameborder='0' 
+          allowfullscreen='true'
+          title='demo'
       / >
 
       <div style={{height: 100}} />
