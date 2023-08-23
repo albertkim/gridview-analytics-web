@@ -19,11 +19,11 @@ export function HomePage() {
           <div className='row'>
             <div className='col-md-8 mx-auto'>
               <h1 className='display-4 fw-bold mb-4'>The competitive edge you need for your real estate investments</h1>
-              <p className='lead mb-4'>Track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
+              <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
                 <Link to='/demo'>
                   <Button className='mr-4' type='primary' size='large' style={{ marginRight: 15 }}>
-                    Book a demo
+                    Join the waitlist
                   </Button>
                 </Link>
                 <Link to='/about'>
@@ -170,7 +170,8 @@ export function HomePage() {
           <div className='col-md-6'>
             <h2>Understand municipal politics like never before</h2>
             <br />
-            <p className='lead'>City politics are obsure, hard to understand, and different for every city. Our platform simplifies all happenings as they relate to real estate and zoning and filters out the noise.</p>
+            <p className='lead'>City politics are obsure, hard to understand, and different for every city. Gridview Analytics simplifies all happenings as they relate to real estate and zoning and filters out the noise.</p>
+            <p className='lead'>Look up political discussions based on zone/address, and stay in tune with sentiment from both politicians and the public. Get the intelligence you need to protect your investments.</p>
           </div>
           <div className='col-md-6'>
 
@@ -357,7 +358,7 @@ export function HomePage() {
               <div>
                 <Link to='/demo'>
                   <Button className='mr-4' type='primary' size='large'>
-                    Book a demo
+                    Join the waitlist
                   </Button>
                 </Link>
               </div>

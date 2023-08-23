@@ -22,9 +22,9 @@ function App() {
         }}>
 
           <div className='container'>
-            <Link className='text-white' to='/' style={{marginRight: 30}}>Home</Link>
-            <Link className='text-white' to='/about' style={{marginRight: 30}}>About</Link>
-            <Link className='text-white' to='/demo'>Demo</Link>
+            <Link className='fw-bold text-white' to='/' style={{marginRight: 30}}>GRIDVIEW ANALYTICS</Link>
+            <Link className='text-white' to='/about' style={{marginRight: 30}}>ABOUT</Link>
+            <Link className='text-white' to='/demo'>WAITLIST</Link>
           </div>
           
         </Header>

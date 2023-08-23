@@ -3,7 +3,7 @@ export function DemoPage() {
   return (
     <div className='container my-5'>
 
-      <h1>Book a demo</h1>
+      <h1>Join our waitlist</h1>
       <p className='lead mb-4'>We're excited to connect!</p>
 
       <iframe 

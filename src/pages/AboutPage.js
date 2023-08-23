@@ -40,7 +40,7 @@ export function AboutPage() {
         <div className='row'>
           <div className='col-md-8'>
             <h1 className='fw-bold mb-4'>We serve the visionaries</h1>
-            <p className='lead mb-4'>Not everyone can imagine what a city could be in the future. People might call you crazy. But we need visionaries, those who can invest and build.</p>
+            <p className='lead mb-4'>Not everyone can imagine what a city could be in the future. People might call you crazy. But we need visionaries, those who can invest and build. Gridview Analytics provides the tools they need to move ahead with confidence.</p>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@ export function AboutPage() {
               <div>
                 <Link to='/demo'>
                   <Button className='mr-4' type='primary' size='large'>
-                    Book a demo
+                    Join the waitlist
                   </Button>
                 </Link>
               </div>
