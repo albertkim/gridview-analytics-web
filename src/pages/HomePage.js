@@ -140,6 +140,7 @@ export function HomePage() {
                   <th>Date proposed</th>
                   <th>Description</th>
                   <th>Est. cost</th>
+                  <th>Last discussion</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,16 +148,19 @@ export function HomePage() {
                   <td>06/30/2023</td>
                   <td>Approval for project A-437266</td>
                   <td>~$10,000,000 CAD</td>
+                  <td>12/11/2022<br /><a href='#'>View meeting notes</a></td>
                 </tr>
                 <tr>
                   <td>07/01/2023</td>
                   <td>Approval for project A-373264</td>
                   <td>~$85,000,000 CAD</td>
+                  <td className='text-muted'>No meetings</td>
                 </tr>
                 <tr>
                   <td>07/23/2023</td>
                   <td>Approval for project A-479856</td>
                   <td>~$150,000,000 CAD</td>
+                  <td className='text-muted'>No meetings</td>
                 </tr>
               </tbody>
             </table>
