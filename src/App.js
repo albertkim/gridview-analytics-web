@@ -4,6 +4,7 @@ import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { DemoPage } from './pages/DemoPage'
+import { NewsPage } from './pages/NewsPage'
 const { Header, Content, Footer } = Layout
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <div className='container'>
             <Link className='fw-bold text-white' to='/' style={{marginRight: 30}}>GRIDVIEW ANALYTICS</Link>
             <Link className='text-white' to='/about' style={{marginRight: 30}}>ABOUT</Link>
+            <Link className='text-white' to='/news' style={{marginRight: 30}}>NEWS</Link>
             <Link className='text-white' to='/demo'>WAITLIST</Link>
           </div>
           
@@ -33,6 +35,7 @@ function App() {
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/about' element={<AboutPage />} />
+              <Route path='/news' element={<NewsPage />} />
               <Route path='/demo' element={<DemoPage />} />
             </Routes>
 
