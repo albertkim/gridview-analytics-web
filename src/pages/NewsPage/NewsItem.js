@@ -13,7 +13,7 @@ export function NewsItem({date, title, sentiment, contents, links}) {
           links && links.length > 0 ? (
             <>
               {
-                links.map((l) => <div><a className='mr-2' href={l.url} target='_blank'>{l.title}</a></div>)
+                links.map((l) => <div><a className='mr-2' href={l.url} target='_blank' rel='noreferrer'>{l.title}</a></div>)
               }
             </>
           ) : undefined
