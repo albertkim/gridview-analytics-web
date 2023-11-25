@@ -174,6 +174,56 @@ const newsData = {
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72013'
         }
       ]
+    },
+    {
+      title: 'Rezonings, and development permits',
+      summary: '',
+      sentiment: 'neutral',
+      city: 'Burnaby',
+      date: 'Nov 20, 2023',
+      meetingType: 'council',
+      links: [
+        {
+          title: 'Rezoning: REZ #20-17 (revision)',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72014'
+        },
+        {
+          title: 'Rezoning: unnamed (applied)',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72004'
+        },
+        {
+          title: 'Rezoning: REZ #18-23 (revision)',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72007'
+        }
+      ]
+    },
+    {
+      title: 'Burnaby Consolidated Fees and Charges Bylaw – Additional Amendments for 2023',
+      summary: 'The document details proposed adjustments to various fees in Burnaby for 2024, including changes to local improvement, sewer connection, and bylaw fees, plus a revision of golf fees, all effective from January 1, 2024.',
+      sentiment: 'neutral',
+      city: 'Burnaby',
+      date: 'Nov 20, 2023',
+      meetingType: 'council',
+      links: [
+        {
+          title: 'Burnaby Consolidated Fees and Charges Bylaw – Additional Amendments for 2023',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72017'
+        }
+      ]
+    },
+    {
+      title: '2024 - 2028 Financial Plan Highlights',
+      summary: 'The 2024-2028 Financial Plan Highlights for Burnaby include a $674 million operating plan with a 4.5% property tax increase and key investments in community safety and services, and a $365.3 million capital plan focusing on major projects like community centers and infrastructure.',
+      sentiment: 'neutral',
+      city: 'Burnaby',
+      date: 'Nov 20, 2023',
+      meetingType: 'council',
+      links: [
+        {
+          title: '2024 - 2028 Financial Plan Highlights',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72029'
+        }
+      ]
     }
   ]
 }
