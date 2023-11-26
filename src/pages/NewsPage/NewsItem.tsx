@@ -1,4 +1,4 @@
-import { Popover } from 'antd'
+import { Popover, Tag } from 'antd'
 import React, { useState } from 'react'
 
 interface NewsItemProps {
@@ -35,27 +35,36 @@ export function NewsItem({date, title, sentiment, contents, tooltip, links}: New
             <>
               {
                 links.map((l) => 
-                  l.summary ? 
-                  (<div>
-                    <Popover
-                      content={
-                        <div style={{width: 400}}>
-                          <p>{l.summary}</p>
-                          <p><a className='mr-2' href={l.url} target='_blank' rel='noreferrer'>Source</a></p>
-                          <a onClick={hide}>Close</a>
-                        </div>
+                  (
+                    <div>
+                      <a href={l.url} target='_blank' rel='noreferrer'>
+                        {l.title}
+                      </a>
+                      {
+                        l.summary ? (
+                          <Popover
+                            content={
+                              <div style={{width: 400}}>
+                                <div><b>{l.title}</b></div>
+                                <div className='mb-2'>
+                                  <a href={l.url} target='_blank' rel='noreferrer'>Source URL</a>
+                                </div>
+                                <div className='text-muted'>{l.summary}</div>
+                              </div>
+                            }
+                            trigger='click'
+                            open={open}
+                            onOpenChange={(e) => handleOpenChange(e)}
+                            placement='bottom'
+                          >
+                            <Tag color='default' style={{cursor: 'pointer', marginLeft: '0.5rem'}}>
+                              Details
+                            </Tag>
+                          </Popover>
+                        ) : undefined
                       }
-                      title={l.title}
-                      trigger="click"
-                      open={open}
-                      onOpenChange={(e) => handleOpenChange(e)}
-                      placement="bottom"
-                    >
-                    <div>{l.title}</div>
-                    </Popover>
-
-                  </div>) :
-                  (<div><a className='mr-2' href={l.url} target='_blank' rel='noreferrer'>{l.title}</a></div>)
+                    </div>
+                  )
                 )
               }
             </>
