@@ -9,8 +9,6 @@ export function DemoPage() {
       <iframe 
           src='https://xas7x0zd620.typeform.com/to/dGe4YCWH' 
           style={{ width: '100%', height: '500px', border: '0' }} 
-          frameborder='0' 
-          allowfullscreen='true'
           title='demo'
       / >
 

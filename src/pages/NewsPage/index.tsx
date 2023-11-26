@@ -189,7 +189,8 @@ const newsData = {
         },
         {
           title: 'Rezoning: PROPOSED DENSITY TRANSFER AND REDEVELOPMENT - BROADVIEW CP (applied)',
-          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72004'
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72004',
+          summary: 'Details a plan to rezone and redevelop properties on both sides of Canada Way in Burnaby. The proposal involves transferring density between these sites to facilitate mixed-use, multi-family development with commercial uses at grade, aligning with Broadview Community Plan guidelines. The plan by AviSina Properties includes full underground parking, with heights up to 12 storeys for certain phases. No financial implications are noted, and the proposal aims to provide a significant amount of rental housing efficiently.'
         },
         {
           title: 'Rezoning: REZ #18-23 (revision)',
