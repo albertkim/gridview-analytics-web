@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Specific styles for the hamburger menu and responsive behavior */
+.hamburger-button {
+  display: none; /* Hidden on larger screens */
+}
+
+@media (max-width: 600px) {
+  .hamburger-button {
+    display: block; /* Shown on small screens */
+  }
+
+  .menu-large {
+    display: none; /* Hide the default menu on small screens */
+  }
+
+  .menu-small {
+    display: flex; /* Show the collapsed menu on small screens */
+    flex-direction: column; /* Align menu items vertically */
+  }
+
+  .menu-small.hidden {
+    display: none; /* Hide when menu is not toggled */
+  }
+}

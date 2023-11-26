@@ -188,7 +188,7 @@ const newsData = {
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72014'
         },
         {
-          title: 'Rezoning: unnamed (applied)',
+          title: 'Rezoning: PROPOSED DENSITY TRANSFER AND REDEVELOPMENT - BROADVIEW CP (applied)',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72004'
         },
         {
@@ -198,7 +198,7 @@ const newsData = {
       ]
     },
     {
-      title: 'Burnaby Consolidated Fees and Charges Bylaw – Additional Amendments for 2023',
+      title: 'Burnaby Consolidated Fees and Charges Bylaw - Additional Amendments for 2023',
       summary: 'The document details proposed adjustments to various fees in Burnaby for 2024, including changes to local improvement, sewer connection, and bylaw fees, plus a revision of golf fees, all effective from January 1, 2024.',
       sentiment: 'neutral',
       city: 'Burnaby',
@@ -206,8 +206,22 @@ const newsData = {
       meetingType: 'council',
       links: [
         {
-          title: 'Burnaby Consolidated Fees and Charges Bylaw – Additional Amendments for 2023',
+          title: 'Burnaby Consolidated Fees and Charges Bylaw - Additional Amendments for 2023',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72017'
+        }
+      ]
+    },
+    {
+      title: 'Burnaby Rent Bank Funding Request',
+      summary: "The Burnaby Rent Bank requests $135,000 from the Operating Housing Reserve over three years for administrative costs. Operated by the Purpose Society since 2020, it offers no-interest loans and grants to low-income renters in Burnaby, preventing homelessness. Increased demand necessitates additional staffing. The program supports the Mayor's Task Force on Community Housing's homelessness prevention goals.",
+      sentiment: 'positive',
+      city: 'Burnaby',
+      date: 'Nov 20, 2023',
+      meetingType: 'council',
+      links: [
+        {
+          title: 'Burnaby Rent Bank Funding Request',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=71992'
         }
       ]
     },
