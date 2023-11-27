@@ -18,7 +18,7 @@ export function HomePage() {
         <div className='container'>
           <div className='row'>
             <div className='col-md-8 mx-auto'>
-              <h1 className='display-4 fw-bold mb-4'>The competitive edge you need for your real estate investments</h1>
+              <h1 className='display-4 fw-bold mb-4'>The competitive edge you need for your real estate developments</h1>
               <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
                 <Link to='/demo'>

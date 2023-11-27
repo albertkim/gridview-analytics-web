@@ -76,3 +76,7 @@ a {
 .anticon {
   vertical-align: 0px;
 }
+
+.navbar-collapse {
+  margin-left: 15px;
+}

@@ -52,8 +52,6 @@ function App() {
             <button
               className='navbar-toggler ml-auto'
               type='button'
-              data-toggle='collapse' 
-              ata-target='#navbarNav'
               onClick={handleMenuExpanded}
               style={{marginRight: 15}}>
               <span className='navbar-toggler-icon'></span>
