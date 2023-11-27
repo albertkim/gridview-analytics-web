@@ -160,6 +160,70 @@ const newsData = {
       ]
     },
     {
+      title: 'Rezoning and development permits',
+      summary: '',
+      sentiment: 'neutral',
+      city: 'Vancouver',
+      date: 'Nov 14, 2023',
+      meetingType: 'Public hearing',
+      links: [
+        {
+          title: 'Rezoning: 5515-5525 Elizabeth Street (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/phea1SR.PDF',
+          summary: 'The document summarizes a proposal to rezone 5515-5525 Elizabeth Street from R1-1 to CD-1, allowing a four-storey residential building with a partial 5th-floor amenity area, comprising 27 strata-titled units. The floor space ratio would increase from 0.7 to 2.0, and building height from 10.7 m to 13.7 m, with an additional height allowance for rooftop amenities. Approval is recommended subject to specific conditions.'
+        },
+        {
+          title: 'Rezoning: 1510 West 71st Avenue and 8733 Granville Street (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/phea2SR.PDF',
+          summary: 'The document proposes rezoning 1510 West 71st Avenue and 8733 Granville Street from C-2 and RM-3A to CD-1 for a six-storey mixed-use building with commercial space and 74 secured rental units. The plan includes a height of 22.0 m and an FSR of 3.38, with approval recommended subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 430-440 West Pender Street (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/phea3SR.PDF',
+          summary: 'The document proposes rezoning 430-440 West Pender Street from DD to CD-1 for a 12-storey mixed-use building with 80 secured market rental units, commercial space at-grade, a partial 13th floor rooftop amenity area, an FSR of 8.42, and a maximum building height of 32.0 m (105 ft.) with additional height for rooftop amenities.'
+        },
+        {
+          title: 'Rezoning: 3231-3245 Fraser Street and 675 East 17th Avenue (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/phea4SR.PDF',
+          summary: 'The document proposes rezoning 3231-3245 Fraser Street and 675 East 17th Avenue from C-2 to CD-1 for a 14-storey mixed-use building with 110 secured rental units (20% as moderate income units), commercial space at-grade, a partial 15th-floor amenity area, an FSR of 6.9, and a maximum height of 45.5 m (149 ft.), with additional height for rooftop amenities.'
+        }
+      ]
+    },
+    {
+      title: 'Elimination of Minimum Parking Requirements - Phase 2',
+      summary: 'Standing Committee approved. The document outlines Phase 2 of eliminating minimum vehicle parking requirements in Vancouver. It proposes extending Downtown parking standards to the West End Robson North and Broadway Plan Area, effective January 1, 2024. Additionally, it includes amendments to loading rates, design standards, and bicycle facility requirements, and directs staff to develop a phasing plan for further elimination of minimum parking requirements and regulation of on-street parking by the end of 2024.',
+      sentiment: 'positive',
+      city: 'Vancouver',
+      date: 'Nov 15, 2023',
+      meetingType: 'Standing Committee on City Finance and Services',
+      links: [
+        {
+          title: 'Elimination of Minimum Parking Requirements – Phase 2 (PDF)',
+          url: 'https://council.vancouver.ca/20231115/documents/cfsc1.pdf'
+        }
+      ]
+    },
+    {
+      title: 'Rezoning and development permits',
+      summary: '',
+      sentiment: 'neutral',
+      city: 'Vancouver',
+      date: 'Nov 16, 2023',
+      meetingType: 'Public hearing',
+      links: [
+        {
+          title: 'Rezoning: 3529-3589 Arbutus Street and 2106 West 19th Avenue (approved)',
+          url: 'https://council.vancouver.ca/20231116/documents/phea1sr.pdf',
+          summary: 'This document outlines the approved rezoning of 3529-3589 Arbutus Street and 2106 West 19th Avenue in Vancouver from residential to residential rental district, allowing a five-story rental building. The approval is subject to conditions outlined in the report by Andrew Cheung Architects Inc.'
+        },
+        {
+          title: 'Rezoning: 6065-6075 Collingwood Place (approved)',
+          url: 'https://council.vancouver.ca/20231116/documents/phea2sr.pdf',
+          summary: 'The rezoning of 6065-6075 Collingwood Place from a residential to a residential rental district has been approved, allowing a five-story rental building with a height of 16.8 meters and a floor space ratio of 2.40. This decision follows recommendations by the General Manager of Planning, Urban Design, and Sustainability, subject to specific conditions.'
+        }
+      ]
+    },
+    {
       title: 'Public Concerns on Albridge Extension Contract',
       summary: "Multiple residents voiced concerns about safety, drug use, and crime escalation in their neighborhood, attributing these issues to the Albridge extension contract. They stressed the need for responsible behavior and better management.",
       sentiment: 'concerned',
@@ -251,6 +315,10 @@ const newsData = {
       date: 'Nov 20, 2023',
       meetingType: 'council',
       links: [
+        {
+          title: 'Council meeting (with video)',
+          url: 'https://pub-burnaby.escribemeetings.com/Meeting.aspx?Id=d2a93368-043a-48c6-8fa6-dc0cbf0b10ea&Agenda=Agenda&lang=English&Item=30&Tab=attachments'
+        },
         {
           title: 'Burnaby Consolidated Fees and Charges Bylaw - Additional Amendments for 2023',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72017'
