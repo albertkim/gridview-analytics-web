@@ -13,6 +13,10 @@ const newsData = {
         {
           title: 'Council meetings (YouTube)',
           url: 'https://www.youtube.com/@VanCityClerk/streams'
+        },
+        {
+          title: 'News',
+          url: 'https://vancouver.ca/news-calendar/all-news-listing.aspx' // Best source so far
         }
       ]
     },
@@ -21,7 +25,7 @@ const newsData = {
       links: [
         {
           title: 'Council meetings (2023)',
-          url: 'https://citycouncil.richmond.ca/schedule/WebAgendaMinutesList.aspx?Category=6&Year=2023'
+          url: 'https://citycouncil.richmond.ca/schedule/WebAgendaMinutesList.aspx?Category=6&Year=2023' // Best source so far
         },
         {
           title: 'Council meetings (YouTube)',
@@ -34,92 +38,126 @@ const newsData = {
       links: [
         {
           title: 'Council meetings',
-          url: 'https://pub-burnaby.escribemeetings.com/?Year=2023'
+          url: 'https://pub-burnaby.escribemeetings.com/?Year=2023' // Best source so far
+        },
+        {
+          title: 'News',
+          url: 'https://www.burnaby.ca/our-city/whats-new/all-news'
         }
       ]
     }
   ],
   news: [
     {
-      title: 'Active Transportation Funding',
-      summary: 'The council reviewed applications for funding to enhance active transportation infrastructure in Vancouver, aiming to improve mobility and safety for cyclists and pedestrians.',
-      sentiment: 'positive negative',
+      title: 'Funding Applications to B.C. Active Transportation Infrastructure Grants Program',
+      summary: 'Council approved two funding applications for the Granville Connector - Signalized Intersections and Drake Street Upgrades, each amounting to $500,000. Council also directed staff to report back with funding mechanisms to advance the Kent Avenue corridor for safe active transportation',
+      sentiment: 'positive',
       city: 'Vancouver',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes (PDF)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf'
+        },
+        {
+          title: 'Funding Applications to B.C. Active Transportation Infrastructure Grants Program (PDF)',
+          url: 'https://council.vancouver.ca/20231114/documents/r3.pdf'
+        }
+      ]
     },
     {
       title: 'Industrial Modernization and Intensification Framework',
-      summary: 'The council addressed the industrial modernization and intensification framework, discussing updates and policy recommendations to modernize industrial sectors.',
-      sentiment: 'neutral',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'UNDRIP Task Force Update',
-      summary: 'The UNDRIP task force provided an update on their action plan towards reconciliation, focusing on collaborative work with indigenous communities.',
+      summary: "This report addresses updates and recommendations for the Industrial Modernization and Intensification Framework in Vancouver. It outlines the city's efforts to modernize and intensify industrial lands, responding to high demand for space, low vacancy rates, and high rents. The report highlights the need for diversity in business types, especially technology companies, and suggests creating multi-level industrial buildings with non-industrial activities.",
       sentiment: 'positive',
       city: 'Vancouver',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes (PDF)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf'
+        },
+        {
+          title: 'Industrial Modernization and Intensification Framework – Updates and Policy Recommendations (PDF)',
+          url: 'https://council.vancouver.ca/20231114/documents/r4.pdf'
+        }
+      ]
     },
     {
-      title: 'BC Lions and Public Safety',
-      summary: "The council acknowledged the BC Lions football team's season and discussed public safety matters, highlighting community engagement and youth safety.",
+      title: 'Rezonings and development permits',
+      summary: '',
       sentiment: 'neutral',
       city: 'Vancouver',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'Citywide Plan Update',
-      summary: "The council was briefed on the citywide plan's progress, highlighting extensive community engagement efforts and strategic planning for Vancouver's long-term development.",
-      sentiment: 'neutral',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'Affordable Housing Projects',
-      summary: "Council discussed several new affordable housing projects, emphasizing partnerships with developers and community groups to increase housing accessibility.",
-      sentiment: 'positive',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'Environmental Sustainability Programs',
-      summary: "The council was presented with new environmental sustainability programs, focusing on green initiatives and setting ambitious goals for reducing the city's carbon footprint.",
-      sentiment: 'positive',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'Public Safety and Crime Prevention',
-      summary: "The council debated public safety issues, focusing on crime prevention strategies and the need for increased police presence and community-based initiatives.",
-      sentiment: 'mixed',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
-    },
-    {
-      title: 'Transportation and Traffic Management',
-      summary: "The council reviewed ongoing transportation policies, discussing traffic management plans and the integration of new technologies to improve citywide mobility.",
-      sentiment: 'neutral',
-      city: 'Vancouver',
-      date: 'Nov 14, 2023',
-      meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Rezoning: 4711-4787 Cambie Street (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr2.pdf',
+          summary: 'The report evaluates a rezoning application for 4711-4787 Cambie Street, proposing two six-storey residential buildings. It aligns with the Cambie Corridor Plan and is recommended for Public Hearing approval, subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 2231-2247 East 41st Avenue (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr3.pdf',
+          summary: 'The report proposes rezoning 2231-2247 East 41st Avenue from R1-1 to RR-2B for a five-storey rental building, delivering 61 units in line with the Secured Rental Policy. It recommends Public Hearing approval subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 6470 Larch Street (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr4.pdf',
+          summary: 'The report recommends rezoning 6470 Larch Street from R1-1 to RR-2B, allowing a five-storey rental building under the Secured Rental Policy. This would result in 33 secured rental units. Staff recommend Public Hearing approval subject to conditions'
+        },
+        {
+          title: 'Rezoning: 1710-1730 East Pender Street (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr5.pdf',
+          summary: 'The report evaluates a rezoning application for 1710-1730 East Pender Street from RM-4 and RM-4N to CD-1, proposing an 18-storey building with 191 social housing units and commercial space. It aligns with the Grandview-Woodland Community Plan and Housing Vancouver Strategy, recommended for Public Hearing approval subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 8120-8168 Lord Street and 540 West 65th Avenue (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr6.pdf',
+          summary: 'The report evaluates a rezoning application for 8120-8168 Lord Street and 540 West 65th Avenue to CD-1 for two six-storey buildings with 146 secured-market rental units, including five below-market rentals. It aligns with the Cambie Corridor Plan and is recommended for Public Hearing approval, subject to conditions'
+        },
+        {
+          title: 'Rezoning: 692 West 30th Avenue (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr7.pdf',
+          summary: 'The report proposes rezoning 692 West 30th Avenue from R1-1 to RM-8A, enabling a townhouse or rowhouse development with a maximum FSR of 1.20, potentially accommodating about ten townhouses. It aligns with the Cambie Corridor Plan and is recommended for Public Hearing approval subject to conditions​.'
+        },
+        {
+          title: 'Rezoning: 688 West 29th Avenue (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr8.pdf',
+          summary: 'The report recommends rezoning 688 West 29th Avenue from R1-1 to RM-8A to facilitate a townhouse or rowhouse development with a maximum FSR of 1.20, potentially accommodating about eight townhouses. It aligns with the Cambie Corridor Plan and is recommended for Public Hearing approval subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 4330-4408 Arbutus Street and 2092 Nanton Avenue (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr9.pdf',
+          summary: 'The report evaluates a rezoning application for 4330-4408 Arbutus Street and 2092 Nanton Avenue to CD-1 for a senior-focused Community Care Facility. It aligns with the Vancouver Plan and Arbutus Ridge/Kerrisdale/Shaughnessy Community Vision, and is recommended for Public Hearing approval subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 848 Seymour Street (public hearing)',
+          url: 'https://council.vancouver.ca/20231114/documents/rr10.pdf',
+          summary: 'The report evaluates a rezoning application for 848 Seymour Street to CD-1 to permit hotel development. It aligns with the Central Business District Rezoning Policy and Metro Core Jobs and Economy Land Use Plan, recommended for Public Hearing approval subject to conditions.'
+        },
+        {
+          title: 'Rezoning: 607-621 West 28th Avenue (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf',
+          summary: 'A By-law to amend Zoning and Development By-law No. 3575 to rezone an area from RS-1 to RM-8A regarding 607-621 West 28th Avenue (By-law No. 13854) (Councillor Zhou and Mayor Sim ineligible to vote)'
+        },
+        {
+          title: 'Rezoning: 668-692 West 54th Avenue (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf',
+          summary: "A By-law to amend Zoning and Development By-law No. 3575 to rezone an area from RS-1 to RM-8A regarding 668-692 West 54th Avenue (By-law No. 13855) (Councillor Zhou and Mayor Sim ineligible to vote)"
+        },
+        {
+          title: 'Rezoning: 160 West 44th Avenue (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf',
+          summary: "A By-law to amend Zoning and Development By-law No. 3575 to rezone an area from RS-1 to RM-8A regarding 160 West 44th Avenue (By-law No. 13856) (Councillor Zhou and Mayor Sim ineligible to vote)"
+        },
+        {
+          title: 'Development: DP-2022-00325 (approved)',
+          url: 'https://council.vancouver.ca/20231114/documents/regu20231114min.pdf',
+          summary: "THAT the form of development for this portion of the site known as 577 West 35th Avenue (formerly 4992-5138 Ash Street) be approved generally as illustrated in the Development Application Number DP-2022-00325, prepared GBL Architects, and submitted electronically on May 3, 2023, provided that the Director of Planning may impose conditions and approve design changes which would not adversely affect either the development character of the site or adjacent properties."
+        }
+      ]
     },
     {
       title: 'Public Concerns on Albridge Extension Contract',
@@ -189,7 +227,7 @@ const newsData = {
           summary: 'The document is a public hearing report for a revised rezoning proposal (REZ #20-17) for a portion of 6229 Marine Drive, focused on non-market housing development as part of the Edmonds Town Centre Plan. It details seeking Council authorization for a new proposed bylaw and amendments to facilitate development of affordable housing units with varying levels of affordability.'
         },
         {
-          title: 'Rezoning: PROPOSED DENSITY TRANSFER AND REDEVELOPMENT - BROADVIEW CP (applied)',
+          title: 'Rezoning: Broadview CP (city applied)',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72004',
           summary: 'Details a plan to rezone and redevelop properties on both sides of Canada Way in Burnaby. The proposal involves transferring density between these sites to facilitate mixed-use, multi-family development with commercial uses at grade, aligning with Broadview Community Plan guidelines. The plan by AviSina Properties includes full underground parking, with heights up to 12 storeys for certain phases. No financial implications are noted, and the proposal aims to provide a significant amount of rental housing efficiently.'
         },
