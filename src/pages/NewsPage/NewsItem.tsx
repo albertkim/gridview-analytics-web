@@ -11,7 +11,7 @@ interface NewsItemProps {
 }
 
 export function NewsItem({date, title, sentiment, contents, tooltip, links}: NewsItemProps) {
-  
+
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (newOpen: boolean) => {
@@ -41,7 +41,7 @@ export function NewsItem({date, title, sentiment, contents, tooltip, links}: New
                         l.summary ? (
                           <Popover
                             content={
-                              <div style={{width: 400}}>
+                              <div style={{maxWidth: 350}}>
                                 <div><b>{l.title}</b></div>
                                 <div className='mb-2'>
                                   <a href={l.url} target='_blank' rel='noreferrer'>Source URL</a>
