@@ -185,7 +185,8 @@ const newsData = {
       links: [
         {
           title: 'Rezoning: REZ #20-17 (revision)',
-          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72014'
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72014',
+          summary: 'The document is a public hearing report for a revised rezoning proposal (REZ #20-17) for a portion of 6229 Marine Drive, focused on non-market housing development as part of the Edmonds Town Centre Plan. It details seeking Council authorization for a new proposed bylaw and amendments to facilitate development of affordable housing units with varying levels of affordability.'
         },
         {
           title: 'Rezoning: PROPOSED DENSITY TRANSFER AND REDEVELOPMENT - BROADVIEW CP (applied)',
@@ -194,7 +195,13 @@ const newsData = {
         },
         {
           title: 'Rezoning: REZ #18-23 (revision)',
-          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72007'
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72007',
+          summary: "The document is a proposal for a swing site for interim rental housing at 6616 and 6638 Telford Avenue, seeking authorization for Belford Properties to work with the city on this project. It involves amending a Phased Development Agreement and a rezoning amendment bylaw. The site will provide 220 rental units, with additional units rented at market rates or below CMHC median rates, to accommodate tenants displaced by redevelopment in Burnaby's Maywood neighborhood."
+        },
+        {
+          title: 'Rezoning: REZ #21-22 (approved)',
+          url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72036',
+          summary: 'Purpose: to permit the construction of a mixed tenure high-rise apartment building with street-fronting live/work townhouses along Douglas Street'
         }
       ]
     },
@@ -221,7 +228,11 @@ const newsData = {
       meetingType: 'council',
       links: [
         {
-          title: 'Burnaby Rent Bank Funding Request',
+          title: 'Council meeting (with video)',
+          url: 'https://pub-burnaby.escribemeetings.com/Meeting.aspx?Id=d2a93368-043a-48c6-8fa6-dc0cbf0b10ea&Agenda=Agenda&lang=English&Item=41&Tab=attachments'
+        },
+        {
+          title: 'Burnaby Rent Bank Funding Request (PDF)',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=71992'
         }
       ]
@@ -235,7 +246,11 @@ const newsData = {
       meetingType: 'council',
       links: [
         {
-          title: '2024 - 2028 Financial Plan Highlights',
+          title: 'Council meeting (with video)',
+          url: 'https://pub-burnaby.escribemeetings.com/Meeting.aspx?Id=d2a93368-043a-48c6-8fa6-dc0cbf0b10ea&Agenda=Agenda&lang=English&Item=65&Tab=attachments'
+        },
+        {
+          title: '2024 - 2028 Financial Plan Highlights (PDF)',
           url: 'https://pub-burnaby.escribemeetings.com/filestream.ashx?DocumentId=72029'
         }
       ]

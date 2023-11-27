@@ -1,22 +1,14 @@
-import { Popover, Tag } from 'antd'
-import React, { useState } from 'react'
+import { LinkItem } from './LinkItem'
 
 interface NewsItemProps {
   date: string
   title: string
   sentiment?: string
   contents?: string
-  tooltip?: string
-  links: Array<{title: string, summary?: string, url: string}>
+  links: Array<{title: string, summary?: string | undefined, url: string}>
 }
 
-export function NewsItem({date, title, sentiment, contents, tooltip, links}: NewsItemProps) {
-
-  const [open, setOpen] = useState(false);
-
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen)
-  }
+export function NewsItem({date, title, sentiment, contents, links}: NewsItemProps) {
 
   return (
     <div className='mb-2'>
@@ -31,37 +23,7 @@ export function NewsItem({date, title, sentiment, contents, tooltip, links}: New
           links && links.length > 0 ? (
             <>
               {
-                links.map((l) => 
-                  (
-                    <div>
-                      <a href={l.url} target='_blank' rel='noreferrer'>
-                        {l.title}
-                      </a>
-                      {
-                        l.summary ? (
-                          <Popover
-                            content={
-                              <div style={{maxWidth: 350}}>
-                                <div><b>{l.title}</b></div>
-                                <div className='mb-2'>
-                                  <a href={l.url} target='_blank' rel='noreferrer'>Source URL</a>
-                                </div>
-                                <div className='text-muted'>{l.summary}</div>
-                              </div>
-                            }
-                            trigger='click'
-                            open={open}
-                            onOpenChange={(e) => handleOpenChange(e)}
-                            placement='bottom'
-                          >
-                            <Tag color='default' style={{cursor: 'pointer', marginLeft: '0.5rem'}}>
-                              Details
-                            </Tag>
-                          </Popover>
-                        ) : undefined
-                      }
-                    </div>
-                  )
+                links.map((l) => <LinkItem title={l.title} url={l.url} summary={l.summary} />
                 )
               }
             </>
