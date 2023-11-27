@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { Layout } from 'antd'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { DemoPage } from './pages/DemoPage'
 import { NewsPage } from './pages/NewsPage'
-const { Header, Content, Footer } = Layout
+const { Content, Footer } = Layout
 
 function App() {
 

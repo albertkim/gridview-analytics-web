@@ -11,15 +11,12 @@ interface NewsItemProps {
 }
 
 export function NewsItem({date, title, sentiment, contents, tooltip, links}: NewsItemProps) {
+  
   const [open, setOpen] = useState(false);
 
-  const hide = () => {
-    setOpen(false);
-  };
-
   const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen);
-  };
+    setOpen(newOpen)
+  }
 
   return (
     <div className='mb-2'>
