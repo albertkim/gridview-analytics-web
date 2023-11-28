@@ -230,34 +230,86 @@ const newsData = {
       city: 'Richmond',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes',
+          url: 'https://citycouncil.richmond.ca/agendas/council/111423_minutes.htm'
+        }
+      ]
     },
     {
       title: 'Review of Utility Rates and Budgets',
-      summary: "The council reviewed utility rates and budgets, focusing on the need for infrastructure investments and the impact on future rate increases. The discussion emphasized managing and mitigating these increases effectively.",
+      summary: "The 2024 District Energy Utility Rates report for the City of Richmond recommends amending bylaws to introduce new rates for Alexandra, Oval Village, and City Centre District Energy Utilities. The report proposes a 6.7% rate increase for commercial and two utility services, and a 1.0% increase for residential services in the Alexandra District Energy Utility. These rates aim to keep energy costs competitive and ensure financial sustainability, considering increased costs and inflation impacts. The report was adopted on consent.",
       sentiment: 'neutral',
       city: 'Richmond',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes',
+          url: 'https://citycouncil.richmond.ca/agendas/council/111423_minutes.htm'
+        },
+        {
+          title: '2024 district utility rates (PDF)',
+          url: 'https://citycouncil.richmond.ca/__shared/assets/1-_2024_district_energy_utility_rates70626.pdf'
+        }
+      ]
     },
     {
-      title: 'Arts and Heritage Initiatives',
-      summary: "The Council discussed the Richmond Arts facility needs assessment and the Steveston Heritage interpretive framework, emphasizing the importance of cultural diversity and connecting past and present in community development.",
-      sentiment: 'positive',
+      title: '2024 Utility Budgets and Rates',
+      summary: "The 2024 Utility Rates and Budget report proposes new rates for water, sewer, flood protection, and solid waste services in Richmond, reflecting cost increases primarily driven by Metro Vancouver. The report recommends adopting Option 3 for most services, aiming for financial sustainability and service maintenance. If the Finance Committee endorses it, amendment bylaws will be introduced at Council Meetings before adoption, for implementation by January 1, 2024",
+      sentiment: 'neutral',
       city: 'Richmond',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes',
+          url: 'https://citycouncil.richmond.ca/agendas/council/111423_minutes.htm'
+        },
+        {
+          title: '2024 utility budgets and rates (PDF)',
+          url: 'https://citycouncil.richmond.ca/__shared/assets/2-2024_utility_rates_budget70627.pdf'
+        }
+      ]
     },
     {
-      title: 'Business Licenses for Body Rub Parlors and Escort Services',
-      summary: "During the meeting, a councilor expressed concerns regarding the issuance of business licenses to body rub parlors and escort services, highlighting their potential connection to the sex trade industry and human trafficking.",
+      title: 'Rezonings and development permits',
+      summary: '',
+      sentiment: 'neutral',
+      city: 'Richmond',
+      date: 'Nov 14, 2023',
+      meetingType: 'council',
+      links: [
+        {
+          title: 'Rezoning: RZ 21-945869 (applied)',
+          url: 'https://citycouncil.richmond.ca/__shared/assets/Application_by_Terra_8120_Number_1_Road_Limited_Partnership_for_Rezoning70635.pdf',
+          summary: 'Terra 8120 Number 1 Road Limited Partnership proposes rezoning 8120 and 8140 No. 1 Road from "Single Detached (RS1/E)" to "Low Density Townhouses (RTL4)". Recommended for first reading, this change aims to develop nine townhouses with vehicle access from No. 1 Road'
+        },
+        {
+          title: 'Rezoning: RZ 22-010976 (applied)',
+          url: 'https://citycouncil.richmond.ca/__shared/assets/Application_by_Navreet_Gill_for_Rezoning_at_11831_11833_Seabrook_Crescent70634.pdf',
+          summary: 'Navreet Gill seeks rezoning of 11831/11833 Seabrook Crescent from "Single Detached (RS1/E)" to "Single Detached (RS2/B)" to subdivide into two single-family lots, each with secondary suites and vehicle access from Seabrook Crescent, recommended for first reading.'
+        }
+      ]
+    },
+    {
+      title: 'Potential lease extension amendment agreement for 6999 Alderbridge Way supportive housing',
+      summary: "Proposal for extending Alderbridge Supportive Housing's lease with PRHC until December 31, 2027, includes authorizing staff to negotiate and execute the amendment. The motion prompted discussion on local concerns like public drug use, homelessness, safety, and the fate of current residents, with suggestions for creative solutions and increased accountability from BC Housing and RainCity. Plans to reconvene the Community Advisory Committee, disbanded due to low attendance, were also discussed.",
       sentiment: 'concerned',
       city: 'Richmond',
       date: 'Nov 14, 2023',
       meetingType: 'council',
-      links: []
+      links: [
+        {
+          title: 'Council meeting minutes',
+          url: 'https://citycouncil.richmond.ca/agendas/council/111423_minutes.htm'
+        },
+        {
+          title: 'Potential lease extension amendment agreement for 6999 Alderbridge Way supportive housing (PDF)',
+          url: 'https://citycouncil.richmond.ca/__shared/assets/_3_-_Potential_Lease_Extention70650.pdf'
+        }
+      ]
     },
     {
       title: 'Park prioritization framework',
