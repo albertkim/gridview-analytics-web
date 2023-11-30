@@ -1,9 +1,14 @@
-import { CityNewsPanel } from "./CityNewsPanel"
+import { CityNewsPanel } from './CityNewsPanel'
 
 export function NewsPage() {
 
   return (
-    <div className='container my-5'>
+    <div className='container my-4'>
+
+      <div className='text-center'>
+        <u>Metro Vancouver</u> | Metro Calgary | Metro Toronto | Metro Chicago | Metro New York
+      </div>
+      <hr />
 
       <h1 className='text-center fw-bold'>METRO VANCOUVER</h1>
 

@@ -52,6 +52,15 @@ const legacyData = {
           url: 'https://delta.civicweb.net/filepro/documents/' // Best source so far
         }
       ]
+    },
+    {
+      name: 'Coquitlamn',
+      links: [
+        {
+          title: 'Council meeting minutes',
+          url: 'https://www.coquitlam.ca/129/Agendas-Minutes' // Best source so far
+        }
+      ]
     }
   ],
   news: [

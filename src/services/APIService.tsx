@@ -43,6 +43,10 @@ export const APIService = {
       }
     })
     return newsResponse.data
+  },
+
+  async postNews() {
+
   }
 
 }

@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { DemoPage } from './pages/DemoPage'
 import { NewsPage } from './pages/NewsPage'
+import { AdminPage } from './pages/AdminPage'
 const { Content, Footer } = Layout
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
             <Route path='/about' element={<AboutPage />} />
             <Route path='/news' element={<NewsPage />} />
             <Route path='/demo' element={<DemoPage />} />
+            <Route path='/admin' element={<AdminPage />} />
           </Routes>
 
         </Content>
