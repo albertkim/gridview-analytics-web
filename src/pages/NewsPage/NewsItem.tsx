@@ -3,9 +3,14 @@ import { LinkItem } from './LinkItem'
 interface NewsItemProps {
   date: string
   title: string
-  sentiment?: string
-  contents?: string
-  links: Array<{title: string, summary?: string | undefined, url: string}>
+  sentiment: string | null
+  contents: string | null
+  links: Array<{
+    id: number,
+    title: string,
+    summary: string | null,
+    url: string
+  }>
 }
 
 export function NewsItem({date, title, sentiment, contents, links}: NewsItemProps) {
@@ -16,14 +21,16 @@ export function NewsItem({date, title, sentiment, contents, links}: NewsItemProp
         <p className='mb-0 flex-grow-1 text-wrap pe-2'><b>{title}</b></p>
         <span className='text-muted text-nowrap text-right'>{date || 'No date'}</span>
       </div>
-      <div className='text-muted'>Sentiment: {sentiment}</div>
+      {
+        sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
+      }
       <div className='text-muted'>{contents}</div>
       <div>
         {
           links && links.length > 0 ? (
             <>
               {
-                links.map((l) => <LinkItem title={l.title} url={l.url} summary={l.summary} />
+                links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />
                 )
               }
             </>

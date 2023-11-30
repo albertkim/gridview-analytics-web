@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 interface LinkItemProps {
   title: string
   url: string
-  summary?: string
+  summary: string | null
 }
 
 export function LinkItem({title, url, summary}: LinkItemProps) {
