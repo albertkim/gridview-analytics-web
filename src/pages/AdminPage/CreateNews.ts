@@ -2,14 +2,14 @@ import moment from 'moment'
 import { action, computed, makeObservable, observable } from "mobx"
 
 // Hardcode city IDs for now
-const cityIDMapping: {[key: string]: number} = {
+export const cityIDMapping: {[key: string]: number} = {
   Vancouver: 1,
   Richmond: 2,
   Burnaby: 3,
   Coquitlam: 4
 }
 
-class CreateLink {
+export class CreateLink {
 
   @observable title: string | null = null
   @observable summary: string | null = null
@@ -20,17 +20,17 @@ class CreateLink {
   }
 
   @action
-  setTitle(title: string) {
+  setTitle(title: string | null) {
     this.title = title || null
   }
 
   @action
-  setSummary(summary: string) {
+  setSummary(summary: string | null) {
     this.summary = summary || null
   }
 
   @action
-  setURL(url: string) {
+  setURL(url: string | null) {
     this.url = url || null
   }
 
@@ -41,7 +41,7 @@ export class CreateNews {
   @observable title: string | null = null
   @observable summary: string | null = null
   @observable meetingType: string | null = null
-  @observable cityName: string | null = null
+  @observable cityId: number | null = null
   @observable date: Date | null = null
   @observable sentiment: string | null = null
   @observable links: CreateLink[] = [new CreateLink()]
@@ -50,32 +50,41 @@ export class CreateNews {
     makeObservable(this)
   }
 
-  @computed get cityId() {
-    if (this.cityName) {
-      return cityIDMapping[this.cityName] || null
-    } else {
+  @computed get cityName() {
+    if (!this.cityId) {
       return null
     }
+    for (const [cityName, id] of Object.entries(cityIDMapping)) {
+      if (id === this.cityId) {
+        return cityName
+      }
+    }
+    return null
   }
 
   @action
-  setTitle(title: string) {
+  setTitle(title: string | null) {
     this.title = title || null
   }
 
   @action
-  setSummary(summary: string) {
+  setSummary(summary: string | null) {
     this.summary = summary || null
   }
 
   @action
-  setMeetingType(meetingType: string) {
+  setMeetingType(meetingType: string | null) {
     this.meetingType = meetingType || null
   }
 
   @action
-  setCityName(cityName: string) {
-    this.cityName = cityName || null
+  setCityId(cityId: number | null) {
+    this.cityId = cityId || null
+  }
+
+  @action
+  setDate(date: Date | null) {
+    this.date = date || null
   }
 
   @action
