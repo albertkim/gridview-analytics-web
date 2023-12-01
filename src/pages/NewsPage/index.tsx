@@ -10,7 +10,7 @@ export function NewsPage() {
       </div>
       <hr />
 
-      <h1 className='text-center fw-bold'>METRO VANCOUVER</h1>
+      <h1 className='text-center fw-bold'>METRO VANCOUVER REGION</h1>
 
       <hr />
       <div className='text-center'>

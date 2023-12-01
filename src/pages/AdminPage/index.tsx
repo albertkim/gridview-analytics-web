@@ -1,6 +1,8 @@
 import { Button, Input, Space } from 'antd'
-import TextArea from 'antd/es/input/TextArea'
+import { observer } from 'mobx-react'
 import { useState } from 'react'
+import { CreateNews } from './CreateNews'
+import TextArea from 'antd/es/input/TextArea'
 
 interface ICreateNews {
   title: string | null
@@ -16,23 +18,9 @@ interface ICreateNews {
   }>
 }
 
-export function AdminPage() {
+const createNews = new CreateNews()
 
-  const [formData, setFormData] = useState<ICreateNews>({
-    title: null,
-    summary: null,
-    meetingType: null,
-    cityId: null,
-    date: null,
-    sentiment: null,
-    links: [
-      {
-        title: null,
-        summary: null,
-        url: null
-      }
-    ]
-  })
+export const AdminPage = observer(() => {
 
   const environment = process.env.NODE_ENV!
 
@@ -53,25 +41,34 @@ export function AdminPage() {
         <div className='col-md-6 mb-4'>
           <div className='mb-2'>
             <div>Title</div>
-            <Input />
+            <Input value={createNews.title || ''} onChange={(e) => createNews.setTitle(e.target.value)} />
           </div>
           <div className='mb-2'>
             <div>Summary</div>
-            <TextArea rows={4} />
+            <TextArea
+              rows={4}
+              value={createNews.summary || ''}
+              onChange={(e) => createNews.setSummary(e.target.value)} />
           </div>
+          <br />
           <div className='mb-2' style={{paddingLeft: 24}}>
-            <div>Links <a href='#'>[add link]</a></div>
+            <div>Links <a href='#' onClick={() => createNews.addLink()}>[add link]</a></div>
             {
-              formData.links.map((link) => {
+              createNews.links.map((link) => {
                 return (
                   <>
+                    <hr />
                     <div className='mb-2'>
                       <div>Title</div>
-                      <Input />
+                      <Input value={link.title || ''} onChange={(e) => link.setTitle(e.target.value)} />
+                    </div>
+                    <div className='mb-2'>
+                      <div>URL</div>
+                      <Input value={link.url || ''} onChange={(e) => link.setURL(e.target.value)} />
                     </div>
                     <div className='mb-2'>
                       <div>Summary</div>
-                      <TextArea rows={4} />
+                      <Input value={link.summary || ''} onChange={(e) => link.setSummary(e.target.value)} />
                     </div>
                   </>
                 )
@@ -91,7 +88,7 @@ export function AdminPage() {
           <br />
           <pre>
             {
-              JSON.stringify(formData, null, 2)
+              JSON.stringify(createNews.getNetworkObject(), null, 2)
             }
           </pre>
         </div>
@@ -101,4 +98,4 @@ export function AdminPage() {
     </div>
   )
 
-}
+})

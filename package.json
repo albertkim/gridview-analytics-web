@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.10",
+    "@types/moment": "^2.13.0",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
@@ -17,6 +18,9 @@
     "antd": "^5.8.2",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.1",
+    "mobx": "^6.12.0",
+    "mobx-react": "^9.1.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.15.0",
@@ -26,7 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
