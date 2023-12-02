@@ -42,11 +42,12 @@ export const APIService = {
         city: city
       }
     })
-    return newsResponse.data
+    return newsResponse.data as INewsResponse
   },
 
-  async postNews() {
-
+  async postNews(createNews: any) {
+    const newsResponse = await axios.post(`/api/v1/admin/news`, createNews)
+    return newsResponse.data as INews
   }
 
 }

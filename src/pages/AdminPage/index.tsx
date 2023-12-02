@@ -1,8 +1,9 @@
-import { Button, DatePicker, Input, Select, Space } from 'antd'
+import { Button, DatePicker, Input, Select, Space, message } from 'antd'
 import { observer } from 'mobx-react'
 import { CreateNews, cityIDMapping } from './CreateNews'
 import React from 'react'
 import TextArea from 'antd/es/input/TextArea'
+import { APIService } from '../../services/APIService'
 
 function toTitleCase(string: string) {
   return string
@@ -32,12 +33,25 @@ export const AdminPage = observer(() => {
     )
   }
 
+  const [messageApi, contextHolder] = message.useMessage()
+
   const cityIDArray = Object.entries(cityIDMapping).map((c) => {
     return {
       cityId: c[1],
       cityName: c[0]
     }
   })
+
+  async function submitCreateNewsRequest() {
+    try {
+      const createdNews = await APIService.postNews(createNews.getNetworkObject())
+      console.log(createdNews)
+      messageApi.success('News item successfully posted')
+    } catch (error) {
+      console.error(error)
+      messageApi.error('Error creating news item')
+    }
+  }
 
   return (
     <div className='container my-4'>
@@ -149,8 +163,9 @@ export const AdminPage = observer(() => {
           <br />
           <div className='d-flex justify-content-end'>
             <Space>
-              <Button>Clear</Button>
-              <Button type='primary'>Submit</Button>
+              <Button type='primary' onClick={() => submitCreateNewsRequest()}>
+                Submit
+              </Button>
             </Space>
           </div>
         </div>
