@@ -114,4 +114,15 @@ export class CreateNews {
     }
   }
 
+  @action
+  clearForm() {
+    this.title = null
+    this.summary = null
+    this.meetingType = null
+    this.cityId = null
+    this.date = null
+    this.sentiment = null
+    this.links = [new CreateLink()]
+  }
+
 }
