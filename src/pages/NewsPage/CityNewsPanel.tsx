@@ -28,7 +28,7 @@ export function CityNewsPanel({city}: IParameters) {
       }
     }
     getNews()
-  }, [currentPage])
+  }, [currentPage, city])
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)

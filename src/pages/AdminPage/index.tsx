@@ -33,7 +33,7 @@ export const AdminPage = observer(() => {
     )
   }
 
-  const [messageApi, contextHolder] = message.useMessage()
+  const [messageApi] = message.useMessage()
 
   const cityIDArray = Object.entries(cityIDMapping).map((c) => {
     return {
