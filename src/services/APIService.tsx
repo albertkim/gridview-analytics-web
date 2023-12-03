@@ -46,6 +46,7 @@ export const APIService = {
   },
 
   async postNews(createNews: any) {
+    console.log(createNews)
     const newsResponse = await axios.post(`/api/v1/admin/news`, createNews)
     return newsResponse.data as INews
   }

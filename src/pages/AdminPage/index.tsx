@@ -1,7 +1,7 @@
 import { Button, DatePicker, Input, Select, Space, message } from 'antd'
 import { observer } from 'mobx-react'
 import { CreateNews, cityIDMapping } from './CreateNews'
-import React from 'react'
+import React, { useState } from 'react'
 import TextArea from 'antd/es/input/TextArea'
 import { APIService } from '../../services/APIService'
 
@@ -18,9 +18,11 @@ function toTitleCase(string: string) {
     .join(' ')
 }
 
-const createNews = new CreateNews()
+let createNews = new CreateNews()
 
 export const AdminPage = observer(() => {
+
+  const [loading, setLoading] = useState(false)
 
   const environment = process.env.NODE_ENV!
 
@@ -33,7 +35,7 @@ export const AdminPage = observer(() => {
     )
   }
 
-  const [messageApi] = message.useMessage()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const cityIDArray = Object.entries(cityIDMapping).map((c) => {
     return {
@@ -42,19 +44,30 @@ export const AdminPage = observer(() => {
     }
   })
 
+  async function clearForm() {
+    createNews.clearForm()
+  }
+
   async function submitCreateNewsRequest() {
     try {
+      setLoading(true)
       const createdNews = await APIService.postNews(createNews.getNetworkObject())
+      setLoading(false)
       console.log(createdNews)
+      clearForm()
       messageApi.success('News item successfully posted')
-    } catch (error) {
+    } catch (error: any) {
+      setLoading(false)
       console.error(error)
-      messageApi.error('Error creating news item')
+      messageApi.error(error.response.data.error)
     }
   }
 
   return (
     <div className='container my-4'>
+
+      {/* For Ant Design message component */}
+      {contextHolder}
 
       <div className='row'>
 
@@ -106,6 +119,12 @@ export const AdminPage = observer(() => {
               rows={2}
               value={createNews.summary || ''}
               onChange={(e) => createNews.setSummary(e.target.value)} />
+          </div>
+          <div className='mb-2'>
+            <div>Sentiment</div>
+            <Input
+              value={createNews.sentiment || ''}
+              onChange={(e) => createNews.setSentiment(e.target.value)} />
           </div>
           <hr />
           <div className='mb-2' style={{paddingLeft: 24}}>
@@ -163,7 +182,10 @@ export const AdminPage = observer(() => {
           <br />
           <div className='d-flex justify-content-end'>
             <Space>
-              <Button type='primary' onClick={() => submitCreateNewsRequest()}>
+              <Button onClick={() => clearForm()}>
+                Clear
+              </Button>
+              <Button type='primary' onClick={() => submitCreateNewsRequest()} loading={loading}>
                 Submit
               </Button>
             </Space>

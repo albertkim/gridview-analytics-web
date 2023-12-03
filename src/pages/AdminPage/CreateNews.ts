@@ -3,10 +3,11 @@ import { action, computed, makeObservable, observable } from "mobx"
 
 // Hardcode city IDs for now
 export const cityIDMapping: {[key: string]: number} = {
-  Vancouver: 1,
-  Richmond: 2,
-  Burnaby: 3,
-  Coquitlam: 4
+  'BC (province)': 5, // https://archive.news.gov.bc.ca
+  Vancouver: 1, // https://vancouver.ca/news-calendar/all-news-listing.aspx
+  Richmond: 2, // https://citycouncil.richmond.ca/schedule/WebAgendaMinutesList.aspx?Category=6&Year=2023
+  Burnaby: 3, // https://pub-burnaby.escribemeetings.com/?Year=2023
+  Coquitlam: 4 // https://www.coquitlam.ca/129/Agendas-Minutes
 }
 
 export class CreateLink {
@@ -112,6 +113,16 @@ export class CreateNews {
       sentiment: this.sentiment,
       links: this.links
     }
+  }
+
+  @action
+  clearForm() {
+    // Keep the city, date, and meeting type the same for easy data entry
+
+    this.title = null
+    this.summary = null
+    this.sentiment = null
+    this.links = [new CreateLink()]
   }
 
 }

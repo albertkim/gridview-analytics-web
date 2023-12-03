@@ -14,13 +14,17 @@ export function NewsPage() {
 
       <hr />
       <div className='text-center'>
-        Vancouver | Burnaby | Richmond | North Vancouver | Coquitlam | Delta
+        BC | Vancouver | Burnaby | Richmond | Coquitlam | Surrey
       </div>
       <hr />
 
-      <div style={{height: 30}} />
+      <div style={{height: 8}} />
 
       <div className='row'>
+
+      <div className='col-md-6 mb-4'>
+        <CityNewsPanel city='BC (province)' />
+      </div>
 
       <div className='col-md-6 mb-4'>
         <CityNewsPanel city='Vancouver' />
@@ -32,6 +36,10 @@ export function NewsPage() {
 
       <div className='col-md-6 mb-4'>
         <CityNewsPanel city='Burnaby' />
+      </div>
+
+      <div className='col-md-6 mb-4'>
+        <CityNewsPanel city='Coquitlam' />
       </div>
 
       </div>
