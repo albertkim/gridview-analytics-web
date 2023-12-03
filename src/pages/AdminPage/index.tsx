@@ -56,10 +56,10 @@ export const AdminPage = observer(() => {
       console.log(createdNews)
       clearForm()
       messageApi.success('News item successfully posted')
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false)
       console.error(error)
-      messageApi.error('Error creating news item')
+      messageApi.error(error.response.data.error)
     }
   }
 

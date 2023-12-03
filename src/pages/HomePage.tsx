@@ -1,4 +1,4 @@
-import { Card, Button, Tag, Image, Tabs } from 'antd'
+import { Card, Button, Tag, Image, Tabs, Space } from 'antd'
 import headerImage from '../images/city-white-background.png'
 import vancouverImage from '../images/vancouver-zoning.png'
 import { EyeOutlined } from '@ant-design/icons'
@@ -18,19 +18,26 @@ export function HomePage() {
         <div className='container'>
           <div className='row'>
             <div className='col-md-8 mx-auto'>
-              <h1 className='display-4 fw-bold mb-4'>The competitive edge you need for your real estate developments</h1>
+              <h1 className='display-4 fw-bold mb-4'>The competitive edge to understand city developments</h1>
               <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
-                <Link to='/demo'>
-                  <Button className='mr-4' type='primary' size='large' style={{ marginRight: 15 }}>
-                    Join the waitlist
-                  </Button>
-                </Link>
-                <Link to='/about'>
-                  <Button size='large'>
-                    About us
-                  </Button>
-                </Link>
+                <Space>
+                  <Link to='/news'>
+                    <Button size='large'>
+                      City news
+                    </Button>
+                  </Link>
+                  <Link to='/about'>
+                    <Button size='large'>
+                      About us
+                    </Button>
+                  </Link>
+                  <Link to='/demo'>
+                    <Button type='primary' size='large'>
+                      Join the waitlist
+                    </Button>
+                  </Link>
+                </Space>
               </div>
             </div>
           </div>
@@ -360,11 +367,18 @@ export function HomePage() {
               <h1 className='display-4 fw-bold mb-4'>Ready to get started?</h1>
               <p className='lead mb-4'>Be on the cutting edge of municipal land zoning, development, and political intelligence. Never miss an opportunity. Win deals before competitors. Our team is here to help.</p>
               <div>
-                <Link to='/demo'>
-                  <Button className='mr-4' type='primary' size='large'>
-                    Join the waitlist
-                  </Button>
-                </Link>
+                <Space>
+                  <Link to='/news'>
+                    <Button size='large'>
+                      City news
+                    </Button>
+                  </Link>
+                  <Link to='/demo'>
+                    <Button className='mr-4' type='primary' size='large'>
+                      Join the waitlist
+                    </Button>
+                  </Link>
+                </Space>
               </div>
             </div>
           </div>
