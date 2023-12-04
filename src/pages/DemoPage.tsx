@@ -1,7 +1,14 @@
+import { Helmet } from "react-helmet"
+
 export function DemoPage() {
 
   return (
     <div className='container my-5'>
+
+      <Helmet>
+        <title>Demo Gridview</title>
+        <meta name='description' content='Contact us and learn about our premium metro region datasets.' />
+      </Helmet>
 
       <h1>Join our waitlist</h1>
       <p className='lead mb-4'>We're excited to connect!</p>

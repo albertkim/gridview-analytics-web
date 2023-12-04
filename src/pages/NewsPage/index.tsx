@@ -1,10 +1,16 @@
 import { Alert } from 'antd'
 import { CityNewsPanel } from './CityNewsPanel'
+import { Helmet } from 'react-helmet'
 
 export function NewsPage() {
 
   return (
     <div className='container my-4'>
+
+      <Helmet>
+        <title>Gridview City News</title>
+        <meta name='description' content='Stay up to date with city developments with links straight from the source.' />
+      </Helmet>
 
       <div className='text-center'>
         <u>Metro Vancouver</u> (others coming soon) | Metro Calgary | Metro Toronto | Metro Chicago | Metro New York

@@ -3,11 +3,17 @@ import headerImage from '../images/city-white-background.png'
 import vancouverImage from '../images/vancouver-zoning.png'
 import { EyeOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 export function HomePage() {
 
   return (
     <div>
+
+      <Helmet>
+        <title>Gridview Analytics</title>
+        <meta name='description' content='Stay up to date with city developments with premium rezoning data sets for select metro regions.' />
+      </Helmet>
 
       <div className='text-center text-white dark-img' style={{
         backgroundImage: `url(${headerImage})`,
