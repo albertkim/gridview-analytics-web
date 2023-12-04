@@ -1,3 +1,4 @@
+import { Alert } from 'antd'
 import { CityNewsPanel } from './CityNewsPanel'
 
 export function NewsPage() {
@@ -6,7 +7,7 @@ export function NewsPage() {
     <div className='container my-4'>
 
       <div className='text-center'>
-        <u>Metro Vancouver</u> | Metro Calgary | Metro Toronto | Metro Chicago | Metro New York
+        <u>Metro Vancouver</u> (others coming soon) | Metro Calgary | Metro Toronto | Metro Chicago | Metro New York
       </div>
       <hr />
 
@@ -18,7 +19,13 @@ export function NewsPage() {
       </div>
       <hr />
 
-      <div style={{height: 8}} />
+      <Alert type='info' message={
+        <span>
+          Sign up for the <a href='/demo'>Gridview Analytics premium service</a> to get access to detailed rezoning update data for Metro Vancouver.
+        </span>
+      } />
+
+      <div style={{height: 16}} />
 
       <div className='row'>
 
