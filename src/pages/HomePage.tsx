@@ -100,37 +100,39 @@ export function HomePage() {
               }
             ]} />
 
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th>Meeting date</th>
-                  <th>Description</th>
-                  <th>Info</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>06/30/2023</td>
-                  <td>IC-1 and IC-2 District separation</td>
-                  <td><a href='#'>Read more</a></td>
-                </tr>
-                <tr>
-                  <td>07/01/2023</td>
-                  <td>Various I, RM, 10N zoning changes</td>
-                  <td><a href='#'>Read more</a></td>
-                </tr>
-                <tr>
-                  <td>07/23/2023</td>
-                  <td>Section 2, 4, 5, 10 changes</td>
-                  <td><a href='#'>Read more</a></td>
-                </tr>
-                <tr>
-                  <td>07/23/2023</td>
-                  <td>Density Bonus Rates & Amenity Definitions</td>
-                  <td><a href='#'>Read more</a></td>
-                </tr>
-              </tbody>
-            </table>
+            <div className='table-responsive'>
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th>Meeting date</th>
+                    <th>Description</th>
+                    <th>Info</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>06/30/2023</td>
+                    <td>IC-1 and IC-2 District separation</td>
+                    <td><a href='#'>Read more</a></td>
+                  </tr>
+                  <tr>
+                    <td>07/01/2023</td>
+                    <td>Various I, RM, 10N zoning changes</td>
+                    <td><a href='#'>Read more</a></td>
+                  </tr>
+                  <tr>
+                    <td>07/23/2023</td>
+                    <td>Section 2, 4, 5, 10 changes</td>
+                    <td><a href='#'>Read more</a></td>
+                  </tr>
+                  <tr>
+                    <td>07/23/2023</td>
+                    <td>Density Bonus Rates & Amenity Definitions</td>
+                    <td><a href='#'>Read more</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
           </div>
         </div>
@@ -152,36 +154,38 @@ export function HomePage() {
 
             <Image src={vancouverImage} />
 
-            <table className='table mt-4'>
-              <thead>
-                <tr>
-                  <th>Date proposed</th>
-                  <th>Description</th>
-                  <th>Est. cost</th>
-                  <th>Last discussion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>06/30/2023</td>
-                  <td>Approval for project A-437266</td>
-                  <td>~$10,000,000 CAD</td>
-                  <td>12/11/2022<br /><a href='#'>View meeting notes</a></td>
-                </tr>
-                <tr>
-                  <td>07/01/2023</td>
-                  <td>Approval for project A-373264</td>
-                  <td>~$85,000,000 CAD</td>
-                  <td className='text-muted'>No meetings</td>
-                </tr>
-                <tr>
-                  <td>07/23/2023</td>
-                  <td>Approval for project A-479856</td>
-                  <td>~$150,000,000 CAD</td>
-                  <td className='text-muted'>No meetings</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className='table-responsive'>
+              <table className='table mt-4'>
+                <thead>
+                  <tr>
+                    <th>Date proposed</th>
+                    <th>Description</th>
+                    <th>Est. cost</th>
+                    <th>Last discussion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>06/30/2023</td>
+                    <td>Approval for project A-437266</td>
+                    <td>~$10,000,000 CAD</td>
+                    <td>12/11/2022<br /><a href='#'>View meeting notes</a></td>
+                  </tr>
+                  <tr>
+                    <td>07/01/2023</td>
+                    <td>Approval for project A-373264</td>
+                    <td>~$85,000,000 CAD</td>
+                    <td className='text-muted'>No meetings</td>
+                  </tr>
+                  <tr>
+                    <td>07/23/2023</td>
+                    <td>Approval for project A-479856</td>
+                    <td>~$150,000,000 CAD</td>
+                    <td className='text-muted'>No meetings</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
           </div>
         </div>
@@ -197,7 +201,7 @@ export function HomePage() {
           </div>
           <div className='col-md-6'>
 
-            <div className='d-flex mb-4'>
+            <div className='table-responsive d-flex mb-4'>
               <Card title='🏙️ City of Vancouver' style={{ width: 300, marginRight: 20 }}>
                 <div>
                   Population: 662,248 (2021)
