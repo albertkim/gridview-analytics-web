@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Layout } from 'antd'
+import { Layout, Image } from 'antd'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
@@ -48,7 +48,15 @@ function App() {
             style={{color: 'white'}}
             ref={navRef}>
 
-            <a className='navbar-brand' style={{marginLeft: 15}} href='/'>GRIDVIEW</a>
+            <a className='navbar-brand' style={{marginLeft: 15}} href='/'>
+              <Image
+                preview={false}
+                src={`${process.env.PUBLIC_URL}/logo.png`}
+                width={35}
+                height={35}
+                style={{marginBottom: 8}} />
+              GRIDVIEW
+            </a>
 
             <button
               className='navbar-toggler ml-auto'
@@ -61,16 +69,13 @@ function App() {
             <div className={`${menuExpanded ? '' : 'collapse'} navbar-collapse`}>
               <ul className='navbar-nav'>
                 <li className='nav-item'>
-                  <a className='nav-link' href='/'>Home</a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link' href='/news'>News</a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link' href='/about'>About</a>
+                  <a className='nav-link' href='/news'>City news</a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link' href='/demo'>Waitlist</a>
+                </li>
+                <li className='nav-item'>
+                  <a className='nav-link' href='/about'>About</a>
                 </li>
               </ul>
             </div>

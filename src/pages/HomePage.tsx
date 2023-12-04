@@ -18,12 +18,17 @@ export function HomePage() {
       <div className='text-center text-white dark-img' style={{
         backgroundImage: `url(${headerImage})`,
         backgroundPosition: 'center',
-        paddingTop: 200,
+        paddingTop: 100,
         paddingBottom: 200
       }}>
         <div className='container'>
           <div className='row'>
             <div className='col-md-8 mx-auto'>
+              <Image
+                preview={false}
+                src={`${process.env.PUBLIC_URL}/logo.png`}
+                width={200}
+                height={200} />
               <h1 className='display-4 fw-bold mb-4'>The competitive edge to understand city developments</h1>
               <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
