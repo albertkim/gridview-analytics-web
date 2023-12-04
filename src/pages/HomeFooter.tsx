@@ -13,17 +13,13 @@ export function HomeFooter() {
           <div className='row'>
             <div className='col-md-3'>
               <p className='lead'>Company</p>
-              <div><a>Home</a></div>
-              <div><a>About</a></div>
-              <div><a>Careers</a></div>
-              <div><a>Terms and conditions</a></div>
+              <div><a className='text-white' href='/'>Home</a></div>
+              <div><a className='text-white' href='/about'>About</a></div>
             </div>
             <div className='col-md-3'>
               <p className='lead'>Products</p>
-              <div><a>City view</a></div>
-              <div><a>Politics view</a></div>
-              <div><a>API</a></div>
-              <div><a>Services</a></div>
+              <div><a className='text-white' href='/news'>City news</a></div>
+              <div><a className='text-white' href='/waitlist'>City rezoning update data</a></div>
             </div>
           </div>
         </div>
