@@ -29,7 +29,7 @@ export function HomePage() {
                 src={`${process.env.PUBLIC_URL}/logo.png`}
                 width={200}
                 height={200} />
-              <h1 className='display-4 fw-bold mb-4'>The competitive edge to understand city developments</h1>
+              <h1 className='display-4 fw-bold mb-4'>Your competitive edge in understanding city developments</h1>
               <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
                 <Space>
