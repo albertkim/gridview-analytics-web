@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Layout, Image } from 'antd'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
@@ -87,11 +87,16 @@ function App() {
         <Content style={{backgroundColor: 'white'}}>
 
           <Routes>
+
             <Route path='/' element={<HomePage />} />
             <Route path='/about' element={<AboutPage />} />
-            <Route path='/news' element={<NewsPage />} />
             <Route path='/demo' element={<DemoPage />} />
             <Route path='/admin' element={<AdminPage />} />
+
+            {/* News URLs */}
+            <Route path='/news/metro_vancouver' element={<NewsPage />} />
+            <Route path='/news' element={<Navigate to='/news/metro_vancouver' replace />} />
+            
           </Routes>
 
         </Content>
