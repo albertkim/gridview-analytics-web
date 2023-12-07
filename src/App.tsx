@@ -5,8 +5,8 @@ import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { DemoPage } from './pages/DemoPage'
-import { NewsPage } from './pages/NewsPage'
 import { AdminPage } from './pages/AdminPage'
+import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
 const { Content, Footer } = Layout
 
 function App() {
@@ -94,7 +94,7 @@ function App() {
             <Route path='/admin' element={<AdminPage />} />
 
             {/* News URLs */}
-            <Route path='/news/metro_vancouver' element={<NewsPage />} />
+            <Route path='/news/:metroCityParam' element={<MetroCityPage />} />
             <Route path='/news' element={<Navigate to='/news/metro_vancouver' replace />} />
             
           </Routes>

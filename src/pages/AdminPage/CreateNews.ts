@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { action, computed, makeObservable, observable } from "mobx"
+import { action, computed, makeObservable, observable } from 'mobx'
 
 // Hardcode city IDs for now
 export const cityIDMapping: {[key: string]: number} = {
