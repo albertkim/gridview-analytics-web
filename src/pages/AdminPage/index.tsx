@@ -1,210 +1,112 @@
-import { Button, DatePicker, Input, Select, Space, message } from 'antd'
-import { observer } from 'mobx-react'
-import { CreateNews, cityIDMapping } from './CreateNews'
-import React, { useState } from 'react'
-import TextArea from 'antd/es/input/TextArea'
-import { APIService } from '../../services/APIService'
+import { useEffect, useState } from 'react'
+import { APIService, INewsResponse } from '../../services/APIService'
+import { Skeleton } from 'antd'
 
-function toTitleCase(string: string) {
-  return string
-    .toLowerCase()
-    .split(' ')
-    .map(word => {
-      if (word.length > 2 || ['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by'].indexOf(word) === -1) {
-        return word.charAt(0).toUpperCase() + word.slice(1)
-      }
-      return word
-    })
-    .join(' ')
-}
+export function AdminPage() {
 
-let createNews = new CreateNews()
+  const [news, setNews] = useState<INewsResponse | null>(null)
 
-export const AdminPage = observer(() => {
-
-  const [loading, setLoading] = useState(false)
-
-  const environment = process.env.NODE_ENV!
-
-  // This admin page should only be available in local development environments
-  if (environment !== 'development') {
-    return (
-      <div>
-        404
-      </div>
-    )
-  }
-
-  const [messageApi, contextHolder] = message.useMessage()
-
-  const cityIDArray = Object.entries(cityIDMapping).map((c) => {
-    return {
-      cityId: c[1],
-      cityName: c[0]
+  useEffect(() => {
+    const getNews = async function() {
+      const newsResponse = await APIService.getNews({
+        offset: 0,
+        limit: 999
+      })
+      setNews(newsResponse)
     }
+
+    getNews()
   })
-
-  async function clearForm() {
-    createNews.clearForm()
-  }
-
-  async function submitCreateNewsRequest() {
-    try {
-      setLoading(true)
-      const createdNews = await APIService.postNews(createNews.getNetworkObject())
-      setLoading(false)
-      console.log(createdNews)
-      clearForm()
-      messageApi.success('News item successfully posted')
-    } catch (error: any) {
-      setLoading(false)
-      console.error(error)
-      messageApi.error(error.response.data.error)
-    }
-  }
 
   return (
     <div className='container my-4'>
 
-      {/* For Ant Design message component */}
-      {contextHolder}
+      <h1 className='fw-bold'>ADMIN PAGE</h1>
 
-      <div className='row'>
+      <br />
+      <div>
+        <a href='/admin/create' target='_blank'>+ Add news</a>
+      </div>
+      <br />
 
-        <div className='col-md-6 mb-4'>
+      <hr />
 
-          <div className='row mb-2'>
-            <div className='col-md-6'>
-              <div>City</div>
-              <Select
-                value={createNews.cityId}
-                style={{width: '100%'}}
-                onChange={(e) => createNews.setCityId(e)}>
+      <div className='table-responsive'>
+        <table className='table table-sm table-borderless'>
+          <thead className='thead-light'>
+            <tr>
+              <th>City</th>
+              <th>News resources</th>
+              <th>Latest date</th>
+              <th>Stale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className='text-muted'>Vancouver</td>
+              <td>
+                <div>
+                  <a href='https://covapp.vancouver.ca/councilMeetingPublic/CouncilMeetings.aspx?SearchType=3' target='_blank'>
+                    Vancouver city council meeting agenda + minutes
+                  </a>
+                </div>
+                <div>
+                  <a href='https://vancouver.ca/news-calendar/all-news-listing.aspx' target='_blank'>
+                    Vancouver city news (includes resources)
+                  </a>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className='text-muted'>Richmond</td>
+              <td>
+                <a href='https://citycouncil.richmond.ca/decisions/search/results.aspx?QB0=AND&QF0=ItemTopic%7cResolutionText%7cFullText%7cSubject&QI0=&QB1=AND&QF1=Date&QI1=&QB4=AND&QF4=Date&QI4=%3e%3d%40DATE-1820&TN=minutes&AC=QBE_QUERY&BU=https%3a%2f%2fcitycouncil.richmond.ca%2fdecisions%2fsearch%2fdefault.aspx&RF=WebBriefDate&' target='_blank'>
+                  Richmond city council meeting minutes + resources
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr />
+      <br />
+
+      {
+        !news ?
+          <Skeleton />
+          :
+          <div className='table-responsive'>
+            <table className='table table-sm table-borderless'>
+              <thead className='thead-light'>
+                <th>Date</th>
+                <th>City</th>
+                <th>News</th>
+              </thead>
+              <tbody>
                 {
-                  cityIDArray.map((c) => {
+                  news.data.map((n) => {
                     return (
-                      <Select.Option
-                        key={c.cityId}
-                        value={c.cityId}>{c.cityName}
-                      </Select.Option>
+                      <tr>
+                        <td className='text-muted' style={{marginRight: 10}}>
+                          {n.date}
+                        </td>
+                        <td className='text-muted' style={{marginRight: 10}}>
+                          {n.cityName}
+                        </td>
+                        <td>
+                          <a href='#'>{n.title}</a>
+                        </td>
+                      </tr>
                     )
                   })
                 }
-              </Select>
-            </div>
-            <div className='col-md-6'>
-              <div>Date</div>
-              <DatePicker 
-                onChange={(e) => createNews.setDate(e ? e.toDate() : null)}
-                style={{width: '100%'}} />
-            </div>
+              </tbody>
+            </table>
           </div>
-
-          <div className='mb-2'>
-            <div>Meeting type</div>
-            <Input
-              value={createNews.meetingType || ''}
-              onChange={(e) => createNews.setMeetingType(e.target.value)} />
-          </div>
-          <hr />
-          <div className='mb-2'>
-            <div>Title</div>
-            <Input
-              value={createNews.title || ''}
-              onChange={(e) => createNews.setTitle(e.target.value)} />
-          </div>
-          <div className='mb-2'>
-            <div>Summary</div>
-            <TextArea
-              rows={2}
-              value={createNews.summary || ''}
-              onChange={(e) => createNews.setSummary(e.target.value)} />
-          </div>
-          <div className='mb-2'>
-            <div>Sentiment</div>
-            <Input
-              value={createNews.sentiment || ''}
-              onChange={(e) => createNews.setSentiment(e.target.value)} />
-          </div>
-          <hr />
-          <div className='mb-2' style={{paddingLeft: 24}}>
-            <div>Links <a href='#' onClick={() => createNews.addLink()}>[+ add link]</a></div>
-            {
-              createNews.links.map((link, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    <hr />
-                    <div className='mb-2'>
-                      <div>Title</div>
-                      <div className='text-muted'>Add [PDF] at the end if applicable. Feel free to paste text with links.</div>
-                      <Input
-                        value={link.title || ''}
-                        onChange={(e) => link.setTitle(e.target.value)}
-                        onPaste={(e) => {
-                          e.preventDefault()
-                          // Try to get HTML content from the clipboard
-                          const pastedHtml = e.clipboardData.getData('text/html')
-                          const doc = new DOMParser().parseFromString(pastedHtml, 'text/html')
-                          const anchor = doc.querySelector('a')
-
-                          if (anchor && anchor.href) {
-                            // If HTML content with hyperlink is found
-                            link.setTitle(anchor.textContent ? toTitleCase(anchor.textContent) : null)
-                            link.setURL(anchor.href)
-                          } else {
-                            // If no HTML content is found, fallback to plain text
-                            const pastedText = e.clipboardData.getData('text/plain')
-                            link.setTitle(toTitleCase(pastedText))
-                          }
-                        }} />
-                    </div>
-                    <div className='mb-2'>
-                      <div>URL</div>
-                      <Input
-                        value={link.url || ''}
-                        onChange={(e) => link.setURL(e.target.value)} />
-                    </div>
-                    <div className='mb-2'>
-                      <div>Summary</div>
-                      <TextArea
-                        rows={2}
-                        value={link.summary || ''}
-                        onChange={(e) => link.setSummary(e.target.value)} />
-                    </div>
-                    <div className='d-flex justify-content-end'>
-                      <a href='#' onClick={() => createNews.removeLink(index)}>[- remove link]</a>
-                    </div>
-                  </React.Fragment>
-                )
-              })
-            }
-          </div>
-          <br />
-          <div className='d-flex justify-content-end'>
-            <Space>
-              <Button onClick={() => clearForm()}>
-                Clear
-              </Button>
-              <Button type='primary' onClick={() => submitCreateNewsRequest()} loading={loading}>
-                Submit
-              </Button>
-            </Space>
-          </div>
-        </div>
-
-        <div className='col-md-6 mb-4'>
-          <div><b>PREVIEW</b></div>
-          <br />
-          <pre>
-            {
-              JSON.stringify(createNews.getNetworkObject(), null, 2)
-            }
-          </pre>
-        </div>
-
-      </div>
+      }
 
     </div>
   )
 
-})
+}

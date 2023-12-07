@@ -52,7 +52,7 @@ export interface INewsResponse {
 
 export const APIService = {
 
-  async getNews({offset, limit, city}: {offset: number, limit: number, city: string}) {
+  async getNews({offset, limit, city}: {offset: number, limit: number, city?: string}) {
     const newsResponse = await axios.get(`/api/v1/news`, {
       params: {
         offset: offset,
