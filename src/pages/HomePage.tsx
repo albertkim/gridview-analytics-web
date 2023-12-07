@@ -33,16 +33,16 @@ export function HomePage() {
               <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
               <div>
                 <Space>
-                  <Link to='/news'>
+                  <a href='/news'>
                     <Button size='large'>
                       City news
                     </Button>
-                  </Link>
-                  <Link to='/demo'>
-                    <Button type='primary' size='large'>
+                  </a>
+                  <a href='/premium'>
+                    <Button className='mr-4' type='primary' size='large'>
                       Join the waitlist
                     </Button>
-                  </Link>
+                  </a>
                 </Space>
               </div>
             </div>
@@ -378,16 +378,16 @@ export function HomePage() {
               <p className='lead mb-4'>Be on the cutting edge of municipal land zoning, development, and political intelligence. Never miss an opportunity. Win deals before competitors. Our team is here to help.</p>
               <div>
                 <Space>
-                  <Link to='/news'>
+                  <a href='/news'>
                     <Button size='large'>
                       City news
                     </Button>
-                  </Link>
-                  <Link to='/demo'>
+                  </a>
+                  <a href='/premium'>
                     <Button className='mr-4' type='primary' size='large'>
                       Join the waitlist
                     </Button>
-                  </Link>
+                  </a>
                 </Space>
               </div>
             </div>

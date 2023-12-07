@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { HomeFooter } from './pages/HomeFooter'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
-import { DemoPage } from './pages/DemoPage'
+import { PremiumPage } from './pages/PremiumPage'
 import { AdminPage } from './pages/AdminPage'
 import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
 const { Content, Footer } = Layout
@@ -72,7 +72,7 @@ function App() {
                   <a className='nav-link' href='/news'>City news</a>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link' href='/demo'>Waitlist</a>
+                  <a className='nav-link' href='/premium'>Premium</a>
                 </li>
                 <li className='nav-item'>
                   <a className='nav-link' href='/about'>About</a>
@@ -90,7 +90,7 @@ function App() {
 
             <Route path='/' element={<HomePage />} />
             <Route path='/about' element={<AboutPage />} />
-            <Route path='/demo' element={<DemoPage />} />
+            <Route path='/premium' element={<PremiumPage />} />
             <Route path='/admin' element={<AdminPage />} />
 
             {/* News URLs */}

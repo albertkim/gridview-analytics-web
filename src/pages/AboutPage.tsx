@@ -72,11 +72,11 @@ export function AboutPage() {
               <h1 className='display-4 fw-bold mb-4'>Ready to get started?</h1>
               <p className='lead mb-4'>Be on the cutting edge of municipal land zoning, development, and political intelligence. Never miss an opportunity. Win deals before competitors. Our team is here to help.</p>
               <div>
-                <Link to='/demo'>
+                <a href='/premium'>
                   <Button className='mr-4' type='primary' size='large'>
                     Join the waitlist
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>

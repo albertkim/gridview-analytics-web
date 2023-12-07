@@ -108,7 +108,7 @@ export function MetroCityPage() {
 
       <Alert type='info' message={
         <span>
-          Sign up for the <a href='/demo'>Gridview Analytics premium service</a> to get access to detailed rezoning update data.
+          Sign up for the <a href='/premium'>Gridview Analytics premium service</a> to get access to detailed rezoning update data.
         </span>
       } />
 
