@@ -38,11 +38,6 @@ export function HomePage() {
                       City news
                     </Button>
                   </Link>
-                  <Link to='/about'>
-                    <Button size='large'>
-                      About us
-                    </Button>
-                  </Link>
                   <Link to='/demo'>
                     <Button type='primary' size='large'>
                       Join the waitlist

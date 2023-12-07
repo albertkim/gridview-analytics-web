@@ -21,6 +21,13 @@ export function HomeFooter() {
               <div><a className='text-white' href='/news'>City news</a></div>
               <div><a className='text-white' href='/waitlist'>City rezoning update data</a></div>
             </div>
+            <div className='col-md-3'>
+              <p className='lead'>Contact</p>
+              <div className='text-white'>albert@gridviewanalytics.com</div>
+              <div>
+                <a  className='text-white' href='mailto:albert@gridviewanalytics.com'>[Email link]</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
