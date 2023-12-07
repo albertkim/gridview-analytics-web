@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { APIService, INewsResponse } from '../../services/APIService'
-import { Skeleton } from 'antd'
+import { Skeleton, Tag } from 'antd'
+import { getAdminCityStructure } from './AdminCityStructure'
 
 export function AdminPage() {
 
@@ -17,6 +18,8 @@ export function AdminPage() {
 
     getNews()
   })
+
+  const adminCityStructure = getAdminCityStructure(news || undefined)
 
   return (
     <div className='container my-4'>
@@ -38,33 +41,49 @@ export function AdminPage() {
               <th>City</th>
               <th>News resources</th>
               <th>Latest date</th>
-              <th>Stale</th>
+              <th>Days since</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className='text-muted'>Vancouver</td>
-              <td>
-                <div>
-                  <a href='https://covapp.vancouver.ca/councilMeetingPublic/CouncilMeetings.aspx?SearchType=3' target='_blank'>
-                    Vancouver city council meeting agenda + minutes
-                  </a>
-                </div>
-                <div>
-                  <a href='https://vancouver.ca/news-calendar/all-news-listing.aspx' target='_blank'>
-                    Vancouver city news (includes resources)
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className='text-muted'>Richmond</td>
-              <td>
-                <a href='https://citycouncil.richmond.ca/decisions/search/results.aspx?QB0=AND&QF0=ItemTopic%7cResolutionText%7cFullText%7cSubject&QI0=&QB1=AND&QF1=Date&QI1=&QB4=AND&QF4=Date&QI4=%3e%3d%40DATE-1820&TN=minutes&AC=QBE_QUERY&BU=https%3a%2f%2fcitycouncil.richmond.ca%2fdecisions%2fsearch%2fdefault.aspx&RF=WebBriefDate&' target='_blank'>
-                  Richmond city council meeting minutes + resources
-                </a>
-              </td>
-            </tr>
+            {
+              adminCityStructure.map((city) => {
+
+                let daysSinceComponent: JSX.Element
+                if (city.daysSince === null) {
+                  daysSinceComponent = <Tag color='red'>No entries</Tag>
+                } else if (city.daysSince <= 7) {
+                  daysSinceComponent = <Tag color='green'>{city.daysSince} days</Tag>
+                } else if (city.daysSince <= 14) {
+                  daysSinceComponent = <Tag color='yellow'>{city.daysSince} days</Tag>
+                } else {
+                  daysSinceComponent = <Tag color='orange'>{city.daysSince} days</Tag>
+                }
+
+                return (
+                  <tr>
+                    <td className='text-muted'>{city.city}</td>
+                    <td>
+                      {
+                        city.resources.map((resource) => {
+                          return (
+                            <div>
+                              <a href={resource.url} target='_blank'>
+                                {resource.title}
+                              </a>
+                            </div>
+                          )
+                        })
+                      }
+                    </td>
+                    <td className='text-muted'>{city.lastNewsDate || '-'}</td>
+                    <td>
+                      {daysSinceComponent}
+                    </td>
+                  </tr>
+                )
+
+              })
+            }
           </tbody>
         </table>
       </div>
