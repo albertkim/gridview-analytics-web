@@ -1,6 +1,5 @@
 import { Button } from 'antd'
 import backgroundImage from '../images/city-blue-background.png'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 export function AboutPage() {

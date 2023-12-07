@@ -2,7 +2,6 @@ import { Card, Button, Tag, Image, Tabs, Space } from 'antd'
 import headerImage from '../images/city-white-background.png'
 import vancouverImage from '../images/vancouver-zoning.png'
 import { EyeOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 export function HomePage() {
