@@ -26,7 +26,7 @@ export function NewsItem({date, title, sentiment, summary: contents, links}: New
       }
       <div
         className='text-muted'
-        dangerouslySetInnerHTML={{__html: contents || ''}} />
+        dangerouslySetInnerHTML={{__html: (contents || '').replace(/\\"/g, '"')}} />
       <div>
         {
           links && links.length > 0 ? (

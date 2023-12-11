@@ -119,8 +119,9 @@ export const AdminCreateNewsPage = observer(() => {
             <ReactQuill
               modules={{
                 toolbar: [
-                  ['bold'], // Only bold button
-                  [{ 'list': 'ordered'}, { 'list': 'bullet' }] // Ordered and unordered list buttons
+                  ['bold'],
+                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                  [{ 'indent': '-1'}, { 'indent': '+1' }],
                 ]
               }}
               value={createNews.summary || ''}
@@ -211,7 +212,7 @@ export const AdminCreateNewsPage = observer(() => {
             Sample GPT prompt to summarize:
           </div>
           <div className='text-muted'>
-            You are summarizing for the purpose of a newsletter where most readers, who are real estate agents, will read your summary in place of reading the document. Do not write "this document", instead be the document reading replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for this audience. Make it clear what stage the contents of the document are in (ex. consideration, passed, etc) in a way that's easy to understand.
+            You are summarizing for the purpose of a newsletter where most readers, who are mostly real estate agents, will read your summary in place of reading the document. Do not write "this document", instead imagine yourself as the document replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for this audience. Make it clear what stage the contents of the document are in (ex. consideration, passed, etc) with dates (if applicable) in a way that's easy to understand. Ideal format is a 1-2 sentence summary followed up by bullet points with details below (if applicable).
           </div>
         </div>
 
