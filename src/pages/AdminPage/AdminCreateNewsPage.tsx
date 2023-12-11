@@ -1,9 +1,10 @@
 import { Button, DatePicker, Input, Select, Space, message } from 'antd'
 import { observer } from 'mobx-react'
 import { CreateNews, cityIDMapping } from './CreateNews'
+import { APIService } from '../../services/APIService'
 import React, { useState } from 'react'
 import TextArea from 'antd/es/input/TextArea'
-import { APIService } from '../../services/APIService'
+import ReactQuill from 'react-quill'
 
 function toTitleCase(string: string) {
   return string
@@ -115,10 +116,15 @@ export const AdminCreateNewsPage = observer(() => {
           </div>
           <div className='mb-2'>
             <div>Summary</div>
-            <TextArea
-              rows={2}
+            <ReactQuill
+              modules={{
+                toolbar: [
+                  ['bold'], // Only bold button
+                  [{ 'list': 'ordered'}, { 'list': 'bullet' }] // Ordered and unordered list buttons
+                ]
+              }}
               value={createNews.summary || ''}
-              onChange={(e) => createNews.setSummary(e.target.value)} />
+              onChange={(e) => createNews.setSummary(e)} />
           </div>
           <div className='mb-2'>
             <div>Sentiment</div>
@@ -201,11 +207,11 @@ export const AdminCreateNewsPage = observer(() => {
             }
           </pre>
           <br />
-          <div className='text-muted'>
+          <div className='text-muted mb-2'>
             Sample GPT prompt to summarize:
           </div>
           <div className='text-muted'>
-            You are summarizing for the purpose of a newsletter where most readers will read your summary in place of reading the document. Do not write "this document", instead be the document reading replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for readers.
+            You are summarizing for the purpose of a newsletter where most readers, who are real estate agents, will read your summary in place of reading the document. Do not write "this document", instead be the document reading replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for this audience. Make it clear what stage the contents of the document are in (ex. consideration, passed, etc) in a way that's easy to understand.
           </div>
         </div>
 

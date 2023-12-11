@@ -61,7 +61,7 @@ export function CityNewsPanel({cityName, newsVisible}: IParameters) {
               key={n.id}
               title={n.title}
               sentiment={n.sentiment}
-              contents={n.summary}
+              summary={n.summary}
               date={n.date}
               links={n.links} />
           )

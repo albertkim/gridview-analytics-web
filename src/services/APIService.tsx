@@ -64,9 +64,17 @@ export const APIService = {
   },
 
   async postNews(createNews: any) {
-    console.log(createNews)
     const newsResponse = await axios.post(`/api/v1/admin/news`, createNews)
     return newsResponse.data as INews
+  },
+
+  async updateNews(newsId: number, updateNews: any) {
+    const newsResponse = await axios.put(`/api/v1/admin/news/${newsId}`, updateNews)
+    return newsResponse.data as INews
+  },
+
+  async deleteNews(newsId: number) {
+    await axios.delete(`/api/v1/admin/news/${newsId}`)
   },
 
   async getCities(metroCityName: string | undefined): Promise<Array<ICity>> {

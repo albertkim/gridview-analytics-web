@@ -4,7 +4,7 @@ interface NewsItemProps {
   date: string
   title: string
   sentiment: string | null
-  contents: string | null
+  summary: string | null
   links: Array<{
     id: number,
     title: string,
@@ -13,7 +13,7 @@ interface NewsItemProps {
   }>
 }
 
-export function NewsItem({date, title, sentiment, contents, links}: NewsItemProps) {
+export function NewsItem({date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='mb-2'>
@@ -24,7 +24,9 @@ export function NewsItem({date, title, sentiment, contents, links}: NewsItemProp
       {
         sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
       }
-      <div className='text-muted'>{contents}</div>
+      <div
+        className='text-muted'
+        dangerouslySetInnerHTML={{__html: contents || ''}} />
       <div>
         {
           links && links.length > 0 ? (

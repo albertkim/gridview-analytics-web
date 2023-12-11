@@ -1,30 +1,46 @@
 import { useEffect, useState } from 'react'
 import { APIService, INewsResponse } from '../../services/APIService'
-import { Skeleton, Tag } from 'antd'
+import { Skeleton, Tag, message } from 'antd'
 import { getAdminCityStructure } from './AdminCityStructure'
 
 export function AdminPage() {
 
   const [news, setNews] = useState<INewsResponse | null>(null)
+  const [messageApi, contextHolder] = message.useMessage()
+
+  const getNews = async function() {
+    const newsResponse = await APIService.getNews({
+      offset: 0,
+      limit: 999
+    })
+    setNews(newsResponse)
+  }
 
   useEffect(() => {
-    const getNews = async function() {
-      const newsResponse = await APIService.getNews({
-        offset: 0,
-        limit: 999
-      })
-      setNews(newsResponse)
-    }
-
     getNews()
-  })
+  }, [])
 
   const adminCityStructure = getAdminCityStructure(news || undefined)
+
+  const deleteNews = async function(newsId: number) {
+    if (window.confirm('Are you sure you want to delete this news item?')) {
+      try {
+        await APIService.deleteNews(newsId)
+        messageApi.success('Successfully deleted news with ID ${newsId}')
+        getNews()
+      } catch (error) {
+        messageApi.error(`There was an error deleting news with ID ${newsId}`)
+      }
+    }
+  }
 
   return (
     <div className='container my-4'>
 
       <h1 className='fw-bold'>ADMIN PAGE</h1>
+
+      {/* For Ant Design message component */}
+      {contextHolder}
 
       <br />
       <div>
@@ -100,10 +116,13 @@ export function AdminPage() {
           <div className='table-responsive'>
             <table className='table table-sm table-borderless'>
               <thead className='thead-light'>
-                <th>Date</th>
-                <th>City</th>
-                <th>Meeting type</th>
-                <th>News</th>
+                <tr>
+                  <th>Date</th>
+                  <th>City</th>
+                  <th>Meeting type</th>
+                  <th>News</th>
+                  <th>Actions</th>
+                </tr>
               </thead>
               <tbody>
                 {
@@ -121,6 +140,9 @@ export function AdminPage() {
                         </td>
                         <td>
                           <a href='#'>{n.title}</a>
+                        </td>
+                        <td>
+                          <a className='text-danger' onClick={() => deleteNews(n.id)}>Delete</a>
                         </td>
                       </tr>
                     )
