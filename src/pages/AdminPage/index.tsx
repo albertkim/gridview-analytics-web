@@ -75,7 +75,9 @@ export function AdminPage() {
                         })
                       }
                     </td>
-                    <td className='text-muted'>{city.lastNewsDate || '-'}</td>
+                    <td className='text-muted' style={{minWidth: 100}}>
+                      {city.lastNewsDate || '-'}
+                    </td>
                     <td>
                       {daysSinceComponent}
                     </td>
@@ -100,6 +102,7 @@ export function AdminPage() {
               <thead className='thead-light'>
                 <th>Date</th>
                 <th>City</th>
+                <th>Meeting type</th>
                 <th>News</th>
               </thead>
               <tbody>
@@ -107,11 +110,14 @@ export function AdminPage() {
                   news.data.map((n) => {
                     return (
                       <tr>
-                        <td className='text-muted' style={{marginRight: 10}}>
+                        <td className='text-muted' style={{minWidth: 100, marginRight: 10}}>
                           {n.date}
                         </td>
                         <td className='text-muted' style={{marginRight: 10}}>
                           {n.cityName}
+                        </td>
+                        <td className='text-muted' style={{maxWidth: 150, marginRight: 10}}>
+                          {n.meetingType}
                         </td>
                         <td>
                           <a href='#'>{n.title}</a>

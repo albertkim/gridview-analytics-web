@@ -200,6 +200,13 @@ export const AdminCreateNewsPage = observer(() => {
               JSON.stringify(createNews.getNetworkObject(), null, 2)
             }
           </pre>
+          <br />
+          <div className='text-muted'>
+            Sample GPT prompt to summarize:
+          </div>
+          <div className='text-muted'>
+            You are summarizing for the purpose of a newsletter where most readers will read your summary in place of reading the document. Do not write "this document", instead be the document reading replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for readers.
+          </div>
         </div>
 
       </div>
