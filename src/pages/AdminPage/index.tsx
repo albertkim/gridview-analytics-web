@@ -26,7 +26,7 @@ export function AdminPage() {
     if (window.confirm('Are you sure you want to delete this news item?')) {
       try {
         await APIService.deleteNews(newsId)
-        messageApi.success('Successfully deleted news with ID ${newsId}')
+        messageApi.success(`Successfully deleted news with ID ${newsId}`)
         getNews()
       } catch (error) {
         messageApi.error(`There was an error deleting news with ID ${newsId}`)
@@ -83,7 +83,7 @@ export function AdminPage() {
                         city.resources.map((resource) => {
                           return (
                             <div>
-                              <a href={resource.url} target='_blank'>
+                              <a href={resource.url} target='_blank' rel='noreferrer'>
                                 {resource.title}
                               </a>
                             </div>
