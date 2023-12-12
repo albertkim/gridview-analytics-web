@@ -110,3 +110,21 @@ a {
 .navbar-collapse {
   margin-left: 15px;
 }
+
+/* Reduce the indent size of React Quill styling */
+
+ul {
+  padding: 0 !important;
+}
+
+.ql-editor .ql-indent-1 {
+  padding-left: 3em !important;
+}
+
+.ql-editor .ql-indent-2 {
+  padding-left: 6em !important;
+}
+
+.ql-editor .ql-indent-3 {
+  padding-left: 9em !important;
+}

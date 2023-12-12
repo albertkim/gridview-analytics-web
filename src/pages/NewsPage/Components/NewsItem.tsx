@@ -25,7 +25,7 @@ export function NewsItem({date, title, sentiment, summary: contents, links}: New
         sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
       }
       <div
-        className='text-muted'
+        className='ql-editor text-muted'
         dangerouslySetInnerHTML={{__html: (contents || '').replace(/\\"/g, '"')}} />
       <div>
         {
