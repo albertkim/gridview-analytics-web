@@ -94,7 +94,7 @@ export function MetroCityPage() {
           {
             cities && cities.map((city) => {
               return (
-                <a key={city.id} className='text-muted' href='#' style={{whiteSpace: 'nowrap'}}>
+                <a key={city.id} className='text-muted' href={`/news/${city.metroCityShortCode}/city/${city.name}`} style={{whiteSpace: 'nowrap'}}>
                   {city.name}
                 </a>
               )

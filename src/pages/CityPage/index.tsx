@@ -114,9 +114,10 @@ export function CityPage() {
       <div className='mb-2'>
         <a href={`/news/${metroCityShortCode}`}>{'< Back to '} {city.metroCityName}</a>
       </div>
-      <h3 className='fw-bold mb-4'>
+      <hr />
+      <h1 className='text-center fw-bold mb-4'>
         {city.name.toUpperCase()}
-      </h3>
+      </h1>
       <hr />
       <br />
       {newsComponent}
