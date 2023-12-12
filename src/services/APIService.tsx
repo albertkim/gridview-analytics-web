@@ -26,7 +26,14 @@ export interface ICity {
   }>
 }
 
-interface INews {
+export interface ILink {
+  id: number
+  title: string
+  summary: string | null
+  url: string
+}
+
+export interface INews {
   id: number
   title: string
   summary: string | null
@@ -35,12 +42,7 @@ interface INews {
   cityName: string
   date: string
   sentiment: string | null
-  links: Array<{
-    id: number
-    title: string
-    summary: string | null
-    url: string
-  }>
+  links: ILink[]
 }
 
 export interface INewsResponse {

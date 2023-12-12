@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
-import { APIService, INewsResponse } from '../../services/APIService'
+import { APIService, INews, INewsResponse } from '../../services/APIService'
 import { Skeleton, Tag, message } from 'antd'
 import { getAdminCityStructure } from './AdminCityStructure'
+import { CreateNewsModal } from './CreateNewsModal'
 
 export function AdminPage() {
 
   const [news, setNews] = useState<INewsResponse | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editNews, setEditNews] = useState<INews | null>(null)
   const [messageApi, contextHolder] = message.useMessage()
 
   const getNews = async function() {
@@ -44,7 +47,7 @@ export function AdminPage() {
 
       <br />
       <div>
-        <a href='/admin/create' target='_blank'>+ Add news</a>
+        <a href='#' onClick={() => setIsModalOpen(true)}>+ Add news</a>
       </div>
       <br />
 
@@ -76,13 +79,13 @@ export function AdminPage() {
                 }
 
                 return (
-                  <tr>
+                  <tr key={city.city}>
                     <td className='text-muted'>{city.city}</td>
                     <td>
                       {
-                        city.resources.map((resource) => {
+                        city.resources.map((resource, index) => {
                           return (
-                            <div>
+                            <div key={index}>
                               <a href={resource.url} target='_blank' rel='noreferrer'>
                                 {resource.title}
                               </a>
@@ -128,7 +131,7 @@ export function AdminPage() {
                 {
                   news.data.map((n) => {
                     return (
-                      <tr>
+                      <tr key={n.id}>
                         <td className='text-muted' style={{minWidth: 100, marginRight: 10}}>
                           {n.date}
                         </td>
@@ -139,7 +142,15 @@ export function AdminPage() {
                           {n.meetingType}
                         </td>
                         <td>
-                          <a href='#'>{n.title}</a>
+                          <a
+                            href='#'
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setIsModalOpen(true)
+                              setEditNews(n)
+                            }}>
+                            {n.title}
+                          </a>
                         </td>
                         <td>
                           <a className='text-danger' onClick={() => deleteNews(n.id)}>Delete</a>
@@ -152,6 +163,18 @@ export function AdminPage() {
             </table>
           </div>
       }
+
+      <CreateNewsModal
+        isModalOpen={isModalOpen}
+        news={editNews || undefined}
+        onSubmit={() => {
+          setIsModalOpen(false)
+          getNews()
+        }}
+        onClose={() => {
+          setIsModalOpen(false)
+          setEditNews(null)
+        }} />
 
     </div>
   )

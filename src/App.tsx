@@ -6,7 +6,6 @@ import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { PremiumPage } from './pages/PremiumPage'
 import { AdminPage } from './pages/AdminPage'
-import { AdminCreateNewsPage } from './pages/AdminPage/AdminCreateNewsPage'
 import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
 const { Content, Footer } = Layout
 
@@ -93,7 +92,6 @@ function App() {
             <Route path='/about' element={<AboutPage />} />
             <Route path='/premium' element={<PremiumPage />} />
             <Route path='/admin' element={<AdminPage />} />
-            <Route path='/admin/create' element={<AdminCreateNewsPage />} />
 
             {/* News URLs */}
             <Route path='/news/:metroCityParam' element={<MetroCityPage />} />
