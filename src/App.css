@@ -111,10 +111,19 @@ a {
   margin-left: 15px;
 }
 
-/* Reduce the indent size of React Quill styling */
+/* Reduce the indent size of React Quill + other list element  styling */
+
+.ql-editor {
+  padding: 0 !important;
+}
 
 ul {
   padding: 0 !important;
+  margin-bottom: 1em !important;
+}
+
+li {
+  margin-bottom: 1em !important;
 }
 
 .ql-editor .ql-indent-1 {
@@ -127,4 +136,8 @@ ul {
 
 .ql-editor .ql-indent-3 {
   padding-left: 9em !important;
+}
+
+p {
+  margin-bottom: 1em !important;
 }

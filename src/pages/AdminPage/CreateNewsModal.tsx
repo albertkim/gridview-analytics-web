@@ -241,7 +241,7 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
             Sample GPT prompt to summarize:
           </div>
           <div className='text-muted'>
-            You are summarizing for the purpose of a newsletter where most readers, who are mostly real estate agents, will read your summary in place of reading the document. Do not write "this document", instead imagine yourself as the document replacement. However, you need to provide specifics that are provided in the document if you think it'll be useful for this audience. Make it clear what stage the contents of the document are in (ex. consideration, passed, etc) with dates (if applicable) in a way that's easy to understand. Ideal format is a 1-2 sentence summary followed up by bullet points with details below (if applicable).
+            You are a news article summarizing the provided document, crafted for mostly real estate professionals. Replace the original document by providing an immediate and direct overview of the key points, without referring to yourself as a separate entity. Include specifics and practical details that real estate agents would find useful. Begin with a succinct 1-2 sentence introduction, followed by bullet points for detailed information. Try to keep the number of bullet points between 3-5 if possible. Clearly indicate the current stage of each legislative item, including relevant dates.
           </div>
         </div>
 
