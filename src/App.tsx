@@ -7,12 +7,13 @@ import { AboutPage } from './pages/AboutPage'
 import { PremiumPage } from './pages/PremiumPage'
 import { AdminPage } from './pages/AdminPage'
 import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
+import { CityPage } from './pages/CityPage'
 const { Content, Footer } = Layout
 
 function App() {
 
   const [menuExpanded, setMenuExpanded] = useState(false)
-  const navRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null)
 
   const handleMenuExpanded = () => setMenuExpanded(!menuExpanded)
 
@@ -21,13 +22,13 @@ function App() {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setMenuExpanded(false)
       }
-    };
+    }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [navRef]);
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [navRef])
 
   return (
     <BrowserRouter>
@@ -96,6 +97,7 @@ function App() {
             {/* News URLs */}
             <Route path='/news/:metroCityParam' element={<MetroCityPage />} />
             <Route path='/news' element={<Navigate to='/news/metro_vancouver' replace />} />
+            <Route path='/news/:metroCityShortCode/city/:cityParam' element={<CityPage />} />
             
           </Routes>
 

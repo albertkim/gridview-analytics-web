@@ -18,8 +18,6 @@ export function MetroCityPage() {
       if (metroCityName) {
         try {
           const cities = await APIService.getCities(metroCityName)
-          console.log(metroCityName)
-          console.log(cities)
           setCities(cities)
         } catch (error) {
           setCities(false)
@@ -96,7 +94,7 @@ export function MetroCityPage() {
           {
             cities && cities.map((city) => {
               return (
-                <a className='text-muted' href='#' style={{whiteSpace: 'nowrap'}}>
+                <a key={city.id} className='text-muted' href='#' style={{whiteSpace: 'nowrap'}}>
                   {city.name}
                 </a>
               )
@@ -133,6 +131,7 @@ export function MetroCityPage() {
                       <div className='col-md-6 mb-4'>
                         <CityNewsPanel
                           key={city.name}
+                          metroCityShortCode={city.metroCityShortCode}
                           cityName={city.name}
                           newsVisible={city.newsVisible} />
                       </div>

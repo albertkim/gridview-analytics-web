@@ -17,7 +17,7 @@ export function LinkItem({title, url, summary}: LinkItemProps) {
 
   return (
     <div>
-      <a href={url} target='_blank' rel='noreferrer'>
+      <a className='text-muted text-decoration-underline' href={url} target='_blank' rel='noreferrer'>
         {title}
       </a>
       {

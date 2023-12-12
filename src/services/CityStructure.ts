@@ -2,6 +2,7 @@ export const CityStructure = [
 
   {
     name: 'Metro Vancouver',
+    shortCode: 'metro_vancouver',
     cities: [
       {
         id: 5,
@@ -218,6 +219,7 @@ export const CityStructure = [
 
   {
     name: 'Metro Calgary',
+    shortCode: 'metro_calgary',
     cities: [
       {
         name: 'AB (province)',
@@ -256,6 +258,7 @@ export const CityStructure = [
 
   {
     name: 'Metro Toronto',
+    shortCode: 'metro_toronto',
     cities: [
       {
         name: 'ON (province)',

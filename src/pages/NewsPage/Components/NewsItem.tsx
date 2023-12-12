@@ -16,7 +16,7 @@ interface NewsItemProps {
 export function NewsItem({date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
-    <div className='mb-2'>
+    <div className='mb-4'>
       <div className='d-flex justify-content-between align-items-center'>
         <p className='mb-0 flex-grow-1 text-wrap pe-2'><b>{title}</b></p>
         <span className='text-muted text-nowrap text-right'>{date || 'No date'}</span>
@@ -24,9 +24,13 @@ export function NewsItem({date, title, sentiment, summary: contents, links}: New
       {
         sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
       }
-      <div
-        className='ql-editor text-muted mt-2 mb-2'
-        dangerouslySetInnerHTML={{__html: (contents || '')}} />
+      {
+        contents && (
+          <div
+            className='ql-editor text-muted mt-2 mb-2'
+            dangerouslySetInnerHTML={{__html: (contents || '')}} />
+        )
+      }
       <div>
         {
           links && links.length > 0 ? (

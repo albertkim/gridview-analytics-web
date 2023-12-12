@@ -111,11 +111,11 @@ a {
   margin-left: 15px;
 }
 
-navbar ul {
+.navbar ul {
   margin-bottom: 0px !important;
 }
 
-navbar li {
+.navbar li {
   margin-bottom: 0px !important;
 }
 
@@ -127,11 +127,11 @@ navbar li {
 
 .ql-editor ul {
   padding: 0 !important;
-  margin-bottom: 1em !important;
+  margin-bottom: 0.5em !important;
 }
 
-.ql-editor li {
-  margin-bottom: 1em !important;
+li {
+  margin-bottom: 0.5em !important;
 }
 
 .ql-editor .ql-indent-1 {

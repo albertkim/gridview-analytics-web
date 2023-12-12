@@ -4,11 +4,12 @@ import { APIService, INewsResponse } from '../../../services/APIService'
 import { Skeleton, Pagination } from 'antd'
 
 interface IParameters {
+  metroCityShortCode: string
   cityName: string
   newsVisible: boolean
 }
 
-export function CityNewsPanel({cityName, newsVisible}: IParameters) {
+export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IParameters) {
 
   const pageSize = 5
 
@@ -17,7 +18,6 @@ export function CityNewsPanel({cityName, newsVisible}: IParameters) {
 
   useEffect(() => {
     const getNews = async () => {
-      console.log('City name: ', cityName)
       try {
         const offset = (currentPage - 1) * pageSize
         const newsResponse = await APIService.getNews({
@@ -78,7 +78,11 @@ export function CityNewsPanel({cityName, newsVisible}: IParameters) {
 
   return (
     <div className='border rounded p-4' style={{minHeight: 200}}>
-      <h3 className='mb-4'>{cityName.toUpperCase()}</h3>
+      <h3 className='mb-4'>
+        <a className='text-dark' href={`/news/${metroCityShortCode}/city/${cityName}`}>
+          {cityName.toUpperCase()}
+        </a>
+      </h3>
       {newsComponent}
     </div>
   )

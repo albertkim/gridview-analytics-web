@@ -12,6 +12,8 @@ const axios = Axios.create({
 export interface ICity {
   id?: number
   name: string
+  metroCityName: string
+  metroCityShortCode: string
   newsVisible: boolean
   stats?: Array<{
     statDate: string
@@ -80,16 +82,37 @@ export const APIService = {
   },
 
   async getCities(metroCityName: string | undefined): Promise<Array<ICity>> {
+    const cityStructure = CityStructure.map((metro) => {
+      const citiesWithMetroInfo = metro.cities.map((city) => {
+        return {
+          ...city,
+          metroCityName: metro.name,
+          metroCityShortCode: metro.shortCode,
+        }
+      })
+      return citiesWithMetroInfo
+    }).flat()
+
     if (metroCityName) {
-      return CityStructure.filter((metro) => metro.name.toLowerCase() === metroCityName.toLowerCase()).map((metro) => metro.cities).flat()
+      return cityStructure.filter((city) => city.metroCityName.toLowerCase() === metroCityName.toLowerCase())
     } else {
-      return CityStructure.map((metro) => metro.cities).flat()
+      return cityStructure
     }
   },
 
   async getCity(cityName: string): Promise<ICity> {
-    const cities = CityStructure.map((metro) => metro.cities).flat()
-    const matchingCities = cities.find((city) => city.name === cityName)
+    const cityStructure = CityStructure.map((metro) => {
+      const citiesWithMetroInfo = metro.cities.map((city) => {
+        return {
+          ...city,
+          metroCityName: metro.name,
+          metroCityShortCode: metro.shortCode,
+        }
+      })
+      return citiesWithMetroInfo
+    }).flat()
+
+    const matchingCities = cityStructure.find((city) => city.name === cityName)
     if (matchingCities) {
       return matchingCities
     } else {
