@@ -143,7 +143,7 @@ export function CityPage() {
       <div className='row'>
         <div className='col-md-4'>
 
-          <div className='border rounded px-3 pt-3 pb-3 bg-light'>
+          <div className='border rounded px-3 pt-3 pb-3 bg-light mb-4'>
 
             {
               city.stats && city.stats.length > 0 && (

@@ -23,17 +23,17 @@ export const CityStructure = [
         newsVisible: true,
         stats: [
           {
-            statDate: '2016',
-            statName: 'population',
-            statValue: 631486,
-            statDisplay: '631,486',
-            sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Vancouver&DGUIDlist=2021A00055915022&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
-          },
-          {
             statDate: '2021',
             statName: 'population',
             statValue: 662248,
             statDisplay: '662,248',
+            sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Vancouver&DGUIDlist=2021A00055915022&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
+          },
+          {
+            statDate: '2016',
+            statName: 'population',
+            statValue: 631486,
+            statDisplay: '631,486',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Vancouver&DGUIDlist=2021A00055915022&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
           },
           {
