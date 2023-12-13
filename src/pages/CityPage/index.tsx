@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { APIService, ICity, INewsResponse } from '../../services/APIService'
-import { Pagination, Skeleton } from 'antd'
+import { Breadcrumb, Pagination, Skeleton, Tooltip } from 'antd'
 import { NewsItem } from '../NewsPage/Components/NewsItem'
+import { InfoCircleOutlined } from '@ant-design/icons'
+
+function capitalizeFirstLetter(str: string) {
+return str.replace(/\b[a-z]/, (char) => {
+  return char.toUpperCase()
+})
+}
 
 export function CityPage() {
 
@@ -90,13 +97,17 @@ export function CityPage() {
       <>
         {news.data.filter((n) => n.cityName === cityName).map((n) => {
           return (
-            <NewsItem
-              key={n.id}
-              title={n.title}
-              sentiment={n.sentiment}
-              summary={n.summary}
-              date={n.date}
-              links={n.links} />
+            <React.Fragment>
+              <NewsItem
+                key={n.id}
+                id={n.id}
+                title={n.title}
+                sentiment={n.sentiment}
+                summary={n.summary}
+                date={n.date}
+                links={n.links} />
+              <hr />
+            </React.Fragment>
           )
         })}
         <Pagination
@@ -111,16 +122,114 @@ export function CityPage() {
 
   return (
     <div className='container my-4'>
-      <div className='mb-2'>
-        <a href={`/news/${metroCityShortCode}`}>{'< Back to '} {city.metroCityName}</a>
-      </div>
+      <Breadcrumb
+        items={[
+          {
+            title: <a href='/news'>Gridview city news</a>
+          },
+          {
+            title: <a href={`/news/${metroCityShortCode}`}>{city.metroCityName}</a>
+          },
+          {
+            title: <a href={`/news/${metroCityShortCode}/city/${city.name}`}>{city.metroCityName}</a>
+          }
+        ]}/>
       <hr />
       <h1 className='text-center fw-bold mb-4'>
         {city.name.toUpperCase()}
       </h1>
       <hr />
       <br />
-      {newsComponent}
+      <div className='row'>
+        <div className='col-md-4'>
+
+          <div className='border rounded px-3 pt-3 pb-3 bg-light'>
+
+            {
+              city.stats && city.stats.length > 0 && (
+                <table className='table table-sm table-borderless'>
+                  <thead>
+                    <tr>
+                      <th className='table-light'>Stat</th>
+                      <th className='table-light'>Value</th>
+                      <th className='table-light'>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      city.stats && (
+                        city.stats.map((stat) => {
+                          return (
+                            <tr>
+                              <td className='table-light text-muted'>
+                                {capitalizeFirstLetter(stat.statName)}
+                              </td>
+                              <td className='table-light text-muted'>
+                                {stat.statDisplay}
+                              </td>
+                              <td className='table-light text-muted'>
+                                {
+                                  stat.sourceUrl ? (
+                                    <a
+                                      className='text-muted text-decoration-underline'
+                                      href={stat.sourceUrl}
+                                      target='_blank'
+                                      rel='noreferrer'>
+                                      {stat.statDate}
+                                    </a>
+                                  ) : stat.statDate
+                                }
+                              </td>
+                            </tr>
+                          )
+                        })
+                      )
+                    }
+                  </tbody>
+                </table>
+              )
+            }
+            
+            <p><b>Resources</b></p>
+            {
+              city.links && city.links.length === 0 && (
+                <div className='text-muted'>
+                  No resources available
+                </div>
+              )
+            }
+            {
+              city.links && (
+                city.links.map((link) => {
+                  return (
+                    <div>
+                      <a
+                        className='text-muted text-decoration-underline'
+                        href={link.url}
+                        target='_blank'
+                        rel='noreferrer'
+                        style={{marginRight: 8}}>
+                        {link.title}
+                      </a>
+                      {
+                        link.description && (
+                          <Tooltip title={link.description} placement='right' style={{marginLeft: 4}}>
+                            <InfoCircleOutlined />
+                          </Tooltip>
+                        )
+                      }
+                    </div>
+                  )
+                })
+              )
+            }
+          </div>
+
+        </div>
+        <div className='col-md-8'>
+          {newsComponent}
+        </div>
+      </div>
       <br />
     </div>
   )

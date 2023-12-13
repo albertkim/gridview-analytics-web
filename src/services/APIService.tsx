@@ -19,6 +19,7 @@ export interface ICity {
     statDate: string
     statName: string
     statValue: number
+    statDisplay: string
     sourceUrl: string
   }>
   links?: Array<{
@@ -55,6 +56,11 @@ export interface INewsResponse {
 }
 
 export const APIService = {
+
+  async getNewsById(newsId: number) {
+    const newsResponse = await axios.get(`/api/v1/news/${newsId}`)
+    return newsResponse.data as INews
+  },
 
   async getNews({offset, limit, city}: {offset: number, limit: number, city?: string}) {
     const newsResponse = await axios.get(`/api/v1/news`, {

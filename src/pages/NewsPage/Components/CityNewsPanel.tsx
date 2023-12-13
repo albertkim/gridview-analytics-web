@@ -59,6 +59,7 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
           return (
             <NewsItem
               key={n.id}
+              id={n.id}
               title={n.title}
               sentiment={n.sentiment}
               summary={n.summary}
@@ -79,7 +80,7 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
   return (
     <div className='border rounded p-4' style={{minHeight: 200}}>
       <h3 className='mb-4'>
-        <a className='text-dark' href={`/news/${metroCityShortCode}/city/${cityName}`}>
+        <a className='text-decoration-underline text-dark' href={`/news/${metroCityShortCode}/city/${cityName}`}>
           {cityName.toUpperCase()}
         </a>
       </h3>

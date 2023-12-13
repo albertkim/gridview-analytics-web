@@ -8,6 +8,7 @@ import { PremiumPage } from './pages/PremiumPage'
 import { AdminPage } from './pages/AdminPage'
 import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
 import { CityPage } from './pages/CityPage'
+import { NewsPage } from './pages/NewsPage/NewsPage'
 const { Content, Footer } = Layout
 
 function App() {
@@ -95,10 +96,18 @@ function App() {
             <Route path='/admin' element={<AdminPage />} />
 
             {/* News URLs */}
+            <Route path='/news/id/:newsId' element={<NewsPage />} />
             <Route path='/news/:metroCityParam' element={<MetroCityPage />} />
             <Route path='/news' element={<Navigate to='/news/metro_vancouver' replace />} />
             <Route path='/news/:metroCityShortCode/city/:cityParam' element={<CityPage />} />
-            
+
+            {/* 404 Route */}
+            <Route path='*' element={
+              <div className='container my-4'>
+                404
+              </div>
+            } />
+
           </Routes>
 
         </Content>

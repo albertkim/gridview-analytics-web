@@ -26,13 +26,71 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 631486,
+            statDisplay: '631,486',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Vancouver&DGUIDlist=2021A00055915022&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 662248,
+            statDisplay: '662,248',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Vancouver&DGUIDlist=2021A00055915022&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
+          },
+          {
+            statDate: '2022',
+            statName: 'tax revenues',
+            statValue: 1747990000,
+            statDisplay: '$1.748 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2023-budget-highlights.pdf'
+          },
+          {
+            statDate: '2021',
+            statName: 'tax revenues',
+            statValue: 1727000000,
+            statDisplay: '$1.727 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/budget-2022-highlights.PDF'
+          },
+          {
+            statDate: '2020',
+            statName: 'tax revenues',
+            statValue: 1597000000,
+            statDisplay: '$1.597 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2021-budget-highlights.pdf'
+          },
+          {
+            statDate: '2019',
+            statName: 'tax revenues',
+            statValue: 1844000000,
+            statDisplay: '$1.844 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2020-budget-highlights.PDF'
+          },
+          {
+            statDate: '2022',
+            statName: 'property tax',
+            statValue: 1008085000,
+            statDisplay: '$1.000 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2023-budget-highlights.pdf'
+          },
+          {
+            statDate: '2021',
+            statName: 'property tax',
+            statValue: 942198000,
+            statDisplay: '$0.942 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/budget-2022-highlights.PDF'
+          },
+          {
+            statDate: '2020',
+            statName: 'property tax',
+            statValue: 890627000,
+            statDisplay: '$0.891 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2021-budget-highlights.pdf'
+          },
+          {
+            statDate: '2019',
+            statName: 'property tax',
+            statValue: 873498000,
+            statDisplay: '$0.873 billion',
+            sourceUrl: 'https://vancouver.ca/files/cov/2019-annual-financial-report.pdf'
           }
         ],
         links: [
@@ -40,6 +98,11 @@ export const CityStructure = [
             title: 'City website',
             description: 'Offical website of the City of Vancouver',
             url: 'https://vancouver.ca'
+          },
+          {
+            title: 'Annual reports and budgets',
+            description: 'Annual reports and budgets of the City of Vancouver',
+            url: 'https://vancouver.ca/your-government/financial-reports-and-information.aspx'
           }
         ]
       },
@@ -51,12 +114,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 517887,
+            statDisplay: '517,887',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Surrey&DGUIDlist=2021A00055915004&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 568322,
+            statDisplay: '568,322',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=Surrey&DGUIDlist=2021A00055915004&GENDERlist=1&STATISTIClist=1&HEADERlist=0'
           },
         ],
@@ -73,12 +138,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 198309,
+            statDisplay: '198,309',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=richmond&DGUIDlist=2021A00055915015&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 209937,
+            statDisplay: '209,937',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=richmond&DGUIDlist=2021A00055915015&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -95,12 +162,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 232755,
+            statDisplay: '232,755',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=burnaby&DGUIDlist=2021A00055915025&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 249125,
+            statDisplay: '249,125',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=burnaby&DGUIDlist=2021A00055915025&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -117,12 +186,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 139284,
+            statDisplay: '139,284',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=coquitlam&DGUIDlist=2021A00055915034&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 148625,
+            statDisplay: '148,625',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=coquitlam&DGUIDlist=2021A00055915034&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -138,12 +209,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 102238,
+            statDisplay: '102,238',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=delta&DGUIDlist=2021A00055915011&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 108455,
+            statDisplay: '108,455',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=delta&DGUIDlist=2021A00055915011&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -159,12 +232,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 85649,
+            statDisplay: '85,649',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=north%20vancouver&DGUIDlist=2021A00055915046&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 88168,
+            statDisplay: '88,168',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=north%20vancouver&DGUIDlist=2021A00055915046&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -180,12 +255,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 52898,
+            statDisplay: '52,898',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=north%20vancouver&DGUIDlist=2021A00055915051&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 58120,
+            statDisplay: '58,120',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=north%20vancouver&DGUIDlist=2021A00055915051&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
@@ -201,12 +278,14 @@ export const CityStructure = [
             statDate: '2016',
             statName: 'population',
             statValue: 70996,
+            statDisplay: '70,996',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=new%20westminster&DGUIDlist=2021A00055915029&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
             statDate: '2021',
             statName: 'population',
             statValue: 78916,
+            statDisplay: '78,916',
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=new%20westminster&DGUIDlist=2021A00055915029&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           }
         ],
