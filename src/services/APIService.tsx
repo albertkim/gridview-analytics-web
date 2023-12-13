@@ -44,7 +44,9 @@ export interface INews {
   cityId: number
   cityName: string
   date: string
+  createDate: string
   sentiment: string | null
+  important: number | null
   links: ILink[]
 }
 
@@ -62,12 +64,13 @@ export const APIService = {
     return newsResponse.data as INews
   },
 
-  async getNews({offset, limit, city}: {offset: number, limit: number, city?: string}) {
+  async getNews({offset, limit, city, important}: {offset: number, limit: number, city?: string | string[], important?: number}) {
     const newsResponse = await axios.get(`/api/v1/news`, {
       params: {
         offset: offset,
         limit: limit,
-        city: city
+        city: city,
+        important: important
       }
     })
     return newsResponse.data as INewsResponse

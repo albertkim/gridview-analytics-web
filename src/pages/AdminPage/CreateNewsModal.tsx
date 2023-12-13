@@ -1,4 +1,4 @@
-import { Button, DatePicker, Input, Select, Space, Modal, message } from 'antd'
+import { Button, DatePicker, Input, Select, Space, Modal, message, Radio } from 'antd'
 import { observer } from 'mobx-react'
 import { CreateNews, cityIDMapping } from './CreateNews'
 import { APIService, INews } from '../../services/APIService'
@@ -133,7 +133,17 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
               value={createNews.meetingType || ''}
               onChange={(e) => createNews.setMeetingType(e.target.value)} />
           </div>
+
+          <div className='mb-2'>
+            <Radio.Group value={createNews.important} onChange={(e) => createNews.setImportant(e.target.value)}>
+              <Radio value={0}>Not important</Radio>
+              <Radio value={1}>Locally important</Radio>
+              <Radio value={2}>Globally important</Radio>
+            </Radio.Group>
+          </div>
+
           <hr />
+
           <div className='mb-2'>
             <div>Title</div>
             <Input

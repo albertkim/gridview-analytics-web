@@ -124,6 +124,7 @@ export function AdminPage() {
                   <th>City</th>
                   <th>Meeting type</th>
                   <th>News</th>
+                  <th>{/** Empty "important" column **/}</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -151,6 +152,11 @@ export function AdminPage() {
                             }}>
                             {n.title}
                           </a>
+                        </td>
+                        <td>
+                          {
+                            n.important && <Tag>{n.important}</Tag>
+                          }
                         </td>
                         <td>
                           <a className='text-danger' onClick={() => deleteNews(n.id)}>Delete</a>

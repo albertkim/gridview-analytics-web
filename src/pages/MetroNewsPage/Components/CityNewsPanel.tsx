@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { NewsItem } from './NewsItem'
+import { MetroNewsItem } from './MetroNewsItem'
 import { APIService, INewsResponse } from '../../../services/APIService'
-import { Skeleton, Pagination } from 'antd'
+import { Skeleton } from 'antd'
 
 interface IParameters {
   metroCityShortCode: string
@@ -14,15 +14,13 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
   const pageSize = 5
 
   const [news, setNews] = useState<INewsResponse | null>(null)
-  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     const getNews = async () => {
       try {
-        const offset = (currentPage - 1) * pageSize
         const newsResponse = await APIService.getNews({
           city: cityName,
-          offset: offset,
+          offset: 0,
           limit: pageSize
         })
         setNews(newsResponse)
@@ -33,11 +31,7 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
     if (newsVisible) {
       getNews()
     }
-  }, [currentPage, cityName, newsVisible])
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-  }
+  }, [cityName, newsVisible])
 
   let newsComponent: JSX.Element
 
@@ -55,35 +49,33 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
   } else {
     newsComponent = (
       <>
-        {news.data.filter((n) => n.cityName === cityName).map((n) => {
+        {news.data.map((n) => {
           return (
-            <NewsItem
+            <MetroNewsItem
               key={n.id}
               id={n.id}
               title={n.title}
-              sentiment={n.sentiment}
-              summary={n.summary}
-              date={n.date}
-              links={n.links} />
+              date={n.date} />
           )
         })}
-        <Pagination
-          current={currentPage}
-          pageSize={pageSize}
-          onChange={handlePageChange}
-          total={news.total}
-        />
+        {
+          news.total > pageSize && (
+            <div>
+              <a href={`/news/${metroCityShortCode}/city/${cityName}`}>Read more</a>
+            </div>
+          )
+        }
       </>
     )
   }
 
   return (
-    <div className='border rounded p-4' style={{minHeight: 200}}>
-      <h3 className='mb-4'>
-        <a className='text-decoration-underline text-dark' href={`/news/${metroCityShortCode}/city/${cityName}`}>
+    <div>
+      <div className='fw-bold mb-2'>
+        <a className='text-decoration-underline' href={`/news/${metroCityShortCode}/city/${cityName}`}>
           {cityName.toUpperCase()}
         </a>
-      </h3>
+      </div>
       {newsComponent}
     </div>
   )

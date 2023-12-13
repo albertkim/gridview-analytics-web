@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { APIService, ICity, INewsResponse } from '../../services/APIService'
 import { Breadcrumb, Pagination, Skeleton, Tooltip } from 'antd'
-import { NewsItem } from '../NewsPage/Components/NewsItem'
 import { InfoCircleOutlined } from '@ant-design/icons'
+import { CityNewsItem } from './CityNewsItem'
 
 function capitalizeFirstLetter(str: string) {
 return str.replace(/\b[a-z]/, (char) => {
@@ -98,7 +98,7 @@ export function CityPage() {
         {news.data.filter((n) => n.cityName === cityName).map((n) => {
           return (
             <React.Fragment>
-              <NewsItem
+              <CityNewsItem
                 key={n.id}
                 id={n.id}
                 title={n.title}
@@ -131,7 +131,7 @@ export function CityPage() {
             title: <a href={`/news/${metroCityShortCode}`}>{city.metroCityName}</a>
           },
           {
-            title: <a href={`/news/${metroCityShortCode}/city/${city.name}`}>{city.metroCityName}</a>
+            title: <a href={`/news/${metroCityShortCode}/city/${city.name}`}>{city.name}</a>
           }
         ]}/>
       <hr />

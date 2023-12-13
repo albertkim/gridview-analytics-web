@@ -1,4 +1,4 @@
-import { LinkItem } from './LinkItem'
+import { LinkItem } from "../MetroNewsPage/Components/LinkItem"
 
 interface NewsItemProps {
   id: number
@@ -12,10 +12,9 @@ interface NewsItemProps {
     summary: string | null,
     url: string
   }>
-  collapsed?: boolean
 }
 
-export function NewsItem({id, date, title, sentiment, summary: contents, links, collapsed}: NewsItemProps) {
+export function CityNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='mb-4'>
@@ -33,27 +32,20 @@ export function NewsItem({id, date, title, sentiment, summary: contents, links, 
         sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
       }
       {
-        collapsed === true ? undefined :
-        (
+        contents && (
+          <div
+            className='ql-editor text-muted mt-2 mb-2'
+            dangerouslySetInnerHTML={{__html: (contents || '')}} />
+        )
+      }
+      {
+        links && links.length > 0 ? (
           <>
             {
-              contents && (
-                <div
-                  className='ql-editor text-muted mt-2 mb-2'
-                  dangerouslySetInnerHTML={{__html: (contents || '')}} />
-              )
-            }
-            {
-              links && links.length > 0 ? (
-                <>
-                  {
-                    links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />)
-                  }
-                </>
-              ) : undefined
+              links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />)
             }
           </>
-        )
+        ) : undefined
       }
     </div>
   )

@@ -55,6 +55,7 @@ export class CreateNews {
   @observable cityId: number | null = null
   @observable date: string | null = null
   @observable sentiment: string | null = null
+  @observable important: number | null = null
   @observable links: CreateLink[] = [new CreateLink()]
 
   constructor() {
@@ -70,6 +71,7 @@ export class CreateNews {
     this.cityId = news.cityId
     this.date = news.date
     this.sentiment = news.sentiment
+    this.important = news.important || 0
     this.links = news.links.map((link) => {
       const createLink = new CreateLink()
       createLink.populateUpdateObject(link)
@@ -120,6 +122,11 @@ export class CreateNews {
   }
 
   @action
+  setImportant(important: number | null) {
+    this.important = important || 0
+  }
+
+  @action
   addLink() {
     this.links.push(new CreateLink())
   }
@@ -137,6 +144,7 @@ export class CreateNews {
       cityId: this.cityId,
       date: this.date ? moment(this.date).format('YYYY-MM-DD') : null,
       sentiment: this.sentiment,
+      important: this.important,
       links: this.links
     }
   }
@@ -153,6 +161,7 @@ export class CreateNews {
     this.title = null
     this.summary = null
     this.sentiment = null
+    this.important = null
     this.links = [new CreateLink()]
   }
 

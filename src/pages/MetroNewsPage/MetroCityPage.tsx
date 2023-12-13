@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { CityNewsPanel } from './Components/CityNewsPanel'
 import { useState, useEffect } from 'react'
 import { APIService, ICity } from '../../services/APIService'
+import { ImportantNewsPanel } from './Components/ImportantNewsPanel'
 
 export function MetroCityPage() {
 
@@ -114,35 +115,45 @@ export function MetroCityPage() {
 
       <div className='row'>
 
-        {
-          cities ? (
-            <>
-              {
-                cities
-                  .sort((a, b) => {
-                    if (a.newsVisible === b.newsVisible) {
-                      return 0
-                    } else {
-                      return a.newsVisible ? -1 : 1
-                    }
-                  })
-                  .map((city) => {
-                    return (
-                      <div className='col-md-6 mb-4'>
-                        <CityNewsPanel
-                          key={city.name}
-                          metroCityShortCode={city.metroCityShortCode}
-                          cityName={city.name}
-                          newsVisible={city.newsVisible} />
-                      </div>
-                    )
-                  })
-              }
-            </>
-          ) : (
-            <Skeleton />
-          )
-        }
+        <div className='col-md-8'>
+          {
+            cities ? (
+              <ImportantNewsPanel cityNames={cities.map((city) => city.name)} />
+            ) : <Skeleton />
+          }
+        </div>
+
+        <div className='col-md-4'>
+          {
+            cities ? (
+              <>
+                {
+                  cities
+                    .sort((a, b) => {
+                      if (a.newsVisible === b.newsVisible) {
+                        return 0
+                      } else {
+                        return a.newsVisible ? -1 : 1
+                      }
+                    })
+                    .map((city) => {
+                      return (
+                        <div className='mb-4'>
+                          <CityNewsPanel
+                            key={city.name}
+                            metroCityShortCode={city.metroCityShortCode}
+                            cityName={city.name}
+                            newsVisible={city.newsVisible} />
+                        </div>
+                      )
+                    })
+                }
+              </>
+            ) : (
+              <Skeleton />
+            )
+          }
+        </div>
 
       </div>
 

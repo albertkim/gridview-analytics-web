@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { APIService, ICity, INews } from '../../services/APIService'
 import { Skeleton, Breadcrumb } from 'antd'
-import { LinkItem } from './Components/LinkItem'
+import { LinkItem } from '../MetroNewsPage/Components/LinkItem'
 
 export function NewsPage() {
 

@@ -6,7 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { PremiumPage } from './pages/PremiumPage'
 import { AdminPage } from './pages/AdminPage'
-import { MetroCityPage } from './pages/NewsPage/MetroCityPage'
+import { MetroCityPage } from './pages/MetroNewsPage/MetroCityPage'
 import { CityPage } from './pages/CityPage'
 import { NewsPage } from './pages/NewsPage/NewsPage'
 const { Content, Footer } = Layout
