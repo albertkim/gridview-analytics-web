@@ -1,0 +1,139 @@
+/* No <a></a> tag underlines */
+a {
+  text-decoration: none !important;
+}
+
+/* Class to darken a background image */
+.less-dark-img {
+  position: relative;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Class to darken a background image */
+.dark-img {
+  position: relative;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.less-dark-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.55); /* Black with 50% opacity */
+  z-index: -2; /* Set it below the image */
+}
+
+.less-dark-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1; /* Above the darkened layer but below the content */
+}
+
+.dark-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85); /* Black with 50% opacity */
+  z-index: -2; /* Set it below the image */
+}
+
+.dark-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1; /* Above the darkened layer but below the content */
+}
+
+/* Otherwise ant icons are aligned too low */
+.anticon {
+  vertical-align: 0px;
+}
+
+.navbar-collapse {
+  margin-left: 15px;
+}
+
+.navbar ul {
+  margin-bottom: 0px !important;
+}
+
+.navbar li {
+  margin-bottom: 0px !important;
+}
+
+/* Reduce the indent size of list element styling */
+
+li {
+  margin-bottom: 0.5em !important;
+}
+
+li p {
+  margin-bottom: 0px !important;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Specific styles for the hamburger menu and responsive behavior */
+.hamburger-button {
+  display: none; /* Hidden on larger screens */
+}
+
+@media (max-width: 600px) {
+  .hamburger-button {
+    display: block; /* Shown on small screens */
+  }
+
+  .menu-large {
+    display: none; /* Hide the default menu on small screens */
+  }
+
+  .menu-small {
+    display: flex; /* Show the collapsed menu on small screens */
+    flex-direction: column; /* Align menu items vertically */
+  }
+
+  .menu-small.hidden {
+    display: none; /* Hide when menu is not toggled */
+  }
+}
+
+/** Borderless bootstrap table **/
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}

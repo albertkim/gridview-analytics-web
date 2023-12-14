@@ -1,65 +1,55 @@
 {
-  "name": "cityline",
+  "name": "gridview-analytics-web-next",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.1",
     "@ant-design/icons": "^5.2.5",
+    "@mantine/core": "^7.3.2",
+    "@mantine/hooks": "^7.3.2",
+    "@mantine/tiptap": "^7.3.2",
     "@popperjs/core": "^2.11.8",
+    "@tabler/icons-react": "^2.44.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tiptap/extension-link": "^2.1.13",
+    "@tiptap/pm": "^2.1.13",
+    "@tiptap/react": "^2.1.13",
+    "@tiptap/starter-kit": "^2.1.13",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.10",
     "@types/moment": "^2.13.0",
-    "@types/node": "^20.10.0",
-    "@types/react": "^18.2.38",
-    "@types/react-dom": "^18.2.17",
     "@types/react-router-dom": "^5.3.3",
-    "antd": "^5.8.2",
+    "antd": "^5.12.2",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.1",
     "dayjs": "^1.11.10",
     "mobx": "^6.12.0",
     "mobx-react": "^9.1.0",
     "moment": "^2.29.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
     "react-helmet": "^6.1.0",
-    "react-quill": "^2.0.0",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
-    "typescript": "^5.3.2",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "jsx-a11y/anchor-is-valid": "off"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8.4.32",
+    "postcss-preset-mantine": "^1.11.1",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5"
   }
 }
