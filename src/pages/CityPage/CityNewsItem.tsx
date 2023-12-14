@@ -17,8 +17,8 @@ interface NewsItemProps {
 export function CityNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
-    <div className='mb-4'>
-      <div className='d-flex justify-content-between align-items-center'>
+    <div className='p-2 mb-4'>
+      <div className='d-flex justify-content-between align-items-start'>
         <p className='mb-0 flex-grow-1 text-wrap pe-2'>
           <b>
             <a className='text-decoration-underline' href={`/news/id/${id}`}>

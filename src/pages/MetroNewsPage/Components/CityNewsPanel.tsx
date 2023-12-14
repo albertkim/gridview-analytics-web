@@ -38,8 +38,7 @@ export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IPara
   if (!newsVisible) {
     newsComponent = (
       <div className='text-muted'>
-        <div>News not yet available.</div>
-        <div>Please contact us to request updates.</div>
+        <div>Not yet available</div>
       </div>
     )
   } else if (!news) {

@@ -115,7 +115,7 @@ export function MetroCityPage() {
 
       <div className='row'>
 
-        <div className='col-md-8'>
+        <div className='col-md-8 mb-2'>
           {
             cities ? (
               <ImportantNewsPanel cityNames={cities.map((city) => city.name)} />
@@ -123,7 +123,7 @@ export function MetroCityPage() {
           }
         </div>
 
-        <div className='col-md-4'>
+        <div className='col-md-4 mb-2 p-4'>
           {
             cities ? (
               <>

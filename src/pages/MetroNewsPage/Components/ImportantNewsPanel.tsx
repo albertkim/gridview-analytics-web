@@ -68,8 +68,8 @@ export function ImportantNewsPanel({cityNames}: IParameters) {
   }
 
   return (
-    <div className='border rounded p-4' style={{minHeight: 200}}>
-      <h3 className='mb-4'>
+    <div className='border rounded p-2' style={{minHeight: 200}}>
+      <h3 className='my-2 p-2'>
         KEY UPDATES
       </h3>
       {newsComponent}
