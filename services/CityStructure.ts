@@ -135,6 +135,13 @@ export const CityStructure = [
         newsVisible: true,
         stats: [
           {
+            statDate: '2021',
+            statName: 'population',
+            statValue: 209937,
+            statDisplay: '209,937',
+            sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=richmond&DGUIDlist=2021A00055915015&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
+          },
+          {
             statDate: '2016',
             statName: 'population',
             statValue: 198309,
@@ -142,15 +149,73 @@ export const CityStructure = [
             sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=richmond&DGUIDlist=2021A00055915015&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
           },
           {
+            statDate: '2022',
+            statName: 'tax revenues',
+            statValue: 644348000,
+            statDisplay: '$0.644 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2022annualreport68846.pdf'
+          },
+          {
             statDate: '2021',
-            statName: 'population',
-            statValue: 209937,
-            statDisplay: '209,937',
-            sourceUrl: 'https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/page.cfm?Lang=E&SearchText=richmond&DGUIDlist=2021A00055915015&GENDERlist=1,2,3&STATISTIClist=1,4&HEADERlist=0'
+            statName: 'tax revenues',
+            statValue: 575444000,
+            statDisplay: '$0.575 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2021annualreport62803.pdf'
+          },
+          {
+            statDate: '2020',
+            statName: 'tax revenues',
+            statValue: 579052000,
+            statDisplay: '$0.579 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2020annualreportcomp58630.pdf'
+          },
+          {
+            statDate: '2019',
+            statName: 'tax revenues',
+            statValue: 581942000,
+            statDisplay: '$0.581 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/annualreport2019comp56398.pdf'
+          },
+          {
+            statDate: '2022',
+            statName: 'property tax',
+            statValue: 524934000,
+            statDisplay: '$0.524 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2022annualreport68846.pdf'
+          },
+          {
+            statDate: '2021',
+            statName: 'property tax',
+            statValue: 496172000,
+            statDisplay: '$0.496 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2021annualreport62803.pdf'
+          },
+          {
+            statDate: '2020',
+            statName: 'property tax',
+            statValue: 413302000,
+            statDisplay: '$0.413 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/2020annualreportcomp58630.pdf'
+          },
+          {
+            statDate: '2019',
+            statName: 'property tax',
+            statValue: 463679000,
+            statDisplay: '$0.463 billion',
+            sourceUrl: 'https://www.richmond.ca/__shared/assets/annualreport2019comp56398.pdf'
           }
         ],
         links: [
-
+          {
+            title: 'City website',
+            description: 'Official website of the City of Richmond',
+            url: 'https://richmond.ca/'
+          },
+          {
+            title: 'Annual reports and budgets',
+            description: 'Annual reports and budgets of the City of Richmond',
+            url: 'https://www.richmond.ca/city-hall/finance/reporting/reports.htm',
+          }
         ]
       },
       {
