@@ -1,10 +1,16 @@
 import Axios from 'axios'
+import qs from 'qs'
 import { CityStructure } from './CityStructure'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!
+console.log(`API URL: ${apiUrl}`)
+
+// AWS Lambda does not accet "[]" as a query string parameter. Axios includes [] by default, so we need to override it
+const customParamsSerializer = (params: Object) => qs.stringify(params, { arrayFormat: 'repeat' })
 
 const axios = Axios.create({
-  baseURL: apiUrl
+  baseURL: apiUrl,
+  paramsSerializer: customParamsSerializer
 })
 
 export interface ICity {
@@ -71,6 +77,7 @@ export const APIService = {
         important: important
       }
     })
+    console.log(newsResponse.config.url)
     return newsResponse.data as INewsResponse
   },
 
