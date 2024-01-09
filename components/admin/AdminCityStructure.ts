@@ -1,4 +1,4 @@
-import { INewsResponse } from '@/services/APIService'
+import { INewsResponse } from '@/services/Models'
 import moment from 'moment'
 
 interface IAdminCityStructureEntry {

@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import qs from 'qs'
+import { INews, INewsResponse, ICity, IRezoningResponse } from './Models'
 import { CityStructure } from './CityStructure'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!
@@ -12,54 +13,6 @@ const axios = Axios.create({
   baseURL: apiUrl,
   paramsSerializer: customParamsSerializer
 })
-
-export interface ICity {
-  id?: number
-  name: string
-  metroCityName: string
-  metroCityShortCode: string
-  newsVisible: boolean
-  stats?: Array<{
-    statDate: string
-    statName: string
-    statValue: number
-    statDisplay: string
-    sourceUrl: string
-  }>
-  links?: Array<{
-    title: string
-    description: string
-    url: string
-  }>
-}
-
-export interface ILink {
-  id: number
-  title: string
-  summary: string | null
-  url: string
-}
-
-export interface INews {
-  id: number
-  title: string
-  summary: string | null
-  meetingType: string
-  cityId: number
-  cityName: string
-  date: string
-  createDate: string
-  sentiment: string | null
-  important: number | null
-  links: ILink[]
-}
-
-export interface INewsResponse {
-  offset: number
-  limit: number
-  total: number
-  data: INews[]
-}
 
 export const APIService = {
 
@@ -143,6 +96,11 @@ export const APIService = {
     } else {
       throw Error('No city found')
     }
+  },
+
+  async getRezonings(): Promise<IRezoningResponse> {
+    const rezoningResponse = await axios.get(`/api/v1/rezonings`)
+    return rezoningResponse.data
   }
 
 }

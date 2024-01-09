@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { action, computed, makeObservable, observable } from 'mobx'
-import { ILink, INews } from '@/services/APIService'
+import { ILink, INews } from '@/services/Models'
 
 // Hardcode city IDs for now
 export const cityIDMapping: {[key: string]: number} = {

@@ -3,7 +3,8 @@ import { NextPageContext } from 'next'
 import { useRouter } from 'next/router'
 import CityNewsPanel from './_cityNewsPanel'
 import ImportantNewsPanel from './_importantNewsPanel'
-import { APIService, ICity, INewsResponse } from '../../../services/APIService'
+import { APIService } from '@/services/APIService'
+import { ICity, INewsResponse } from '@/services/Models'
 
 export const getServerSideProps = async function(ctx: NextPageContext) {
   const metroShortcodeParam = ctx.query['metro-shortcode'] as string

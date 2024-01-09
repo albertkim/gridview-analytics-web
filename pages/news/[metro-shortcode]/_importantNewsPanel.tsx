@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Skeleton, Pagination } from 'antd'
-import { APIService, INewsResponse } from '../../../services/APIService'
+import { APIService } from '@/services/APIService'
+import { INewsResponse } from '@/services/Models'
 import ImportantNewsItem from './_importantNewsItem'
 
 const pageSize = 10

@@ -1,6 +1,7 @@
 import { NextPageContext } from 'next'
 import { useRouter } from 'next/router'
-import { APIService, ICity, INews } from '@/services/APIService'
+import { APIService } from '@/services/APIService'
+import { ICity, INews } from '@/services/Models'
 import { Breadcrumb } from 'antd'
 import { LinkItem } from '@/components/LinkItem'
 

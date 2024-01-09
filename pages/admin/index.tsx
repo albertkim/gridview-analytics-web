@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { APIService, INews, INewsResponse } from '../../services/APIService'
+import { APIService } from '../../services/APIService'
+import { INews, INewsResponse } from '@/services/Models'
 import { Skeleton, Tag, message } from 'antd'
 import { getAdminCityStructure } from '@/components/admin/AdminCityStructure'
 import { CreateNewsModal } from '@/components/admin/CreateNewsModal'

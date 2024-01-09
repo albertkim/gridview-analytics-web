@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import CityNewsItem from './_cityNewsItem'
-import { APIService, INewsResponse } from '../../../services/APIService'
+import { APIService } from '@/services/APIService'
+import { INewsResponse } from '@/services/Models'
 import { Skeleton } from 'antd'
 
 interface IParameters {
