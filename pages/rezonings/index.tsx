@@ -89,12 +89,14 @@ export default function RezoningsPage(props: IProps) {
   }
 
   return (
-    <div className='container my-4'>
+    <div className='container-fluid my-4'>
 
       <br />
 
-      <div className='text-muted'>Gridview Premium</div>
-      <h1 className='display-4 fw-bold'>REZONING DATA</h1>
+      <div className='container'>
+        <div className='text-muted'>Gridview Premium</div>
+        <h1 className='display-4 fw-bold'>REZONING DATA</h1>
+      </div>
 
       <br />
       <hr />
@@ -146,7 +148,7 @@ export default function RezoningsPage(props: IProps) {
                   <th>Description</th>
                   <th>Stats</th>
                   <th>Resources</th>
-                  <th><a className='text-dark text-decoration-underline'>Last update*</a></th>
+                  <th><a className='text-dark text-decoration-underline'>Last update</a></th>
                   <th>Applied</th>
                   <th>Approved</th>
                   <th>Status</th>
