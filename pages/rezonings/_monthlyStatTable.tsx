@@ -20,37 +20,41 @@ export default function MonthlyStatTable({year, monthlyRezoningMetrics}: IProps)
     .reverse()
 
   return (
-    <table className='table table-sm'>
-      <thead className='thead'>
-        <tr>
-          <th>{year}</th>
-          <th className='text-right'>Applied</th>
-          <th className='text-right'>Approved</th>
-        </tr>
-      </thead>
-      <tbody className='tbody'>
-        {
-          filteredMetrics.length === 0 && (
-            <tr>
-              <td colSpan={3} className='text-muted text-center'>
-                No data
-              </td>
-            </tr>
-          )
-        }
-        {
-          filteredMetrics.map((metric, index) => {
-            return (
-              <tr key={index}>
-                <td className='text-muted'>{metric.date}</td>
-                <td className='text-muted text-right'>{metric.applicationCount}</td>
-                <td className='text-muted text-right'>{metric.approvalCount}</td>
+    <div className='table-responsive'>
+
+      <table className='table table-sm'>
+        <thead className='thead'>
+          <tr>
+            <th>{year}</th>
+            <th className='text-right'>Applied</th>
+            <th className='text-right'>Approved</th>
+          </tr>
+        </thead>
+        <tbody className='tbody'>
+          {
+            filteredMetrics.length === 0 && (
+              <tr>
+                <td colSpan={3} className='text-muted text-center'>
+                  No data
+                </td>
               </tr>
             )
-          })
-        }
-      </tbody>
-    </table>
+          }
+          {
+            filteredMetrics.map((metric, index) => {
+              return (
+                <tr key={index}>
+                  <td className='text-muted'>{metric.date}</td>
+                  <td className='text-muted text-right'>{metric.applicationCount}</td>
+                  <td className='text-muted text-right'>{metric.approvalCount}</td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
+      </table>
+
+    </div>
   )
 
 }
