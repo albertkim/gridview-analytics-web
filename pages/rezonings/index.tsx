@@ -13,6 +13,7 @@ interface IProps {
 export default function RezoningsPage(props: IProps) {
 
   const [city, setCity] = useState<ICity | null>(null)
+  const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
   const [rezonings, setRezonings] = useState<IRezoningDetail[] | null>(null)
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function RezoningsPage(props: IProps) {
   let monthlyRezoningMetrics: {date: string, applicationCount: number, approvalCount: number}[] = []
 
   if (rezonings) {
+
     rezonings.forEach(rezoning => {
 
       const appliedDate = rezoning.dates.appliedDate ?
@@ -75,12 +77,24 @@ export default function RezoningsPage(props: IProps) {
     })
   }
 
+  let sortedRezonings: IRezoningDetail[] | null = null
+
+  // Sort rezonings based on current sort state
+  if (rezonings && sort === 'lastUpdate') {
+    sortedRezonings = rezonings.sort((a, b) => {
+      const aDate = moment(a.urls.map(obj => obj.date)).max()
+      const bDate = moment(b.urls.map(obj => obj.date)).max()
+      return aDate.isBefore(bDate) ? -1 : 1
+    })
+  }
+
   return (
     <div className='container my-4'>
 
       <br />
 
-      <h1>PREMIUM: REZONING DATA</h1>
+      <div className='text-muted'>Gridview Premium</div>
+      <h1 className='display-4 fw-bold'>REZONING DATA</h1>
 
       <br />
       <hr />
@@ -116,13 +130,13 @@ export default function RezoningsPage(props: IProps) {
       <br /><br />
 
       {
-        !rezonings && (
+        !sortedRezonings && (
           <Skeleton />
         )
       }
 
       {
-        !!rezonings && (
+        !!sortedRezonings && (
           <div className='table-responsive'>
             <table className='table table-sm table-striped'>
               <thead className='thead thead-light'>
@@ -132,6 +146,7 @@ export default function RezoningsPage(props: IProps) {
                   <th>Description</th>
                   <th>Stats</th>
                   <th>Resources</th>
+                  <th><a className='text-dark text-decoration-underline'>Last update*</a></th>
                   <th>Applied</th>
                   <th>Approved</th>
                   <th>Status</th>
@@ -139,7 +154,7 @@ export default function RezoningsPage(props: IProps) {
               </thead>
               <tbody className='tbody'>
                 {
-                  rezonings.map((rezoning, index) => (
+                  sortedRezonings.map((rezoning, index) => (
                     <tr key={index}>
                       <td style={{maxWidth: 150, marginRight: 10}}>
                         <div>
@@ -260,6 +275,11 @@ export default function RezoningsPage(props: IProps) {
                             </Popover>
                           }
                         </div>
+                      </td>
+                      <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>
+                        {
+                          moment.max(rezoning.urls.map(obj => moment(obj.date))).fromNow()
+                        }
                       </td>
                       <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>
                         {rezoning.dates.appliedDate}
