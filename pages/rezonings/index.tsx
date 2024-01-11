@@ -80,11 +80,13 @@ export default function RezoningsPage(props: IProps) {
   let sortedRezonings: IRezoningDetail[] | null = null
 
   // Sort rezonings based on current sort state
-  if (rezonings && sort === 'lastUpdate') {
+  if (!!rezonings && (sort === 'lastUpdate')) {
     sortedRezonings = rezonings.sort((a, b) => {
-      const aDate = moment(a.urls.map(obj => obj.date)).max()
-      const bDate = moment(b.urls.map(obj => obj.date)).max()
-      return aDate.isBefore(bDate) ? -1 : 1
+      const aDates = a.urls.map(obj => moment(obj.date))
+      const bDates = b.urls.map(obj => moment(obj.date))
+      const aMaxDate = moment.max(aDates)
+      const bMaxDate = moment.max(bDates)
+      return aMaxDate.isBefore(bMaxDate) ? 1 : -1
     })
   }
 
@@ -208,12 +210,6 @@ export default function RezoningsPage(props: IProps) {
                               {rezoning.stats.fsr}
                             </div>
                         }
-                        {/* {
-                          !!rezoning.stats.height &&
-                            <div className='text-muted'><b>Height: </b>
-                              {rezoning.stats.height}
-                            </div>
-                        } */}
                       </td>
                       <td>
                         <div className='mb-1'>
