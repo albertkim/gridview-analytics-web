@@ -78,6 +78,7 @@ export interface IRezoningDetail {
     hotels: number | null
     fsr: number | null
     height: number | null
+    storeys: number | null
   }
   zoning: {
     previousZoningCode: string | null
@@ -93,6 +94,10 @@ export interface IRezoningDetail {
     denialDate: string | null
     withdrawnDate: string | null
   }
+  location: {
+    latitude: number | null
+    longitude: number | null
+  },
   urls: {
     title: string
     url: string

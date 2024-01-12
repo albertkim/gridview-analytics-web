@@ -3,6 +3,7 @@ import { APIService } from '@/services/APIService'
 import { ICity, IRezoningDetail } from '@/services/Models'
 import { Popover, Skeleton } from 'antd'
 import React, { useEffect, useState } from 'react'
+import { GoogleMap, Circle, useJsApiLoader } from '@react-google-maps/api'
 import MonthlyStatTable from './_monthlyStatTable'
 import RezoningStatusBadge from './_rezoningStatusBadge'
 
@@ -10,11 +11,17 @@ interface IProps {
 
 }
 
-export default function RezoningsPage(props: IProps) {
+export default function Rezonings() {
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyCD6ujv751_CLPaEfaw3fEfqzilXWqbtLg'
+  })
 
   const [city, setCity] = useState<ICity | null>(null)
   const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
   const [rezonings, setRezonings] = useState<IRezoningDetail[] | null>(null)
+  const [map, setMap] = useState<google.maps.Map | null>(null)
 
   useEffect(() => {
 
@@ -25,6 +32,15 @@ export default function RezoningsPage(props: IProps) {
 
     getRezonings()
 
+  }, [])
+
+  // Google Maps functions
+  const onLoad = React.useCallback((map: google.maps.Map) => {
+    setMap(map)
+  }, [])
+
+  const onUnmount = React.useCallback((map: google.maps.Map) => {
+    setMap(null)
   }, [])
 
   // Summarize total rezonings into monthly metrics - date format MMM YYYY
@@ -97,6 +113,7 @@ export default function RezoningsPage(props: IProps) {
 
       <div className='container'>
         <div className='text-muted'>Gridview Premium</div>
+        <div className='text-muted'>Metro Vancouver early access</div>
         <h1 className='display-4 fw-bold'>REZONING DATA</h1>
       </div>
 
@@ -132,6 +149,58 @@ export default function RezoningsPage(props: IProps) {
       </div>
 
       <br /><br />
+
+      {
+        isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={{width: '100%', height: '500px'}}
+            center={{lat: 49.2827, lng: -123.1207}}
+            zoom={10}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+          >
+            {
+              // Render addresses as circles on map with different colors for types
+              !!rezonings && rezonings
+                .filter((rezonings) => rezonings.location.latitude && rezonings.location.longitude)
+                .map((rezoning, index) => (
+                  <Circle
+                    key={index}
+                    center={{
+                      lat: rezoning.location.latitude!,
+                      lng: rezoning.location.longitude!
+                    }}
+                    radius={200}
+                    options={{
+                      strokeColor: '#ff0000',
+                      strokeOpacity: 0.8,
+                      strokeWeight: 2,
+                      fillColor: '#0000ff',
+                      fillOpacity: 0.35,
+                      clickable: true,
+                      draggable: false,
+                      editable: false,
+                      visible: true,
+                      zIndex: 1
+                    }}
+                    onClick={() => {
+                      if (map) {
+                        map.panTo({
+                          lat: rezoning.location.latitude!,
+                          lng: rezoning.location.longitude!
+                        })
+                      }
+                    }}
+                  />
+                ))
+            }
+          </GoogleMap>
+        ) : (
+          <Skeleton />
+        )
+      }
+
+      <br /><br/>
 
       {
         !sortedRezonings && (
@@ -184,6 +253,12 @@ export default function RezoningsPage(props: IProps) {
                           !!rezoning.stats.buildings &&
                             <div className='text-muted'><b>Buildings: </b>
                               {rezoning.stats.buildings}
+                            </div>
+                        }
+                        {
+                          !!rezoning.stats.storeys &&
+                            <div className='text-muted'><b>Storeys: </b>
+                              {rezoning.stats.storeys}
                             </div>
                         }
                         {
