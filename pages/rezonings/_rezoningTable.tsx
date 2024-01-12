@@ -17,6 +17,10 @@ interface IProps {
 
 export default function({sortedRezonings}: IProps) {
 
+  if (!sortedRezonings) {
+    return null
+  }
+
   return (
     <div className='table-responsive'>
       <table className='table table-sm table-striped'>
