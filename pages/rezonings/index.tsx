@@ -15,7 +15,8 @@ export default function Rezonings() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCD6ujv751_CLPaEfaw3fEfqzilXWqbtLg'
+    // Accidentially checked in previous API key, so it's regenerated now
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!
   })
 
   const [city, setCity] = useState<ICity | null>(null)
