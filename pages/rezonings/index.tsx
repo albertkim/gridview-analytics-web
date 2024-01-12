@@ -1,11 +1,12 @@
 import moment from 'moment'
-import { APIService } from '@/services/APIService'
-import { ICity, IRezoningDetail } from '@/services/Models'
-import { Popover, Skeleton } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { GoogleMap, CircleF, useJsApiLoader } from '@react-google-maps/api'
 import MonthlyStatTable from './_monthlyStatTable'
 import RezoningStatusBadge from './_rezoningStatusBadge'
+import { APIService } from '@/services/APIService'
+import { ICity, IFullRezoningDetail } from '@/services/Models'
+import { Popover, Skeleton } from 'antd'
+import { GoogleMap, CircleF, useJsApiLoader } from '@react-google-maps/api'
+import { getRezoningUtilities } from './_rezoningUtilities'
 
 interface IProps {
 
@@ -15,13 +16,12 @@ export default function Rezonings() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    // Accidentially checked in previous API key, so it's regenerated now
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!
   })
 
   const [city, setCity] = useState<ICity | null>(null)
   const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
-  const [rezonings, setRezonings] = useState<IRezoningDetail[] | null>(null)
+  const [rezonings, setRezonings] = useState<IFullRezoningDetail[] | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
 
   useEffect(() => {
@@ -44,57 +44,7 @@ export default function Rezonings() {
     setMap(null)
   }, [])
 
-  // Summarize total rezonings into monthly metrics - date format MMM YYYY
-  let monthlyRezoningMetrics: {date: string, applicationCount: number, approvalCount: number}[] = []
-
-  if (rezonings) {
-
-    rezonings.forEach(rezoning => {
-
-      const appliedDate = rezoning.dates.appliedDate ?
-        moment(new Date(rezoning.dates.appliedDate!)).format('MMM YYYY') :
-        null
-      const approvedDate = rezoning.dates.approvalDate ? 
-        moment(new Date(rezoning.dates.approvalDate!)).format('MMM YYYY') :
-        null
-
-      // Increment appropriate counts in monthlyRezoningMetrics
-      if (appliedDate) {
-        const existingAppliedDate = monthlyRezoningMetrics.find(m => m.date === appliedDate)
-        if (existingAppliedDate) {
-          existingAppliedDate.applicationCount++
-        } else {
-          monthlyRezoningMetrics.push({
-            date: appliedDate,
-            applicationCount: 1,
-            approvalCount: 0
-          })
-        }
-      }
-
-      if (approvedDate) {
-        const existingApprovedDate = monthlyRezoningMetrics.find(m => m.date === approvedDate)
-        if (existingApprovedDate) {
-          existingApprovedDate.approvalCount++
-        } else {
-          monthlyRezoningMetrics.push({
-            date: approvedDate,
-            applicationCount: 0,
-            approvalCount: 1
-          })
-        }
-      }
-    })
-
-    // Sort by date using moment
-    monthlyRezoningMetrics = monthlyRezoningMetrics.sort((a, b) => {
-      const aDate = moment(a.date, 'MMM YYYY')
-      const bDate = moment(b.date, 'MMM YYYY')
-      return aDate.isBefore(bDate) ? 1 : -1
-    })
-  }
-
-  let sortedRezonings: IRezoningDetail[] | null = null
+  let sortedRezonings: IFullRezoningDetail[] | null = null
 
   // Sort rezonings based on current sort state
   if (!!rezonings && (sort === 'lastUpdate')) {
@@ -122,32 +72,42 @@ export default function Rezonings() {
       <hr />
       <br />
 
-      <div className='row'>
-        <div className='col-md-3'>
-          <MonthlyStatTable
-            year={moment().subtract(3, 'years').format('YYYY')}
-            monthlyRezoningMetrics={monthlyRezoningMetrics}
-          />
-        </div>
-        <div className='col-md-3'>
-          <MonthlyStatTable
-            year={moment().subtract(2, 'years').format('YYYY')}
-            monthlyRezoningMetrics={monthlyRezoningMetrics}
-          />
-        </div>
-        <div className='col-md-3'>
-          <MonthlyStatTable
-            year={moment().subtract(1, 'year').format('YYYY')}
-            monthlyRezoningMetrics={monthlyRezoningMetrics}
-          />
-        </div>
-        <div className='col-md-3'>
-          <MonthlyStatTable
-            year={moment().format('YYYY')}
-            monthlyRezoningMetrics={monthlyRezoningMetrics}
-          />
-        </div>
-      </div>
+      {
+        !!sortedRezonings ? (
+          <div className='row'>
+            <div className='col-md-3'>
+              <MonthlyStatTable
+                monthlyRezoningMetrics={
+                  getRezoningUtilities(moment().subtract(3, 'years').format('YYYY'), sortedRezonings)
+                }
+              />
+            </div>
+            <div className='col-md-3'>
+              <MonthlyStatTable
+                monthlyRezoningMetrics={
+                  getRezoningUtilities(moment().subtract(2, 'years').format('YYYY'), sortedRezonings)
+                }
+              />
+            </div>
+            <div className='col-md-3'>
+              <MonthlyStatTable
+                monthlyRezoningMetrics={
+                  getRezoningUtilities(moment().subtract(1, 'years').format('YYYY'), sortedRezonings)
+                }
+              />
+            </div>
+            <div className='col-md-3'>
+              <MonthlyStatTable
+                monthlyRezoningMetrics={
+                  getRezoningUtilities(moment().format('YYYY'), sortedRezonings)
+                }
+              />
+            </div>
+          </div>
+        ) : (
+          <Skeleton />
+        )
+      }
 
       <br /><br />
 

@@ -62,7 +62,7 @@ export type ZoningStatus =
   'denied' |
   'withdrawn'
 
-export interface IRezoningDetail {
+export interface IFullRezoningDetail {
   city: string
   metroCity: string | null
   rezoningId: string | null
@@ -113,5 +113,5 @@ export interface IRezoningDetail {
 
 export interface IRezoningResponse {
   total: number
-  data: IRezoningDetail[]
+  data: IFullRezoningDetail[]
 }
