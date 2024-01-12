@@ -3,7 +3,7 @@ import { APIService } from '@/services/APIService'
 import { ICity, IRezoningDetail } from '@/services/Models'
 import { Popover, Skeleton } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { GoogleMap, Circle, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, CircleF, useJsApiLoader } from '@react-google-maps/api'
 import MonthlyStatTable from './_monthlyStatTable'
 import RezoningStatusBadge from './_rezoningStatusBadge'
 
@@ -165,7 +165,7 @@ export default function Rezonings() {
               !!rezonings && rezonings
                 .filter((rezonings) => rezonings.location.latitude && rezonings.location.longitude)
                 .map((rezoning, index) => (
-                  <Circle
+                  <CircleF
                     key={index}
                     center={{
                       lat: rezoning.location.latitude!,
