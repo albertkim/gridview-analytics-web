@@ -1,23 +1,27 @@
 import moment from 'moment'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import MonthlyStatTable from './_monthlyStatTable'
 import RezoningStatusBadge from './_rezoningStatusBadge'
 import { APIService } from '@/services/APIService'
 import { ICity, IFullRezoningDetail } from '@/services/Models'
 import { Popover, Skeleton } from 'antd'
-import { GoogleMap, CircleF, useJsApiLoader } from '@react-google-maps/api'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
 
 interface IProps {
 
 }
 
+const defaultGoogleMapOptions = {
+  zoom: 10,
+  center: {
+    lat: 49.2827,
+    lng: -123.1207
+  }
+}
+
 export default function Rezonings() {
 
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!
-  })
+  const mapRef = useRef<HTMLDivElement>(null)
 
   const [city, setCity] = useState<ICity | null>(null)
   const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
@@ -25,24 +29,41 @@ export default function Rezonings() {
   const [map, setMap] = useState<google.maps.Map | null>(null)
 
   useEffect(() => {
-
     async function getRezonings() {
       const rezonings = await APIService.getRezonings()
       setRezonings(rezonings.data)
     }
-
     getRezonings()
-
   }, [])
 
   // Google Maps functions
-  const onLoad = React.useCallback((map: google.maps.Map) => {
-    setMap(map)
-  }, [])
+  useEffect(() => {
+    if (mapRef.current && !map) {
+      setMap(new google.maps.Map(mapRef.current, defaultGoogleMapOptions))
+    }
+  }, [mapRef, map, defaultGoogleMapOptions])
 
-  const onUnmount = React.useCallback((map: google.maps.Map) => {
-    setMap(null)
-  }, [])
+  useEffect(() => {
+    if (map && rezonings) {
+      rezonings.forEach(rezoning => {
+        if (rezoning.location.latitude && rezoning.location.longitude) {
+          new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 1,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: {
+              lat: rezoning.location.latitude,
+              lng: rezoning.location.longitude
+            },
+            radius: 100
+          })
+        }
+      })
+    }
+  }, [map, rezonings])
 
   let sortedRezonings: IFullRezoningDetail[] | null = null
 
@@ -111,55 +132,7 @@ export default function Rezonings() {
 
       <br /><br />
 
-      {
-        isLoaded ? (
-          <GoogleMap
-            mapContainerStyle={{width: '100%', height: '500px'}}
-            center={{lat: 49.2827, lng: -123.1207}}
-            zoom={10}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-          >
-            {
-              // Render addresses as circles on map with different colors for types
-              !!rezonings && rezonings
-                .filter((rezonings) => rezonings.location.latitude && rezonings.location.longitude)
-                .map((rezoning, index) => (
-                  <CircleF
-                    key={index}
-                    center={{
-                      lat: rezoning.location.latitude!,
-                      lng: rezoning.location.longitude!
-                    }}
-                    radius={200}
-                    options={{
-                      strokeColor: '#ff0000',
-                      strokeOpacity: 0.8,
-                      strokeWeight: 2,
-                      fillColor: '#0000ff',
-                      fillOpacity: 0.35,
-                      clickable: true,
-                      draggable: false,
-                      editable: false,
-                      visible: true,
-                      zIndex: 1
-                    }}
-                    onClick={() => {
-                      if (map) {
-                        map.panTo({
-                          lat: rezoning.location.latitude!,
-                          lng: rezoning.location.longitude!
-                        })
-                      }
-                    }}
-                  />
-                ))
-            }
-          </GoogleMap>
-        ) : (
-          <Skeleton />
-        )
-      }
+      <div ref={mapRef} style={{ width: '100%', height: '400px' }} />
 
       <br /><br/>
 
