@@ -6,7 +6,7 @@ import { APIService } from '@/services/APIService'
 import { ICity, IFullRezoningDetail } from '@/services/Models'
 import { Popover, Skeleton } from 'antd'
 import { GoogleMap, CircleF, useJsApiLoader } from '@react-google-maps/api'
-import { getRezoningUtilities } from './_rezoningUtilities'
+import { getRezoningUtilities } from '@/services/RezoningUtilities'
 
 interface IProps {
 
