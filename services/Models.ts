@@ -49,7 +49,7 @@ export interface INewsResponse {
 export type ZoningType =
   'single-family residential' |
   'townhouse' |
-  'mixed-use' |
+  'mixed use' |
   'multi-family residential' |
   'industrial' |
   'commercial'
