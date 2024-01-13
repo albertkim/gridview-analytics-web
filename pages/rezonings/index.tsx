@@ -260,7 +260,7 @@ export default function Rezonings() {
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}
                   onClick={() => setSelectedRezoning(rezoning)}>
-                  <div className='p-2'>
+                  <div>
                     <RezoningPanelRow
                       rezoning={rezoning}
                       expanded={selectedRezoning && selectedRezoning.address === rezoning.address}
