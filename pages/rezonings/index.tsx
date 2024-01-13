@@ -5,13 +5,10 @@ import RezoningTable from './_rezoningTable'
 import RezoningPanelRow from './_rezoningPanelRow'
 import { APIService } from '@/services/APIService'
 import { ICity, IFullRezoningDetail } from '@/services/Models'
-import { Select, Skeleton } from 'antd'
+import { Select, Skeleton, Modal } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
 import { calculateCircleRadius, defaultGoogleMapOptions, getColours } from '@/services/MapUtilities'
-
-interface IProps {
-
-}
+import FullRezoningContents from './_fullRezoningContents'
 
 export default function Rezonings() {
 
@@ -20,6 +17,8 @@ export default function Rezonings() {
   const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
   const [rezonings, setRezonings] = useState<IFullRezoningDetail[] | null>(null)
   const [selectedRezoning, setSelectedRezoning] = useState<IFullRezoningDetail | null>(null)
+  // Used for full details modal
+  const [selectedFullRezoning, setSelectedFullRezoning] = useState<IFullRezoningDetail | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
 
@@ -35,13 +34,12 @@ export default function Rezonings() {
     getRezonings()
   }, [])
 
-  // Google Maps functions
-  // Update the circles ref whenever the circles state changes
+  // Google Maps - Update the circles ref whenever the circles state changes
   useEffect(() => {
     circlesRef.current = circles
   }, [circles])
 
-  // useEffect for initializing the map and adding the zoom listener
+  // Google Maps - Initializing the map and adding the zoom listener
   useEffect(() => {
     if (mapRef.current && !map) {
       console.log('Initializing Google Maps')
@@ -64,7 +62,7 @@ export default function Rezonings() {
     }
   }, [mapRef, map, defaultGoogleMapOptions])
 
-  // useEffect for handling rezonings and circle updates
+  // Google Maps - Handle rezonings and circle updates
   useEffect(() => {
     if (map && rezonings) {
       // Clear existing circles
@@ -131,7 +129,7 @@ export default function Rezonings() {
 
         // Scroll to the selected rezoning list item
         if (selectedRezoningListItem) {
-          const rezoningRightPanel = document.getElementById('map-right-panel')!
+          const rezoningRightPanel = document.getElementById('rezoning-right-panel-list')!
           rezoningRightPanel.scrollTo({
             top: selectedRezoningListItem.offsetTop - 20,
             behavior: 'smooth'
@@ -172,24 +170,37 @@ export default function Rezonings() {
   return (
     <div>
 
+      {/** Full details modal */}
+      <Modal
+        open={!!selectedFullRezoning}
+        onCancel={() => setSelectedFullRezoning(null)}
+        title={
+          <>
+            <span>{selectedFullRezoning?.address} </span>
+            <a
+              className='text-muted text-decoration-underline'
+              href={`https://www.google.com/maps/search/?api=1&query=${selectedFullRezoning?.address}, ${selectedFullRezoning?.city}}`}
+              target='_blank'
+              rel='noreferrer'
+              >
+              [open in Google Maps]
+            </a>
+          </>
+        }
+        footer={null}
+        width={1000}>
+        {
+          !!selectedFullRezoning && <FullRezoningContents rezoning={selectedFullRezoning} />
+        }
+      </Modal>
+
       <div className='d-none d-sm-block' style={{position: 'relative', width: '100%', height: '85vh'}}>
 
         {/** Google Map div/ref */}
         <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
 
         {/** Title and filters */}
-        <div style={{
-          position: 'absolute',
-          width: 'calc(100% - 410px)',
-          top: 20,
-          left: 20,
-          height: 100,
-          zIndex: 10,
-          backgroundColor: 'white',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-          borderRadius: 5,
-          padding: 10
-        }}>
+        <div id='rezoning-map-container'>
           <h5 className='mb-3'>Gridview Premium - Rezoning dataset</h5>
           <div>
             <Select
@@ -210,27 +221,17 @@ export default function Rezonings() {
               onChange={e => setCity(null)}>
               <option value='all'>All cities</option>
             </Select>
+            <Select
+              placeholder='Sort by'
+              style={{marginRight: 10}}
+              onChange={e => setCity(null)}>
+              <option value='all'>All cities</option>
+            </Select>
           </div>
         </div>
 
-        {/** Rezonings right-hand header */}
-
-        <div
-          style={{
-            width: 350,
-            minHeight: 100,
-            maxHeight: 100,
-            overflowY: 'auto',
-            position: 'absolute',
-            backgroundColor: 'white',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-            scrollbarWidth: 'thin',
-            zIndex: 10,
-            top: 20,
-            right: 20,
-            borderRadius: 5,
-            padding: 10
-          }}>
+        {/** Rezonings right-hand panel header */}
+        <div id='rezoning-right-panel-header'>
           {
             !!sortedRezonings && (
               <>
@@ -248,22 +249,8 @@ export default function Rezonings() {
           }
         </div>
 
-        {/** Rezonings right-hand panel */}
-        <div
-          id='map-right-panel'
-          style={{
-            width: 350,
-            maxHeight: 'calc(85vh - 40px - 120px)',
-            overflowY: 'auto',
-            position: 'absolute',
-            backgroundColor: 'white',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-            scrollbarWidth: 'thin',
-            zIndex: 10,
-            bottom: 20,
-            right: 20,
-            borderRadius: 5
-          }}>
+        {/** Rezonings right-hand panel list */}
+        <div id='rezoning-right-panel-list'>
           {
             !!sortedRezonings && (
               sortedRezonings.map((rezoning, index) => (
@@ -277,7 +264,7 @@ export default function Rezonings() {
                     <RezoningPanelRow
                       rezoning={rezoning}
                       expanded={selectedRezoning && selectedRezoning.address === rezoning.address}
-                      onFullDetailsClick={() => null}
+                      onFullDetailsClick={() => setSelectedFullRezoning(rezoning)}
                     />
                   </div>
 
