@@ -2,9 +2,10 @@ import moment from 'moment'
 import React, { useEffect, useState, useRef } from 'react'
 import MonthlyStatTable from './_monthlyStatTable'
 import RezoningTable from './_rezoningTable'
+import RezoningPanelRow from './_rezoningPanelRow'
 import { APIService } from '@/services/APIService'
 import { ICity, IFullRezoningDetail } from '@/services/Models'
-import { Skeleton } from 'antd'
+import { Select, Skeleton } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
 import { calculateCircleRadius, defaultGoogleMapOptions, getColours } from '@/services/MapUtilities'
 
@@ -179,31 +180,46 @@ export default function Rezonings() {
         {/** Title and filters */}
         <div style={{
           position: 'absolute',
-          width: 'calc(100% - 450px)',
+          width: 'calc(100% - 410px)',
           top: 20,
           left: 20,
+          height: 100,
           zIndex: 10,
           backgroundColor: 'white',
           boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
           borderRadius: 5,
           padding: 10
         }}>
-          <h5>Gridview Premium - Rezoning dataset</h5>
-          <div className='row'>
-            <div className='col-md-3'>
-              <select className='form-select' onChange={e => setSort(e.target.value as 'lastUpdate')}>
-                <option value='lastUpdate'>Last Update</option>
-              </select>
-            </div>
+          <h5 className='mb-3'>Gridview Premium - Rezoning dataset</h5>
+          <div>
+            <Select
+              placeholder='Cities'
+              style={{marginRight: 10}}
+              onChange={e => setCity(null)}>
+              <option value='all'>All cities</option>
+            </Select>
+            <Select
+              placeholder='Rezoning types'
+              style={{marginRight: 10}}
+              onChange={e => setCity(null)}>
+              <option value='all'>All cities</option>
+            </Select>
+            <Select
+              placeholder='Status'
+              style={{marginRight: 10}}
+              onChange={e => setCity(null)}>
+              <option value='all'>All cities</option>
+            </Select>
           </div>
         </div>
 
-        {/** Rezonings right-hand panel */}
+        {/** Rezonings right-hand header */}
+
         <div
-          id='map-right-panel'
           style={{
             width: 350,
-            maxHeight: 'calc(85vh - 40px)',
+            minHeight: 100,
+            maxHeight: 100,
             overflowY: 'auto',
             position: 'absolute',
             backgroundColor: 'white',
@@ -211,28 +227,60 @@ export default function Rezonings() {
             scrollbarWidth: 'thin',
             zIndex: 10,
             top: 20,
-            right: 60,
+            right: 20,
             borderRadius: 5,
             padding: 10
+          }}>
+          {
+            !!sortedRezonings && (
+              <>
+                <h5>{sortedRezonings.length} rezonings found</h5>
+                <div className='text-muted'>
+                  <div>
+                    {sortedRezonings.filter((r) => r.status === 'approved').length} approved
+                  </div>
+                  {sortedRezonings.length > 0 && (
+                    <span>Data from {moment.min(sortedRezonings.map(rezoning => moment(rezoning.urls[0].date))).format('MMM DD, YYYY')} to {moment.max(sortedRezonings.map(rezoning => moment(rezoning.urls[0].date))).format('MMM DD, YYYY')}</span>
+                  )}
+                </div>
+              </>
+            )
+          }
+        </div>
+
+        {/** Rezonings right-hand panel */}
+        <div
+          id='map-right-panel'
+          style={{
+            width: 350,
+            maxHeight: 'calc(85vh - 40px - 120px)',
+            overflowY: 'auto',
+            position: 'absolute',
+            backgroundColor: 'white',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+            scrollbarWidth: 'thin',
+            zIndex: 10,
+            bottom: 20,
+            right: 20,
+            borderRadius: 5
           }}>
           {
             !!sortedRezonings && (
               sortedRezonings.map((rezoning, index) => (
                 <div
                   key={index}
-                  className='rezoning-list-item'
-                  style={{ marginBottom: 5, backgroundColor: selectedRezoning && selectedRezoning.address === rezoning.address ? '#eee' : 'white' }}
-                  onClick={() => setSelectedRezoning(rezoning)}
-                >
-                  <span className='badge bg-secondary' style={{ marginRight: 5 }}>
-                    {rezoning.type}
-                  </span>
-                  <span className='badge bg-secondary' style={{ marginRight: 5 }}>
-                    {rezoning.status}
-                  </span>
-                  <div>
-                    {rezoning.address}
+                  // .rezoning-list-item is used in a useEffect to scroll to the selected rezoning
+                  className='rezoning-list-item border border-light'
+                  style={{cursor: 'pointer'}}
+                  onClick={() => setSelectedRezoning(rezoning)}>
+                  <div className='p-2'>
+                    <RezoningPanelRow
+                      rezoning={rezoning}
+                      expanded={selectedRezoning && selectedRezoning.address === rezoning.address}
+                      onFullDetailsClick={() => null}
+                    />
                   </div>
+
                 </div>
               ))
             )

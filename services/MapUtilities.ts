@@ -36,6 +36,7 @@ export const defaultGoogleMapOptions: google.maps.MapOptions = {
   mapTypeControl: false,
   streetViewControl: false,
   fullscreenControl: false,
+  zoomControl: false,
   gestureHandling: 'greedy',
   styles: [
     {
