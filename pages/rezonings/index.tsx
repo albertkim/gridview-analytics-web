@@ -289,58 +289,62 @@ export default function Rezonings() {
 
       </div>
 
-      <br /><br />
+      <br />
 
-      {
-        !!sortedRezonings ? (
-          <div className='row'>
-            <div className='col-md-3'>
-              <MonthlyStatTable
-                monthlyRezoningMetrics={
-                  getRezoningUtilities(moment().subtract(3, 'years').format('YYYY'), sortedRezonings)
-                }
-              />
-            </div>
-            <div className='col-md-3'>
-              <MonthlyStatTable
-                monthlyRezoningMetrics={
-                  getRezoningUtilities(moment().subtract(2, 'years').format('YYYY'), sortedRezonings)
-                }
-              />
-            </div>
-            <div className='col-md-3'>
-              <MonthlyStatTable
-                monthlyRezoningMetrics={
-                  getRezoningUtilities(moment().subtract(1, 'years').format('YYYY'), sortedRezonings)
-                }
-              />
-            </div>
-            <div className='col-md-3'>
-              <MonthlyStatTable
-                monthlyRezoningMetrics={
-                  getRezoningUtilities(moment().format('YYYY'), sortedRezonings)
-                }
-              />
-            </div>
-          </div>
-        ) : (
-          <Skeleton />
-        )
-      }
+      <div className='container-fluid'>
 
-      {
-        !sortedRezonings && (
-          <Skeleton />
-        )
-      }
+        {
+          !!sortedRezonings ? (
+            <div className='row table-responsive'>
+              <div className='col-md-3'>
+                <MonthlyStatTable
+                  monthlyRezoningMetrics={
+                    getRezoningUtilities(moment().subtract(3, 'years').format('YYYY'), sortedRezonings)
+                  }
+                />
+              </div>
+              <div className='col-md-3'>
+                <MonthlyStatTable
+                  monthlyRezoningMetrics={
+                    getRezoningUtilities(moment().subtract(2, 'years').format('YYYY'), sortedRezonings)
+                  }
+                />
+              </div>
+              <div className='col-md-3'>
+                <MonthlyStatTable
+                  monthlyRezoningMetrics={
+                    getRezoningUtilities(moment().subtract(1, 'years').format('YYYY'), sortedRezonings)
+                  }
+                />
+              </div>
+              <div className='col-md-3'>
+                <MonthlyStatTable
+                  monthlyRezoningMetrics={
+                    getRezoningUtilities(moment().format('YYYY'), sortedRezonings)
+                  }
+                />
+              </div>
+            </div>
+          ) : (
+            <Skeleton />
+          )
+        }
 
-      {
-        !!sortedRezonings && (
-          <RezoningTable sortedRezonings={sortedRezonings} />
-        )
-      }
+        {
+          !sortedRezonings && (
+            <Skeleton />
+          )
+        }
 
-      <div style={{ height: 100 }}></div>
+        {
+          !!sortedRezonings && (
+            <RezoningTable sortedRezonings={sortedRezonings} />
+          )
+        }
+
+        <div style={{ height: 100 }}></div>
+
+      </div>
 
     </div>
   )
