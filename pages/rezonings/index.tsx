@@ -18,6 +18,7 @@ export default function Rezonings() {
   const [city, setCity] = useState<ICity | null>(null)
   const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
   const [rezonings, setRezonings] = useState<IFullRezoningDetail[] | null>(null)
+  const [selectedRezoning, setSelectedRezoning] = useState<IFullRezoningDetail | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
 
@@ -73,7 +74,7 @@ export default function Rezonings() {
         .filter(rezoning => !!rezoning.type)
 
       const newCircles = rezoningsWithCoordinates.map(rezoning => {
-        return new google.maps.Circle({
+        const newCircle = new google.maps.Circle({
           strokeColor: 'black',
           strokeOpacity: 0.0,
           strokeWeight: 0.5,
@@ -83,11 +84,59 @@ export default function Rezonings() {
           center: { lat: rezoning.location.latitude!, lng: rezoning.location.longitude! },
           radius: calculateCircleRadius(map.getZoom())
         })
+        google.maps.event.addListener(newCircle, 'click', () => {
+          setSelectedRezoning(rezoning)
+        })
+        return newCircle
       })
 
       setCircles(newCircles)
     }
   }, [map, rezonings])
+
+  // If a rezoning is selected, scroll to it on the right panel and show a bubble above the circle
+  useEffect(() => {
+
+    console.log(`Rezoning selected: ${selectedRezoning?.address}`)
+
+    let selectedCircle: google.maps.Circle | null = null
+
+    if (selectedRezoning && circlesRef.current) {
+      selectedCircle = circlesRef.current.find(circle => {
+        const lat = circle.getCenter()?.lat()
+        const lng = circle.getCenter()?.lng()
+        return lat === selectedRezoning.location.latitude && lng === selectedRezoning.location.longitude
+      }) || null
+    }
+
+    if (selectedRezoning && circlesRef.current) {
+      const selectedCircle = circlesRef.current.find(circle => {
+        const lat = circle.getCenter()?.lat()
+        const lng = circle.getCenter()?.lng()
+        return lat === selectedRezoning.location.latitude && lng === selectedRezoning.location.longitude
+      })
+
+      if (selectedCircle) {
+        const rezoningDiv = document.querySelector(`#map-right-panel div[style*="${selectedRezoning.address}"]`)
+        rezoningDiv?.scrollIntoView({ behavior: 'smooth' })
+
+        // Make the selected circle red
+        selectedCircle.setOptions({
+          fillColor: 'red'
+        })
+      }
+    }
+
+    return () => {
+      // Revert selected circle color)
+      if (selectedRezoning && selectedCircle) {
+        selectedCircle.setOptions({
+          fillColor: getColours(selectedRezoning.type)
+        })
+      }
+    }
+
+  }, [selectedRezoning])
 
   let sortedRezonings: IFullRezoningDetail[] | null = null
 
@@ -103,19 +152,78 @@ export default function Rezonings() {
   }
 
   return (
-    <div className='container-fluid my-4'>
+    <div>
 
-      <br />
+      <div className='d-none d-sm-block' style={{position: 'relative', width: '100%', height: '85vh'}}>
 
-      <div className='container'>
-        <div className='text-muted'>Gridview Premium</div>
-        <div className='text-muted'>Metro Vancouver early access</div>
-        <h1 className='display-4 fw-bold'>REZONING DATA</h1>
+        {/** Google Map div/ref */}
+        <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
+
+        {/** Title and filters */}
+        <div style={{
+          position: 'absolute',
+          width: 'calc(100% - 450px)',
+          top: 20,
+          left: 20,
+          zIndex: 10,
+          backgroundColor: 'white',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+          borderRadius: 5,
+          padding: 10
+        }}>
+          <h5>Gridview Premium - Rezoning dataset</h5>
+          <div className='row'>
+            <div className='col-md-3'>
+              <select className='form-select' onChange={e => setSort(e.target.value as 'lastUpdate')}>
+                <option value='lastUpdate'>Last Update</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/** Rezonings right-hand panel */}
+        <div
+          id='map-right-panel'
+          style={{
+            width: 350,
+            maxHeight: 'calc(85vh - 40px)',
+            overflowY: 'auto',
+            position: 'absolute',
+            backgroundColor: 'white',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+            scrollbarWidth: 'thin',
+            zIndex: 10,
+            top: 20,
+            right: 60,
+            borderRadius: 5,
+            padding: 10
+          }}>
+          {
+            !!sortedRezonings && (
+              sortedRezonings.map((rezoning, index) => (
+                <div
+                  key={index}
+                  style={{ marginBottom: 5 }}
+                  onClick={() => setSelectedRezoning(rezoning)}
+                >
+                  <span className='badge bg-secondary' style={{ marginRight: 5 }}>
+                    {rezoning.type}
+                  </span>
+                  <span className='badge bg-secondary' style={{ marginRight: 5 }}>
+                    {rezoning.status}
+                  </span>
+                  <div>
+                    {rezoning.address}
+                  </div>
+                </div>
+              ))
+            )
+          }
+        </div>
+
       </div>
 
-      <br />
-      <hr />
-      <br />
+      <br /><br />
 
       {
         !!sortedRezonings ? (
@@ -153,12 +261,6 @@ export default function Rezonings() {
           <Skeleton />
         )
       }
-
-      <br /><br />
-
-      <div ref={mapRef} style={{ width: '100%', height: '500px' }} />
-
-      <br /><br />
 
       {
         !sortedRezonings && (

@@ -28,13 +28,15 @@ export function getColours(type: ZoningType | null) {
 }
 
 export const defaultGoogleMapOptions: google.maps.MapOptions = {
-  zoom: 10,
+  zoom: 12,
   center: {
     lat: 49.2827,
     lng: -123.1207
   },
   mapTypeControl: false,
   streetViewControl: false,
+  fullscreenControl: false,
+  gestureHandling: 'greedy',
   styles: [
     {
       'featureType': 'landscape',
