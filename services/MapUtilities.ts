@@ -15,7 +15,7 @@ export function calculateCircleRadius(zoom: number | undefined) {
   }
 }
 
-export function getColours(type: ZoningType | null) {
+export function getZoningTypeColours(type: ZoningType | null) {
   switch (type) {
     case 'townhouse': return '#b5ffc9'
     case 'single-family residential': return '#b5ffc9'

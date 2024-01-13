@@ -7,7 +7,7 @@ import { APIService } from '@/services/APIService'
 import { ICity, IFullRezoningDetail } from '@/services/Models'
 import { Select, Skeleton, Modal } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
-import { calculateCircleRadius, defaultGoogleMapOptions, getColours } from '@/services/MapUtilities'
+import { calculateCircleRadius, defaultGoogleMapOptions, getZoningTypeColours } from '@/services/MapUtilities'
 import FullRezoningContents from './_fullRezoningContents'
 
 export default function Rezonings() {
@@ -77,7 +77,7 @@ export default function Rezonings() {
           strokeColor: 'black',
           strokeOpacity: 0.0,
           strokeWeight: 0.5,
-          fillColor: getColours(rezoning.type),
+          fillColor: getZoningTypeColours(rezoning.type),
           fillOpacity: 0.8,
           map: map,
           center: { lat: rezoning.location.latitude!, lng: rezoning.location.longitude! },
@@ -147,7 +147,7 @@ export default function Rezonings() {
       // Revert selected circle color)
       if (selectedRezoning && selectedCircle) {
         selectedCircle.setOptions({
-          fillColor: getColours(selectedRezoning.type)
+          fillColor: getZoningTypeColours(selectedRezoning.type)
         })
       }
     }
@@ -201,7 +201,7 @@ export default function Rezonings() {
 
         {/** Title and filters */}
         <div id='rezoning-map-container'>
-          <h5 className='mb-3'>Gridview Premium - Rezoning dataset</h5>
+          <h5 className='mb-3'>Gridview Premium</h5>
           <div>
             <Select
               placeholder='Cities'
