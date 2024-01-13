@@ -116,9 +116,26 @@ export default function Rezonings() {
         return lat === selectedRezoning.location.latitude && lng === selectedRezoning.location.longitude
       })
 
-      if (selectedCircle) {
-        const rezoningDiv = document.querySelector(`#map-right-panel div[style*="${selectedRezoning.address}"]`)
-        rezoningDiv?.scrollIntoView({ behavior: 'smooth' })
+      if (selectedRezoning && selectedCircle) {
+        // Find the matching rezoning list item in the right panel
+        let selectedRezoningListItem: HTMLElement | null = null
+        const rezoningListItems = document.getElementsByClassName('rezoning-list-item')
+        for (let i = 0; i < rezoningListItems.length; i++) {
+          const div = rezoningListItems[i] as HTMLElement
+          if (div.innerText.includes(selectedRezoning.address)) {
+            selectedRezoningListItem = div
+            break
+          }
+        }
+
+        // Scroll to the selected rezoning list item
+        if (selectedRezoningListItem) {
+          const rezoningRightPanel = document.getElementById('map-right-panel')!
+          rezoningRightPanel.scrollTo({
+            top: selectedRezoningListItem.offsetTop - 20,
+            behavior: 'smooth'
+          })
+        }
 
         // Make the selected circle red
         selectedCircle.setOptions({
@@ -203,7 +220,8 @@ export default function Rezonings() {
               sortedRezonings.map((rezoning, index) => (
                 <div
                   key={index}
-                  style={{ marginBottom: 5 }}
+                  className='rezoning-list-item'
+                  style={{ marginBottom: 5, backgroundColor: selectedRezoning && selectedRezoning.address === rezoning.address ? '#eee' : 'white' }}
                   onClick={() => setSelectedRezoning(rezoning)}
                 >
                   <span className='badge bg-secondary' style={{ marginRight: 5 }}>
