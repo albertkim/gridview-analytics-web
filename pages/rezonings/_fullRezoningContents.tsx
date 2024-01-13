@@ -134,6 +134,17 @@ export default function FullRezoningContents({rezoning}: IProps) {
 
         <div className='col-md-8'>
           <div className='border border-gray p-3' style={{borderRadius: 5}}>
+            <div className='text-muted'>Applicant</div>
+            <br />
+            <div>{rezoning.applicant}</div>
+            {
+              rezoning.behalf && (
+                <div>
+                  On behalf of {rezoning.behalf}
+                </div>
+              )
+            }
+            <br />
             <div className='text-muted'>Description</div>
             <br />
             {rezoning.description}
