@@ -182,7 +182,7 @@ export default function FullRezoningContents({rezoning}: IProps) {
                 {
                   rezoning.minutesUrls.map((urlObject, index) => (
                     <tr key={index}>
-                      <td style={{paddingLeft: 0}}>
+                      <td>
                         <a
                           href={urlObject.url}
                           target='_blank'
