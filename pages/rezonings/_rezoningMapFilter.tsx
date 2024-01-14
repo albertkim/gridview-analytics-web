@@ -12,7 +12,7 @@ export default function RezoningMapFilter({mapFilterModel, onApply}: IProps) {
   return (
     <div>
 
-      <Space>
+      <Space wrap>
 
         <Select
           mode='multiple'

@@ -149,7 +149,7 @@ td .text-right {
   width: calc(100% - 410px);
   top: 20px;
   left: 20px;
-  height: 100px;
+  min-height: 100px;
   z-index: 10;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);

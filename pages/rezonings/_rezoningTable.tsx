@@ -39,8 +39,8 @@ export default function({sortedRezonings}: IProps) {
         </thead>
         <tbody className='tbody'>
           {
-            sortedRezonings.map((rezoning, index) => (
-              <tr key={index}>
+            sortedRezonings.map((rezoning) => (
+              <tr key={rezoning.id}>
                 <td style={{maxWidth: 150, marginRight: 10}}>
                   <div>
                     <b className='text-muted'>{rezoning.city}</b>

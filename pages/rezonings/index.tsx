@@ -101,7 +101,7 @@ export default function Rezonings() {
   // If a rezoning is selected, scroll to it on the right panel and show a bubble above the circle
   useEffect(() => {
 
-    console.log(`Rezoning selected: ${selectedRezoning?.address}`)
+    console.log(`${selectedRezoning?.id}: ${selectedRezoning?.address}`)
 
     let selectedCircle: google.maps.Circle | null = null
 
@@ -222,9 +222,9 @@ export default function Rezonings() {
         <div id='rezoning-right-panel-list'>
           {
             !!sortedRezonings && (
-              sortedRezonings.map((rezoning, index) => (
+              sortedRezonings.map((rezoning) => (
                 <div
-                  key={index}
+                  key={rezoning.id}
                   // .rezoning-list-item is used in a useEffect to scroll to the selected rezoning
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}

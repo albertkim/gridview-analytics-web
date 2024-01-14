@@ -63,6 +63,7 @@ export type ZoningStatus =
   'withdrawn'
 
 export interface IFullRezoningDetail {
+  id: string
   city: string
   metroCity: string | null
   rezoningId: string | null
