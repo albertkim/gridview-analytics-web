@@ -4,19 +4,22 @@ import MonthlyStatTable from './_monthlyStatTable'
 import RezoningTable from './_rezoningTable'
 import RezoningPanelRow from './_rezoningPanelRow'
 import { APIService } from '@/services/APIService'
-import { ICity, IFullRezoningDetail } from '@/services/Models'
-import { Select, Skeleton, Modal } from 'antd'
+import { IFullRezoningDetail } from '@/services/Models'
+import { Skeleton, Modal } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
 import { calculateCircleRadius, defaultGoogleMapOptions, getZoningTypeColours } from '@/services/MapUtilities'
 import FullRezoningContents from './_fullRezoningContents'
+import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
+import RezoningMapFilter from './_rezoningMapFilter'
+
+const mapFilter = new MapFilterModel()
 
 export default function Rezonings() {
 
-  // States
-  const [city, setCity] = useState<ICity | null>(null)
-  const [sort, setSort] = useState<'lastUpdate'>('lastUpdate')
+  const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
   const [rezonings, setRezonings] = useState<IFullRezoningDetail[] | null>(null)
   const [selectedRezoning, setSelectedRezoning] = useState<IFullRezoningDetail | null>(null)
+
   // Used for full details modal
   const [selectedFullRezoning, setSelectedFullRezoning] = useState<IFullRezoningDetail | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
@@ -72,7 +75,9 @@ export default function Rezonings() {
         .filter(rezoning => rezoning.location.latitude && rezoning.location.longitude)
         .filter(rezoning => !!rezoning.type)
 
-      const newCircles = rezoningsWithCoordinates.map(rezoning => {
+      const filteredRezonings = filterRezonings(rezoningsWithCoordinates, filter)
+
+      const newCircles = filteredRezonings.map(rezoning => {
         const newCircle = new google.maps.Circle({
           strokeColor: 'black',
           strokeOpacity: 0.0,
@@ -91,7 +96,7 @@ export default function Rezonings() {
 
       setCircles(newCircles)
     }
-  }, [map, rezonings])
+  }, [map, rezonings, filter])
 
   // If a rezoning is selected, scroll to it on the right panel and show a bubble above the circle
   useEffect(() => {
@@ -154,18 +159,7 @@ export default function Rezonings() {
 
   }, [selectedRezoning])
 
-  let sortedRezonings: IFullRezoningDetail[] | null = null
-
-  // Sort rezonings based on current sort state
-  if (!!rezonings && (sort === 'lastUpdate')) {
-    sortedRezonings = rezonings.sort((a, b) => {
-      const aDates = a.urls.map(obj => moment(obj.date))
-      const bDates = b.urls.map(obj => moment(obj.date))
-      const aMaxDate = moment.max(aDates)
-      const bMaxDate = moment.max(bDates)
-      return aMaxDate.isBefore(bMaxDate) ? 1 : -1
-    })
-  }
+  const sortedRezonings: IFullRezoningDetail[] | null = filterRezonings(rezonings, filter)
 
   return (
     <div>
@@ -202,32 +196,7 @@ export default function Rezonings() {
         {/** Title and filters */}
         <div id='rezoning-map-container'>
           <h5 className='mb-3'>Gridview Premium</h5>
-          <div>
-            <Select
-              placeholder='Cities'
-              style={{marginRight: 10}}
-              onChange={e => setCity(null)}>
-              <option value='all'>All cities</option>
-            </Select>
-            <Select
-              placeholder='Rezoning types'
-              style={{marginRight: 10}}
-              onChange={e => setCity(null)}>
-              <option value='all'>All cities</option>
-            </Select>
-            <Select
-              placeholder='Status'
-              style={{marginRight: 10}}
-              onChange={e => setCity(null)}>
-              <option value='all'>All cities</option>
-            </Select>
-            <Select
-              placeholder='Sort by'
-              style={{marginRight: 10}}
-              onChange={e => setCity(null)}>
-              <option value='all'>All cities</option>
-            </Select>
-          </div>
+          <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
         </div>
 
         {/** Rezonings right-hand panel header */}
