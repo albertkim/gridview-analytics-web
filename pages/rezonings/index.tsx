@@ -209,7 +209,7 @@ export default function Rezonings() {
                   <div>
                     {sortedRezonings.filter((r) => r.status === 'approved').length} approved
                   </div>
-                  {sortedRezonings.length > 0 && (
+                  {sortedRezonings.length > 0 && sortedRezonings[0].urls.length > 0 && (
                     <span>Data from {moment.min(sortedRezonings.map(rezoning => moment(rezoning.urls[0].date))).format('MMM DD, YYYY')} to {moment.max(sortedRezonings.map(rezoning => moment(rezoning.urls[0].date))).format('MMM DD, YYYY')}</span>
                   )}
                 </div>

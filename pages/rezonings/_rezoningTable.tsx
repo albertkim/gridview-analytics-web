@@ -3,8 +3,10 @@ import { Popover } from 'antd'
 import moment from 'moment'
 import RezoningStatusBadge from './_rezoningStatusBadge'
 
-function truncateString(str: string, maxLength: number) {
-  if (str.length > maxLength) {
+function truncateString(str: string | null, maxLength: number) {
+  if (!str) {
+    return ''
+  } else if (str.length > maxLength) {
     return str.substring(0, maxLength - 3) + '...'
   } else {
     return str

@@ -16,8 +16,15 @@ export class MapFilterModel implements IMapFilter {
   @observable cities: string[] | null = null
   @observable applicationYears: string[] | null = null
   @observable approvalYears: string[] | null = null
-  @observable rezoningTypes: ZoningType[] | null = null
-  @observable rezoningStatuses: ZoningStatus[] | null = null
+  @observable rezoningTypes: ZoningType[] | null = [
+    'single-family residential',
+    'townhouse',
+    'multi-family residential',
+    'commercial',
+    'mixed use',
+    'industrial'
+  ]
+  @observable rezoningStatuses: ZoningStatus[] | null = ['applied', 'public hearing', 'approved']
   @observable sortBy: string | null = 'last update'
   @observable order: 'asc' | 'desc' = 'desc'
 
