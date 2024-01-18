@@ -10,6 +10,10 @@ interface IProps {
 
 export default observer(({mapFilterModel, onApply}: IProps) => {
 
+  if (!mapFilterModel) {
+    return null
+  }
+
   return (
     <div>
 
