@@ -11,6 +11,7 @@ import { calculateCircleRadius, defaultGoogleMapOptions, getZoningTypeColours } 
 import { FullRezoningContents } from './FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from './RezoningMapFilter'
+import { CityStatistics } from './CityStatistics'
 
 const mapFilter = new MapFilterModel()
 
@@ -253,42 +254,15 @@ export function Rezonings() {
 
       <div className='container-fluid'>
 
-        {
-          !!sortedRezonings ? (
-            <div className='row table-responsive'>
-              <div className='col-md-3'>
-                <MonthlyStatTable
-                  monthlyRezoningMetrics={
-                    getRezoningUtilities(moment().subtract(3, 'years').format('YYYY'), sortedRezonings)
-                  }
-                />
-              </div>
-              <div className='col-md-3'>
-                <MonthlyStatTable
-                  monthlyRezoningMetrics={
-                    getRezoningUtilities(moment().subtract(2, 'years').format('YYYY'), sortedRezonings)
-                  }
-                />
-              </div>
-              <div className='col-md-3'>
-                <MonthlyStatTable
-                  monthlyRezoningMetrics={
-                    getRezoningUtilities(moment().subtract(1, 'years').format('YYYY'), sortedRezonings)
-                  }
-                />
-              </div>
-              <div className='col-md-3'>
-                <MonthlyStatTable
-                  monthlyRezoningMetrics={
-                    getRezoningUtilities(moment().format('YYYY'), sortedRezonings)
-                  }
-                />
-              </div>
-            </div>
-          ) : (
-            <Skeleton />
-          )
+        {/* {
+          rezonings && <CityStatistics city='Vancouver' rezonings={rezonings} />
         }
+        {
+          rezonings && <CityStatistics city='Richmond' rezonings={rezonings} />
+        }
+        {
+          rezonings && <CityStatistics city='Burnaby' rezonings={rezonings} />
+        } */}
 
         {
           !sortedRezonings && (
