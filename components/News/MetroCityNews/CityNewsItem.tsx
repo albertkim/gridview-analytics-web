@@ -4,7 +4,7 @@ interface NewsItemProps {
   title: string
 }
 
-export default function CityNewsItem({id, date, title}: NewsItemProps) {
+export function CityNewsItem({id, date, title}: NewsItemProps) {
 
   return (
     <div className='mb-2'>

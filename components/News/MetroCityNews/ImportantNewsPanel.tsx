@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Skeleton, Pagination } from 'antd'
 import { APIService } from '@/services/APIService'
 import { INewsResponse } from '@/services/Models'
-import ImportantNewsItem from './_importantNewsItem'
+import { ImportantNewsItem } from './ImportantNewsItem'
 
 const pageSize = 10
 
@@ -11,7 +11,7 @@ interface IParameters {
   news: INewsResponse
 }
 
-export default function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) {
+export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) {
 
   const [news, setNews] = useState<INewsResponse | null>(initialNews)
   const [currentPage, setCurrentPage] = useState(1)

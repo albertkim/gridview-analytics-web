@@ -14,7 +14,7 @@ interface NewsItemProps {
   }>
 }
 
-export default function CityNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
+export function CityNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='p-2 mb-4'>

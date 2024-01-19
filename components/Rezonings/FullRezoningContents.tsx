@@ -1,11 +1,11 @@
 import { IFullRezoningDetail } from '@/services/Models'
-import RezoningStatusBadge from './_rezoningStatusBadge'
+import { RezoningStatusBadge } from './RezoningStatusBadge'
 
 interface IProps {
   rezoning: IFullRezoningDetail
 }
 
-export default function FullRezoningContents({rezoning}: IProps) {
+export function FullRezoningContents({rezoning}: IProps) {
 
   if (!rezoning) {
     return null

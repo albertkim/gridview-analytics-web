@@ -1,4 +1,4 @@
-import { LinkItem } from '../../../components/LinkItem'
+import { LinkItem } from '../../LinkItem'
 
 interface NewsItemProps {
   id: number
@@ -14,7 +14,7 @@ interface NewsItemProps {
   }>
 }
 
-export default function ImportantNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
+export function ImportantNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='p-2 mb-4'>

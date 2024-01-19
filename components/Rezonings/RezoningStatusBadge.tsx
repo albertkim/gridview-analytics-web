@@ -1,6 +1,6 @@
 import { Tag } from 'antd'
 
-export default function RezoningStatusBadge({status}: {status: string}) {
+export function RezoningStatusBadge({status}: {status: string}) {
 
   if (status === null) {
     return <Tag color='red'>{status}</Tag>

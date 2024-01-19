@@ -1,6 +1,6 @@
 import { IFullRezoningDetail, ZoningStatus } from '@/services/Models'
-import { Badge, Tag } from 'antd'
-import RezoningStatusBadge from './_rezoningStatusBadge'
+import { Badge } from 'antd'
+import { RezoningStatusBadge } from './RezoningStatusBadge'
 import { getZoningTypeColours } from '@/services/MapUtilities'
 
 interface IProps {
@@ -9,23 +9,7 @@ interface IProps {
   onFullDetailsClick: () => void
 }
 
-function getBadgeStatusColor(status: ZoningStatus | null) {
-  if (!status) {
-    return 'error'
-  }
-  // Key is of type ZoningStatus, Value is string
-  const badgeStatusColorMapping: {[key in ZoningStatus]: string} = {
-    'applied': 'default',
-    'pending': 'warning',
-    'public hearing': 'warning',
-    'approved': 'success',
-    'denied': 'error',
-    'withdrawn': 'error'
-  }
-  return badgeStatusColorMapping[status] || 'error'
-}
-
-export default function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProps) {
+export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProps) {
 
   if (!rezoning) {
     return null

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import CityNewsItem from './_cityNewsItem'
+import { CityNewsItem } from './CityNewsItem'
 import { APIService } from '@/services/APIService'
 import { INewsResponse } from '@/services/Models'
 import { Skeleton } from 'antd'
@@ -10,7 +10,7 @@ interface IParameters {
   newsVisible: boolean
 }
 
-export default function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IParameters) {
+export function CityNewsPanel({metroCityShortCode, cityName, newsVisible}: IParameters) {
 
   const pageSize = 5
 

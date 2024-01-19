@@ -8,7 +8,7 @@ interface IProps {
   onApply: (filter: IMapFilter) => void
 }
 
-export default observer(({mapFilterModel, onApply}: IProps) => {
+export const RezoningMapFilter = observer(({mapFilterModel, onApply}: IProps) => {
 
   if (!mapFilterModel) {
     return null

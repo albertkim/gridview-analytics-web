@@ -10,7 +10,7 @@ interface IRezoningMetric {
   approvalCount: number
 }
 
-export default function MonthlyStatTable({monthlyRezoningMetrics}: IProps) {
+export function MonthlyStatTable({monthlyRezoningMetrics}: IProps) {
 
   if (!monthlyRezoningMetrics) {
     return null
