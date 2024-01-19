@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { APIService } from '../../services/APIService'
-import { INews, INewsResponse } from '@/services/Models'
 import { Skeleton, Tag, message } from 'antd'
-import { getAdminCityStructure } from '@/components/Admin/AdminCityStructure'
-import { CreateNewsModal } from '@/components/Admin/CreateNewsModal'
+import { APIService } from '@/services/APIService'
+import { INews, INewsResponse } from '@/services/Models'
+import { getAdminCityStructure } from './AdminCityStructure'
+import { CreateNewsModal } from './CreateNewsModal'
 
 export function AdminPage() {
 
