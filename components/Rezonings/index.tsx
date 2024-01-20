@@ -5,7 +5,7 @@ import { RezoningTable } from './RezoningTable'
 import { RezoningPanelRow } from './RezoningPanelRow'
 import { APIService } from '@/services/APIService'
 import { IFullRezoningDetail } from '@/services/Models'
-import { Skeleton, Modal, message } from 'antd'
+import { Skeleton, Modal, message, Alert } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
 import { calculateCircleRadius, defaultGoogleMapOptions, getZoningTypeColours } from '@/services/MapUtilities'
 import { FullRezoningContents } from './FullRezoningContents'
@@ -202,7 +202,7 @@ export function Rezonings() {
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>Gridview Premium</h5>
+            <h5 className='mb-3'>Gridview Premium {!rezonings && <span className='text-muted'>(loading...)</span>}</h5>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
@@ -263,6 +263,10 @@ export function Rezonings() {
       <br />
 
       <div className='container-fluid'>
+
+        <div className='d-block d-sm-none mb-2'>
+          <Alert type='info' message='View on desktop for a complete map-based experience' />
+        </div>
 
         {
           !sortedRezonings && (
