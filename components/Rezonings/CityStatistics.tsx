@@ -97,6 +97,10 @@ export function CityStatistics({ city, rezonings }: IProps) {
         </thead>
         <tbody>
           <tr>
+            <td className='text-muted'>Townhouse</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('townhouse') ? getStatsByType('townhouse')?.medDaysToApproval : '-'} days</td>
+          </tr>
+          <tr>
             <td className='text-muted'>Multi-family residential</td>
             <td style={{textAlign: 'right'}}>{getStatsByType('multi-family residential') ? getStatsByType('multi-family residential')?.medDaysToApproval : '-'} days</td>
           </tr>
