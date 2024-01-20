@@ -132,7 +132,7 @@ export function FullRezoningContents({rezoning}: IProps) {
 
       <div className='row'>
 
-        <div className='col-md-8'>
+        <div className='col-md-7'>
           <div className='border border-gray p-3' style={{borderRadius: 5}}>
 
             {
@@ -166,15 +166,15 @@ export function FullRezoningContents({rezoning}: IProps) {
           </div>
         </div>
 
-        <div className='col-md-4'>
+        <div className='col-md-5'>
           <div className='border border-gray p-3' style={{borderRadius: 5}}>
-            <div className='text-muted'>Documents</div>
+            <div className='text-muted'>Reports</div>
             <table className='table table-sm table-borderless'>
               <tbody>
                 {
                   rezoning.urls.map((urlObject, index) => (
                     <tr key={index}>
-                      <td>
+                      <td style={{width: '100%'}}>
                         <a
                           href={urlObject.url}
                           target='_blank'
@@ -182,6 +182,9 @@ export function FullRezoningContents({rezoning}: IProps) {
                         >
                           {urlObject.title}
                         </a>
+                      </td>
+                      <td className='text-muted' style={{minWidth: 100, textAlign: 'right'}}>
+                        {urlObject.type}
                       </td>
                       <td className='text-muted' style={{minWidth: 90, textAlign: 'right'}}>
                         {urlObject.date}
@@ -197,7 +200,7 @@ export function FullRezoningContents({rezoning}: IProps) {
                 {
                   rezoning.minutesUrls.map((urlObject, index) => (
                     <tr key={index}>
-                      <td>
+                      <td style={{width: '100%'}}>
                         <a
                           href={urlObject.url}
                           target='_blank'
@@ -205,6 +208,9 @@ export function FullRezoningContents({rezoning}: IProps) {
                         >
                           Meeting minutes
                         </a>
+                      </td>
+                      <td className='text-muted' style={{minWidth: 100, textAlign: 'right'}}>
+                        {urlObject.type}
                       </td>
                       <td className='text-muted' style={{minWidth: 90, textAlign: 'right'}}>
                         {urlObject.date}

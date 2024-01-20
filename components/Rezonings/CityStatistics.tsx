@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { IFullRezoningDetail, ZoningType } from '@/services/Models'
+import { useState } from 'react'
 
 interface IProps {
   city: string
@@ -16,6 +17,8 @@ interface ITypeStatistic {
 }
 
 export function CityStatistics({ city, rezonings }: IProps) {
+
+  const [expanded, setExpanded] = useState<boolean>(false)
 
   const rezoningsInCity = rezonings.filter(rezoning => rezoning.city === city)
 
@@ -60,12 +63,61 @@ export function CityStatistics({ city, rezonings }: IProps) {
     type.maxDaysToApproval = Math.max(...type.daysToApprovalArray)
   })
 
+  function getStatsByType(type: ZoningType) {
+    const matchingType = typesWithAvgMinMaxDaysToApproval.find(t => t.type === type)
+    if (matchingType) {
+      return matchingType
+    } else {
+      return null
+    }
+  }
+
+  if (!expanded) {
+    return (
+      <div style={{width: 150}}>
+        <a className='text-decoration-underline' onClick={() => setExpanded(true)}>{city} metrics</a>
+      </div>
+    )
+  }
+
   return (
-    <div>
-      <div><b>{city}</b></div>
-      <pre>
-        {JSON.stringify(typesWithAvgMinMaxDaysToApproval, null, 2)}
-      </pre>
+    <div style={{width: 300}}>
+      <div className='mb-2'>
+        <a className='text-decoration-underline' onClick={() => setExpanded(false)}>Hide</a>
+      </div>
+      <table className='table table-sm'>
+        <thead>
+          <tr>
+            <th>{city}</th>
+            <th style={{textAlign: 'right'}}>
+              <div>Median days</div>
+              <div>to approval</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className='text-muted'>Multi-family residential</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('multi-family residential') ? getStatsByType('multi-family residential')?.medDaysToApproval : '-'} days</td>
+          </tr>
+          <tr>
+            <td className='text-muted'>Mixed-use</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('mixed use') ? getStatsByType('mixed use')?.medDaysToApproval : '-'} days</td>
+          </tr>
+          <tr>
+            <td className='text-muted'>Commercial</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('commercial') ? getStatsByType('commercial')?.medDaysToApproval : '-'} days</td>
+          </tr>
+          <tr>
+            <td className='text-muted'>Industrial</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('industrial') ? getStatsByType('industrial')?.medDaysToApproval : '-'} days</td>
+          </tr>
+          <tr>
+            <td className='text-muted'>Single-family residential</td>
+            <td style={{textAlign: 'right'}}>{getStatsByType('single-family residential') ? getStatsByType('single-family residential')?.medDaysToApproval : '-'} days</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 

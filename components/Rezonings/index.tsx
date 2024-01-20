@@ -187,7 +187,7 @@ export function Rezonings() {
           </>
         }
         footer={null}
-        width={1000}>
+        width={1200}>
         {
           !!selectedFullRezoning && <FullRezoningContents rezoning={selectedFullRezoning} />
         }
@@ -198,11 +198,21 @@ export function Rezonings() {
         {/** Google Map div/ref */}
         <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
 
-        {/** Title and filters */}
+        {/** Title, filters, and city metrics (underneath) */}
         <div id='rezoning-map-container'>
-          <h5 className='mb-3'>Gridview Premium</h5>
-          <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
+
+          <div id='rezoning-top-filter'>
+            <h5 className='mb-3'>Gridview Premium</h5>
+            <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
+          </div>
+
+          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Vancouver' rezonings={rezonings} /></div>}
+          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Richmond' rezonings={rezonings} /></div>}
+          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Burnaby' rezonings={rezonings} /></div>}
+
         </div>
+
+        {/** City left-hand metrics */}
 
         {/** Rezonings right-hand panel header */}
         <div id='rezoning-right-panel-header'>
@@ -253,16 +263,6 @@ export function Rezonings() {
       <br />
 
       <div className='container-fluid'>
-
-        {/* {
-          rezonings && <CityStatistics city='Vancouver' rezonings={rezonings} />
-        }
-        {
-          rezonings && <CityStatistics city='Richmond' rezonings={rezonings} />
-        }
-        {
-          rezonings && <CityStatistics city='Burnaby' rezonings={rezonings} />
-        } */}
 
         {
           !sortedRezonings && (

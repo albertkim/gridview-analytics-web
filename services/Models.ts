@@ -104,10 +104,12 @@ export interface IFullRezoningDetail {
     title: string
     url: string
     date: string
+    type: ZoningStatus
   }[]
   minutesUrls: {
     url: string
     date: string
+    type: ZoningStatus
   }[]
   createDate: string
   updateDate: string

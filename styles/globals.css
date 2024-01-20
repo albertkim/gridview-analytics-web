@@ -148,16 +148,33 @@ td .text-right {
 
 /** Rezoning page css **/
 #rezoning-map-container {
-  position: absolute;
   width: calc(100% - 410px);
+  position: absolute;
   top: 20px;
   left: 20px;
-  min-height: 100px;
+  pointer-events: none;
+}
+
+#rezoning-top-filter {
   z-index: 10;
+  width: 100%;
+  min-height: 100px;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   border-radius: 5px;
   padding: 10px;
+  pointer-events: all;
+}
+
+#rezoning-left-metrics {
+  z-index: 10;
+  width: fit-content;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  pointer-events: all;
 }
 
 #rezoning-right-panel-header {
