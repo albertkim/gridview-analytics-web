@@ -34,11 +34,17 @@ export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProp
         </div>
 
         <div>
-          {rezoning.address || 'ERROR'}
+          {rezoning.address || ' - '}, {rezoning.city}
         </div>
 
         <div className='text-muted'>
-          {rezoning.city || 'ERROR'}
+          {
+            [
+              !!rezoning.stats.storeys ? `${rezoning.stats.storeys} storeys` : null,
+              !!rezoning.stats.stratas ? `${rezoning.stats.stratas} stratas` : null,
+              !!rezoning.stats.rentals ? `${rezoning.stats.rentals} rentals` : null,
+            ].filter((r) => r).join(', ')
+          }
         </div>
 
         {
@@ -46,8 +52,13 @@ export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProp
             <>
               <br />
               <div className='text-muted'>
-                Status: {rezoning.status || 'ERROR'}
+                {`Applied: ${rezoning.dates.appliedDate || ' - '}`}
               </div>
+              {
+                <div className='text-muted'>
+                  {rezoning.dates.approvalDate && `Approved: ${rezoning.dates.approvalDate}`}
+                </div>
+              }
               <br />
               <div className='text-muted'>
                 {rezoning.description}
