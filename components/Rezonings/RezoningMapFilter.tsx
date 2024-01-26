@@ -36,6 +36,7 @@ export const RezoningMapFilter = observer(({mapFilterModel, onApply}: IProps) =>
           <Select.Option value='Vancouver'>Vancouver</Select.Option>
           <Select.Option value='Richmond'>Richmond</Select.Option>
           <Select.Option value='Burnaby'>Burnaby</Select.Option>
+          <Select.Option value='Surrey'>Surrey</Select.Option>
         </Select>
 
         <Select<ZoningType[] | null>

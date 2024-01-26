@@ -209,6 +209,7 @@ export function Rezonings() {
           {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Vancouver' rezonings={rezonings} /></div>}
           {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Richmond' rezonings={rezonings} /></div>}
           {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Burnaby' rezonings={rezonings} /></div>}
+          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Surrey' rezonings={rezonings} /></div>}
 
         </div>
 
