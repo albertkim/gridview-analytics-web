@@ -52,14 +52,33 @@ export function Rezonings() {
     if (mapRef.current && !map) {
       console.log('Initializing Google Maps')
       const initializedMap = new google.maps.Map(mapRef.current, defaultGoogleMapOptions)
+
+      // Debounce to reduce zoom lagging
+      const debounce = (func: (...args: any[]) => void, wait: number): (...args: any[]) => void => {
+        let timeout: NodeJS.Timeout | null = null
       
+        return function executedFunction(...args: any[]) {
+          const later = () => {
+            timeout = null
+            func(...args)
+          }
+      
+          if (timeout) {
+            clearTimeout(timeout)
+          }
+          timeout = setTimeout(later, wait)
+        }
+      }
+
       // Add zoom listener
-      google.maps.event.addListener(initializedMap, 'zoom_changed', () => {
+      const handleZoomChange = (): void => {
         const currentZoom = initializedMap.getZoom()
         circlesRef?.current?.forEach(circle => {
           circle.setRadius(calculateCircleRadius(currentZoom))
         })
-      })
+      }
+      const debouncedZoomHandler = debounce(handleZoomChange, 250)
+      google.maps.event.addListener(initializedMap, 'zoom_changed', debouncedZoomHandler)
 
       setMap(initializedMap)
     }
