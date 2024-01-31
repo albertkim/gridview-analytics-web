@@ -57,7 +57,7 @@ export function RezoningTable({sortedRezonings}: IProps) {
                   </a>
                 </td>
                 <td style={{maxWidth: 90, marginRight: 10}}>
-                  {rezoning.type}
+                  {rezoning.buildingType}
                 </td>
                 <td className='text-muted' style={{maxWidth: 200, marginRight: 10}}>
                   {truncateString(rezoning.description, 150)}
@@ -141,7 +141,7 @@ export function RezoningTable({sortedRezonings}: IProps) {
                         content={
                           <div>
                             {
-                              rezoning.urls.map((url, index) => (
+                              rezoning.reportUrls.map((url, index) => (
                                 <div key={index}>
                                   <a
                                     href={url.url}
@@ -165,7 +165,7 @@ export function RezoningTable({sortedRezonings}: IProps) {
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>
                   {
-                    moment.max(rezoning.urls.map(obj => moment(obj.date))).fromNow()
+                    moment.max(rezoning.reportUrls.map(obj => moment(obj.date))).fromNow()
                   }
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>

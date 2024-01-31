@@ -7,7 +7,7 @@ import { APIService } from '@/services/APIService'
 import { IFullRezoningDetail } from '@/services/Models'
 import { Skeleton, Modal, message, Alert } from 'antd'
 import { getRezoningUtilities } from '@/services/RezoningUtilities'
-import { calculateCircleRadius, defaultGoogleMapOptions, getZoningTypeColours } from '@/services/MapUtilities'
+import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
 import { FullRezoningContents } from './FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from './RezoningMapFilter'
@@ -97,7 +97,7 @@ export function Rezonings() {
 
       const rezoningsWithCoordinates = rezonings
         .filter(rezoning => rezoning.location.latitude && rezoning.location.longitude)
-        .filter(rezoning => !!rezoning.type)
+        .filter(rezoning => !!rezoning.buildingType)
 
       const filteredRezonings = filterRezonings(rezoningsWithCoordinates, filter)
 
@@ -106,7 +106,7 @@ export function Rezonings() {
           strokeColor: 'black',
           strokeOpacity: 0.0,
           strokeWeight: 0.5,
-          fillColor: getZoningTypeColours(rezoning.type),
+          fillColor: getBuildingTypeColours(rezoning.buildingType),
           fillOpacity: 0.8,
           map: map,
           center: { lat: rezoning.location.latitude!, lng: rezoning.location.longitude! },
@@ -176,7 +176,7 @@ export function Rezonings() {
       // Revert selected circle color)
       if (selectedRezoning && selectedCircle) {
         selectedCircle.setOptions({
-          fillColor: getZoningTypeColours(selectedRezoning.type)
+          fillColor: getBuildingTypeColours(selectedRezoning.buildingType)
         })
       }
     }
@@ -244,7 +244,7 @@ export function Rezonings() {
                   <div>
                     {sortedRezonings.filter((r) => r.status === 'approved').length} approved
                   </div>
-                  {sortedRezonings.length > 0 && sortedRezonings[0].urls.length > 0 && (
+                  {sortedRezonings.length > 0 && sortedRezonings[0].reportUrls.length > 0 && (
                     <span>Data from {moment.min(sortedRezonings.map(rezoning => moment(rezoning.minutesUrls[0].date))).format('MMM DD, YYYY')} to {moment.max(sortedRezonings.map(rezoning => moment(rezoning.minutesUrls[0].date))).format('MMM DD, YYYY')}</span>
                   )}
                 </div>

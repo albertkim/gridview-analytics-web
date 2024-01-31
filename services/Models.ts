@@ -67,12 +67,13 @@ export interface IFullRezoningDetail {
   id: string
   city: string
   metroCity: string | null
-  rezoningId: string | null
+  applicationId: string | null
   address: string
   applicant: string | null
   behalf: string | null
   description: string
-  type: ZoningType | null
+  type: 'rezoning' | 'development permit'
+  buildingType: ZoningType | null
   stats: {
     buildings: number | null
     stratas: number | null
@@ -100,16 +101,16 @@ export interface IFullRezoningDetail {
     latitude: number | null
     longitude: number | null
   },
-  urls: {
+  reportUrls: {
     title: string
     url: string
     date: string
-    type: ZoningStatus
+    status: ZoningStatus
   }[]
   minutesUrls: {
     url: string
     date: string
-    type: ZoningStatus
+    status: ZoningStatus
   }[]
   createDate: string
   updateDate: string

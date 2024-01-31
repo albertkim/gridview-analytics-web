@@ -6,7 +6,7 @@ export interface IMapFilter {
   cities: string[] | null
   applicationYears: string [] | null
   approvalYears: string[] | null
-  rezoningTypes: ZoningType[] | null
+  buildingTypes: ZoningType[] | null
   rezoningStatuses: ZoningStatus[] | null
   sortBy: string | null
 }
@@ -16,7 +16,7 @@ export class MapFilterModel implements IMapFilter {
   @observable cities: string[] | null = null
   @observable applicationYears: string[] | null = null
   @observable approvalYears: string[] | null = null
-  @observable rezoningTypes: ZoningType[] | null = [
+  @observable buildingTypes: ZoningType[] | null = [
     'single-family residential',
     'townhouse',
     'multi-family residential',
@@ -60,11 +60,11 @@ export class MapFilterModel implements IMapFilter {
   }
 
   @action
-  setRezoningTypes(rezoningTypes: ZoningType[] | null) {
-    if (rezoningTypes && rezoningTypes.length === 0) {
-      this.rezoningTypes = null
+  setBuildingTypes(buildingTypes: ZoningType[] | null) {
+    if (buildingTypes && buildingTypes.length === 0) {
+      this.buildingTypes = null
     } else {
-      this.rezoningTypes = rezoningTypes
+      this.buildingTypes = buildingTypes
     }
   }
 
@@ -87,7 +87,7 @@ export class MapFilterModel implements IMapFilter {
       cities: this.cities,
       applicationYears: this.applicationYears,
       approvalYears: this.approvalYears,
-      rezoningTypes: this.rezoningTypes,
+      buildingTypes: this.buildingTypes,
       rezoningStatuses: this.rezoningStatuses,
       sortBy: this.sortBy
     }
@@ -115,7 +115,7 @@ export function filterRezonings(rezonings: IFullRezoningDetail[] | null, filter:
       return false
     }
 
-    if (filter.rezoningTypes && (!rezoning.type || !filter.rezoningTypes.includes(rezoning.type))) {
+    if (filter.buildingTypes && (!rezoning.buildingType || !filter.buildingTypes.includes(rezoning.buildingType))) {
       return false
     }
 
@@ -129,8 +129,8 @@ export function filterRezonings(rezonings: IFullRezoningDetail[] | null, filter:
 
   if (filter.sortBy === 'last update') {
     filteredRezonings = filteredRezonings.sort((a, b) => {
-      const aDates = a.urls.map(obj => moment(obj.date))
-      const bDates = b.urls.map(obj => moment(obj.date))
+      const aDates = a.reportUrls.map(obj => moment(obj.date))
+      const bDates = b.reportUrls.map(obj => moment(obj.date))
       const aMaxDate = moment.max(aDates)
       const bMaxDate = moment.max(bDates)
       return aMaxDate.isBefore(bMaxDate) ? 1 : -1

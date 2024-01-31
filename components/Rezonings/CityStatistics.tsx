@@ -8,7 +8,7 @@ interface IProps {
 }
 
 interface ITypeStatistic {
-  type: ZoningType
+  buildingType: ZoningType
   avgDaysToApproval: number
   minDaysToApproval: number
   maxDaysToApproval: number
@@ -23,13 +23,14 @@ export function CityStatistics({ city, rezonings }: IProps) {
   const rezoningsInCity = rezonings.filter(rezoning => rezoning.city === city)
 
   const rezoningsWithAppliedAndApprovalDate = rezoningsInCity
+    .filter(rezoning => rezoning.type === 'rezoning')
     .filter(rezoning =>
-      rezoning.type &&
+      rezoning.buildingType &&
       rezoning.dates.appliedDate &&
       rezoning.dates.approvalDate &&
       moment(rezoning.dates.appliedDate).isBefore(moment(rezoning.dates.approvalDate))
     ).map(rezoning => ({
-      type: rezoning.type!,
+      buildingType: rezoning.buildingType!,
       appliedDate: rezoning.dates.appliedDate!,
       approvalDate: rezoning.dates.approvalDate!,
       daysToApproval: moment(rezoning.dates.approvalDate).diff(moment(rezoning.dates.appliedDate), 'days')
@@ -39,13 +40,13 @@ export function CityStatistics({ city, rezonings }: IProps) {
   const typesWithAvgMinMaxDaysToApproval: ITypeStatistic[] = []
 
   rezoningsWithAppliedAndApprovalDate.forEach(rezoning => {
-    const typeStatistic = typesWithAvgMinMaxDaysToApproval.find(type => type.type === rezoning.type)
+    const typeStatistic = typesWithAvgMinMaxDaysToApproval.find(type => type.buildingType === rezoning.buildingType)
 
     if (typeStatistic) {
       typeStatistic.daysToApprovalArray.push(rezoning.daysToApproval)
     } else {
       typesWithAvgMinMaxDaysToApproval.push({
-        type: rezoning.type,
+        buildingType: rezoning.buildingType,
         avgDaysToApproval: 0,
         medDaysToApproval: 0,
         minDaysToApproval: 0,
@@ -64,7 +65,7 @@ export function CityStatistics({ city, rezonings }: IProps) {
   })
 
   function getStatsByType(type: ZoningType) {
-    const matchingType = typesWithAvgMinMaxDaysToApproval.find(t => t.type === type)
+    const matchingType = typesWithAvgMinMaxDaysToApproval.find(t => t.buildingType === type)
     if (matchingType) {
       return matchingType
     } else {

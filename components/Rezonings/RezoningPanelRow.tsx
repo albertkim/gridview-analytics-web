@@ -1,7 +1,7 @@
 import { IFullRezoningDetail, ZoningStatus } from '@/services/Models'
 import { Badge } from 'antd'
 import { RezoningStatusBadge } from './RezoningStatusBadge'
-import { getZoningTypeColours } from '@/services/MapUtilities'
+import { getBuildingTypeColours } from '@/services/MapUtilities'
 
 interface IProps {
   rezoning: IFullRezoningDetail
@@ -27,9 +27,9 @@ export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProp
         <div>
           <Badge
             style={{marginRight: 5}}
-            color={getZoningTypeColours(rezoning.type) as any} />
+            color={getBuildingTypeColours(rezoning.buildingType) as any} />
           <span className='text-muted'>
-            {rezoning.type || 'ERROR'}
+            {rezoning.buildingType || 'ERROR'}
           </span>
         </div>
 

@@ -21,7 +21,7 @@ export function FullRezoningContents({rezoning}: IProps) {
         <div className='col-md-4'>
           <div className='border border-gray p-3' style={{borderRadius: 5, height: '100%'}}>
             <div className='text-muted'>Rezoning</div>
-            <div>{rezoning.type}</div>
+            <div>{rezoning.buildingType}</div>
             <br />
             <div className='text-muted'>From: {rezoning.zoning.previousZoningCode}</div>
             <div>{rezoning.zoning.previousZoningDescription}</div>
@@ -136,10 +136,10 @@ export function FullRezoningContents({rezoning}: IProps) {
           <div className='border border-gray p-3' style={{borderRadius: 5}}>
 
             {
-              !!rezoning.rezoningId && (
+              !!rezoning.applicationId && (
                 <>
-                  <div className='text-muted'>Rezoning ID</div>
-                  <div>{rezoning.rezoningId}</div>
+                  <div className='text-muted'>Application ID</div>
+                  <div>{rezoning.applicationId}</div>
                   <br />
                 </>
               )
@@ -172,7 +172,7 @@ export function FullRezoningContents({rezoning}: IProps) {
             <table className='table table-sm table-borderless'>
               <tbody>
                 {
-                  rezoning.urls.map((urlObject, index) => (
+                  rezoning.reportUrls.map((urlObject, index) => (
                     <tr key={index}>
                       <td style={{width: '100%'}}>
                         <a
@@ -184,7 +184,7 @@ export function FullRezoningContents({rezoning}: IProps) {
                         </a>
                       </td>
                       <td className='text-muted' style={{minWidth: 100, textAlign: 'right'}}>
-                        {urlObject.type}
+                        {urlObject.status}
                       </td>
                       <td className='text-muted' style={{minWidth: 90, textAlign: 'right'}}>
                         {urlObject.date}
@@ -210,7 +210,7 @@ export function FullRezoningContents({rezoning}: IProps) {
                         </a>
                       </td>
                       <td className='text-muted' style={{minWidth: 100, textAlign: 'right'}}>
-                        {urlObject.type}
+                        {urlObject.status}
                       </td>
                       <td className='text-muted' style={{minWidth: 90, textAlign: 'right'}}>
                         {urlObject.date}

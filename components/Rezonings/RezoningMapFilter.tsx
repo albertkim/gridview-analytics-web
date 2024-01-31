@@ -51,8 +51,8 @@ export const RezoningMapFilter = observer(({mapFilterModel, onApply}: IProps) =>
             else return `${selectedItems.length} types selected`
           }}
           style={{ width: 200 }}
-          value={mapFilterModel.rezoningTypes}
-          onChange={(types) => mapFilterModel.setRezoningTypes(types)}>
+          value={mapFilterModel.buildingTypes}
+          onChange={(types) => mapFilterModel.setBuildingTypes(types)}>
           <Select.Option value='single-family residential'>Single-Family Residential</Select.Option>
           <Select.Option value='townhouse'>Townhouse</Select.Option>
           <Select.Option value='mixed use'>Mixed Use</Select.Option>
