@@ -103,6 +103,10 @@ export function filterRezonings(rezonings: IFullRezoningDetail[] | null, filter:
 
   let filteredRezonings = rezonings.filter((rezoning) => {
 
+    if (rezoning.type !== 'rezoning') {
+      return false
+    }
+
     if (filter.cities && !filter.cities.includes(rezoning.city)) {
       return false
     }
