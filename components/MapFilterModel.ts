@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { action, makeObservable, observable } from 'mobx'
-import { IFullRezoningDetail, ZoningStatus, ZoningType } from '@/services/Models'
+import { IFullRecordDetail, ZoningStatus, ZoningType } from '@/services/Models'
 
 export interface IMapFilter {
   cities: string[] | null
@@ -95,7 +95,19 @@ export class MapFilterModel implements IMapFilter {
 
 }
 
-export function filterRezonings(rezonings: IFullRezoningDetail[] | null, filter: IMapFilter) {
+function getLatestDate(rezoning: IFullRecordDetail) {
+  const reportUrlDates = rezoning.reportUrls.map((report) => report.date)
+  const minutesUrlDates = rezoning.minutesUrls.map((minutes) => minutes.date)
+  const combinedDates = [...reportUrlDates, ...minutesUrlDates]
+  const latestDate = combinedDates.length > 0 ? combinedDates.reduce((latest, current) => {
+    if (!latest) return current
+    if (moment(current).isAfter(moment(latest))) return current
+    return latest
+  }) : '2000-01-01' // If no dates for some reason, set to a very old date
+  return latestDate
+}
+
+export function filterRezonings(rezonings: IFullRecordDetail[] | null, filter: IMapFilter) {
 
   if (!rezonings) {
     return []
@@ -133,11 +145,11 @@ export function filterRezonings(rezonings: IFullRezoningDetail[] | null, filter:
 
   if (filter.sortBy === 'last update') {
     filteredRezonings = filteredRezonings.sort((a, b) => {
-      const aDates = a.reportUrls.map(obj => moment(obj.date))
-      const bDates = b.reportUrls.map(obj => moment(obj.date))
-      const aMaxDate = moment.max(aDates)
-      const bMaxDate = moment.max(bDates)
-      return aMaxDate.isBefore(bMaxDate) ? 1 : -1
+
+      const aMaxDate = getLatestDate(a)
+      const bMaxDate = getLatestDate(b)
+
+      return moment(aMaxDate).isBefore(bMaxDate) ? 1 : -1
     })
   }
 

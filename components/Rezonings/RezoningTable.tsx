@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { Popover } from 'antd'
-import { IFullRezoningDetail } from '@/services/Models'
+import { IFullRecordDetail } from '@/services/Models'
 import { RezoningStatusBadge } from './RezoningStatusBadge'
 
 function truncateString(str: string | null, maxLength: number) {
@@ -14,7 +14,7 @@ function truncateString(str: string | null, maxLength: number) {
 }
 
 interface IProps {
-  sortedRezonings: IFullRezoningDetail[]
+  sortedRezonings: IFullRecordDetail[]
 }
 
 export function RezoningTable({sortedRezonings}: IProps) {

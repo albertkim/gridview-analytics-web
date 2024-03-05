@@ -1,10 +1,10 @@
-import { IFullRezoningDetail, ZoningStatus } from '@/services/Models'
+import { IFullRecordDetail, ZoningStatus } from '@/services/Models'
 import { Badge } from 'antd'
 import { RezoningStatusBadge } from './RezoningStatusBadge'
 import { getBuildingTypeColours } from '@/services/MapUtilities'
 
 interface IProps {
-  rezoning: IFullRezoningDetail
+  rezoning: IFullRecordDetail
   expanded: boolean | null
   onFullDetailsClick: () => void
 }

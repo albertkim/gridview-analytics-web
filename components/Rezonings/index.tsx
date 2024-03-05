@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { RezoningTable } from './RezoningTable'
 import { RezoningPanelRow } from './RezoningPanelRow'
 import { APIService } from '@/services/APIService'
-import { IFullRezoningDetail } from '@/services/Models'
+import { IFullRecordDetail } from '@/services/Models'
 import { Skeleton, Modal, message, Alert } from 'antd'
 import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
 import { FullRezoningContents } from './FullRezoningContents'
@@ -16,11 +16,11 @@ const mapFilter = new MapFilterModel()
 export function Rezonings() {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
-  const [rezonings, setRezonings] = useState<IFullRezoningDetail[] | null>(null)
-  const [selectedRezoning, setSelectedRezoning] = useState<IFullRezoningDetail | null>(null)
+  const [rezonings, setRezonings] = useState<IFullRecordDetail[] | null>(null)
+  const [selectedRezoning, setSelectedRezoning] = useState<IFullRecordDetail | null>(null)
 
   // Used for full details modal
-  const [selectedFullRezoning, setSelectedFullRezoning] = useState<IFullRezoningDetail | null>(null)
+  const [selectedFullRezoning, setSelectedFullRezoning] = useState<IFullRecordDetail | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
 
@@ -123,7 +123,9 @@ export function Rezonings() {
   // If a rezoning is selected, scroll to it on the right panel and show a bubble above the circle
   useEffect(() => {
 
-    console.log(`${selectedRezoning?.id}: ${selectedRezoning?.address}`)
+    if (selectedRezoning) {
+      console.log(`${selectedRezoning.id}: ${selectedRezoning.address}`)
+    }
 
     let selectedCircle: google.maps.Circle | null = null
 
@@ -181,7 +183,7 @@ export function Rezonings() {
 
   }, [selectedRezoning])
 
-  const sortedRezonings: IFullRezoningDetail[] | null = filterRezonings(rezonings, filter)
+  const sortedRezonings: IFullRecordDetail[] | null = filterRezonings(rezonings, filter)
 
   return (
     <div>
