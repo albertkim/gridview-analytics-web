@@ -7,10 +7,16 @@ import { CreateNewsModal } from './CreateNewsModal'
 
 export function AdminPage() {
 
+  // Data returned from the API and stored on client]
   const [news, setNews] = useState<INewsResponse | null>(null)
   const [rawNews, setRawNews] = useState<IRawNews[] | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Fields to control the create/edit modal
+  const [createNews, setCreateNews] = useState<boolean | null>(null)
   const [editNews, setEditNews] = useState<INews | null>(null)
+  const [editRawNews, setEditRawNews] = useState<IRawNews | null>(null)
+
+  // Ant Design message component: https://ant.design/components/message
   const [messageApi, contextHolder] = message.useMessage()
 
   const getNews = async function() {
@@ -23,7 +29,6 @@ export function AdminPage() {
 
   const getRawNews = async function() {
     const rawNewsResponse = await APIService.getRawNews()
-    console.log(rawNewsResponse)
     setRawNews(rawNewsResponse)
   }
 
@@ -62,7 +67,7 @@ export function AdminPage() {
         <div className='col-md-6'>
 
           <div>
-            <a href='#' onClick={() => setIsModalOpen(true)}>+ Add news</a>
+            <a href='#' onClick={() => setCreateNews(true)}>+ Add news</a>
           </div>
           <br />
 
@@ -162,7 +167,6 @@ export function AdminPage() {
                                 href='#'
                                 onClick={(e) => {
                                   e.preventDefault()
-                                  setIsModalOpen(true)
                                   setEditNews(n)
                                 }}>
                                 {n.title}
@@ -204,7 +208,10 @@ export function AdminPage() {
                     return (
                       <div className='mb-2' key={index}>
                         <div className='text-muted'><b>{rawNewsItem.date} - {rawNewsItem.city}</b></div>
-                        <b><a href={rawNewsItem.url} target='_blank' rel='noreferrer'>{rawNewsItem.title}</a></b>
+                        <div>
+                          <b><a className='mr-2' onClick={() => setEditRawNews(rawNewsItem)}>{rawNewsItem.title}</a></b>
+                          <a href={rawNewsItem.url} target='_blank' rel='noreferrer'>[Link]</a>
+                        </div>
                         {
                           rawNewsItem.contents && (
                             <div className='text-muted'>
@@ -244,15 +251,15 @@ export function AdminPage() {
       </div>
 
       <CreateNewsModal
-        isModalOpen={isModalOpen}
-        news={editNews || undefined}
+        isModalOpen={createNews || !!editNews || !!editRawNews}
+        editNews={editNews || undefined}
+        editRawNews={editRawNews || undefined}
         onSubmit={() => {
-          setIsModalOpen(false)
           getNews()
         }}
         onClose={() => {
-          setIsModalOpen(false)
           setEditNews(null)
+          setEditRawNews(null)
         }} />
 
     </div>

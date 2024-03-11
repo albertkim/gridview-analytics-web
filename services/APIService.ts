@@ -39,6 +39,20 @@ export const APIService = {
     return newsResponse.data.data as IRawNews[]
   },
 
+  async analyzeRawNews(rawNews: IRawNews) {
+    const analyzedNewsResponse = await axios.post(`/api/v1/news/raw/analyze`, rawNews)
+    return analyzedNewsResponse.data as {
+      date: string
+      city: string
+      metroCity: string | null
+      meetingType: string
+      title: string
+      contents: string
+      minuteUrl: string
+      reportUrls: { url: string, title: string }[]
+    }
+  },
+
   async postNews(createNews: any) {
     const newsResponse = await axios.post(`/api/v1/admin/news`, createNews)
     return newsResponse.data as INews

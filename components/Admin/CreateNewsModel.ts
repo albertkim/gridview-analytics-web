@@ -156,8 +156,10 @@ export class CreateNewsModel {
 
   @action
   clearForm() {
-    // Keep the city, date, and meeting type the same for easy data entry
     this.id = null
+    this.cityId = null
+    this.date = null
+    this.meetingType = null
     this.title = null
     this.summary = null
     this.sentiment = null

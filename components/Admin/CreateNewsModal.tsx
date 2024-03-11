@@ -2,16 +2,17 @@ import { Button, DatePicker, Input, Select, Space, Modal, message, Radio } from 
 import { observer } from 'mobx-react'
 import { CreateNewsModel, cityIDMapping } from './CreateNewsModel'
 import { APIService } from '@/services/APIService'
-import { INews } from '@/services/Models'
-import React, { useState, useEffect } from 'react'
-import TextArea from 'antd/es/input/TextArea'
+import { INews, IRawNews } from '@/services/Models'
 import { RichTextEditor } from '@mantine/tiptap'
 import { useEditor } from '@tiptap/react'
+import React, { useState, useEffect } from 'react'
+import TextArea from 'antd/es/input/TextArea'
 import StarterKit from '@tiptap/starter-kit'
 import dayjs from 'dayjs'
 
 interface IParameters {
-  news?: INews // Pass through when editing
+  editNews?: INews // Pass through when editing
+  editRawNews?: IRawNews // Pass through when creating from raw news
   isModalOpen: boolean
   onSubmit: () => void
   onClose: () => void
@@ -32,9 +33,38 @@ function toTitleCase(string: string) {
 
 let createNews = new CreateNewsModel()
 
-export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}: IParameters) => {
+export const CreateNewsModal = observer(({editNews, editRawNews, isModalOpen, onSubmit, onClose}: IParameters) => {
 
   const [loading, setLoading] = useState(false)
+
+  const analyzeRawNews = async function() {
+    if (editRawNews) {
+      createNews.clearForm()
+      const analyzedRawNews = await APIService.analyzeRawNews(editRawNews)
+
+      createNews.setCityId(cityIDMapping[analyzedRawNews.city])
+      createNews.setTitle(analyzedRawNews.title)
+      createNews.setSummary(analyzedRawNews.contents)
+      createNews.setDate(analyzedRawNews.date)
+      createNews.setMeetingType(analyzedRawNews.meetingType)
+
+      // Add main minute URL
+      createNews.links[0].setTitle('Main minute')
+      createNews.links[0].setURL(analyzedRawNews.minuteUrl)
+
+      // Add report URLs
+      analyzedRawNews.reportUrls.forEach((reportUrl) => {
+        createNews.addLink()
+        createNews.links[createNews.links.length - 1].setTitle(reportUrl.title)
+        createNews.links[createNews.links.length - 1].setURL(reportUrl.url)
+      })
+    }
+  }
+
+  // If there is a raw news input, populate the form with AI analysis
+  useEffect(() => {
+    analyzeRawNews()
+  }, [editRawNews])
 
   // Rich text editor for the news summary section
   const editor = useEditor({
@@ -51,18 +81,19 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
     if (createNews.summary) {
       editor?.commands.setContent(createNews.summary)
     } else {
-      createNews.clearForm();
+      editor?.commands.setContent(null)
+      createNews.clearForm()
     }
   }, [createNews.summary, editor])
 
   useEffect(() => {
-    if (news) {
+    if (editNews) {
       createNews.clearForm()
-      createNews.populateUpdateObject(news)
+      createNews.populateUpdateObject(editNews)
     } else {
       createNews.clearForm()
     }
-  }, [news])
+  }, [editNews])
 
   const environment = process.env.NODE_ENV!
 
@@ -91,8 +122,8 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
   async function submitCreateNewsRequest() {
     try {
       setLoading(true)
-      if (news) {
-        await APIService.updateNews(news.id, createNews.getUpdateNetworkObject())
+      if (editNews) {
+        await APIService.updateNews(editNews.id, createNews.getUpdateNetworkObject())
       } else {
         await APIService.postNews(createNews.getCreateNetworkObject())
       }
@@ -110,12 +141,14 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
   return (
     <Modal
       width={1000}
-      title={news ? `Update news ${news.id}` : 'Create news'}
+      title={editNews ? `Update news ${editNews.id}` : 'Create news'}
       open={isModalOpen} onCancel={() => onClose()}
       footer={null}>
 
       {/* For Ant Design message component */}
       {contextHolder}
+
+      <br />
 
       <div className='row'>
 
@@ -276,13 +309,6 @@ export const CreateNewsModal = observer(({news, isModalOpen, onSubmit, onClose}:
               JSON.stringify(createNews.getCreateNetworkObject(), null, 2)
             }
           </pre>
-          <br />
-          <div className='text-muted mb-2'>
-            Sample GPT prompt to summarize:
-          </div>
-          <div className='text-muted'>
-            You are a news article summarizing the provided document, crafted for mostly real estate professionals. Replace the original document by providing an immediate and direct overview of the key points, without referring to yourself as a separate entity. Include specifics and practical details that real estate agents would find useful. Begin with a succinct 1-2 sentence introduction, followed by bullet points for detailed information. Try to keep the number of bullet points between 3-5 if possible. Clearly indicate the current stage of each legislative item, including relevant dates.
-          </div>
         </div>
 
       </div>
