@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Skeleton, Tag, message } from 'antd'
 import { APIService } from '@/services/APIService'
-import { INews, INewsResponse } from '@/services/Models'
+import { INews, INewsResponse, IRawNews } from '@/services/Models'
 import { getAdminCityStructure } from './AdminCityStructure'
 import { CreateNewsModal } from './CreateNewsModal'
 
 export function AdminPage() {
 
   const [news, setNews] = useState<INewsResponse | null>(null)
+  const [rawNews, setRawNews] = useState<IRawNews[] | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editNews, setEditNews] = useState<INews | null>(null)
   const [messageApi, contextHolder] = message.useMessage()
@@ -20,13 +21,19 @@ export function AdminPage() {
     setNews(newsResponse)
   }
 
+  const getRawNews = async function() {
+    const rawNewsResponse = await APIService.getRawNews()
+    setRawNews(rawNewsResponse)
+  }
+
   useEffect(() => {
     getNews()
+    getRawNews()
   }, [])
 
   const adminCityStructure = getAdminCityStructure(news || undefined)
 
-  const deleteNews = async function(newsId: number) {
+  const deleteNews = async function (newsId: number) {
     if (window.confirm('Are you sure you want to delete this news item?')) {
       try {
         await APIService.deleteNews(newsId)
@@ -39,7 +46,7 @@ export function AdminPage() {
   }
 
   return (
-    <div className='container my-4'>
+    <div className='container-fluid my-4'>
 
       <h1 className='fw-bold'>ADMIN PAGE</h1>
 
@@ -47,129 +54,172 @@ export function AdminPage() {
       {contextHolder}
 
       <br />
-      <div>
-        <a href='#' onClick={() => setIsModalOpen(true)}>+ Add news</a>
-      </div>
-      <br />
 
-      <hr />
+      <div className='row'>
 
-      <div className='table-responsive'>
-        <table className='table table-sm table-borderless'>
-          <thead className='thead-light'>
-            <tr>
-              <th>City</th>
-              <th>News resources</th>
-              <th>Latest date</th>
-              <th>Days since</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              adminCityStructure.map((city) => {
+        {/** The left half of the screen has the ability to view, add, delete news */}
+        <div className='col-md-6'>
 
-                let daysSinceComponent: JSX.Element
-                if (city.daysSince === null) {
-                  daysSinceComponent = <Tag color='red'>No entries</Tag>
-                } else if (city.daysSince <= 7) {
-                  daysSinceComponent = <Tag color='green'>{city.daysSince} days</Tag>
-                } else if (city.daysSince <= 14) {
-                  daysSinceComponent = <Tag color='yellow'>{city.daysSince} days</Tag>
-                } else {
-                  daysSinceComponent = <Tag color='orange'>{city.daysSince} days</Tag>
-                }
+          <div>
+            <a href='#' onClick={() => setIsModalOpen(true)}>+ Add news</a>
+          </div>
+          <br />
 
-                return (
-                  <tr key={city.city}>
-                    <td className='text-muted'>{city.city}</td>
-                    <td>
-                      {
-                        city.resources.map((resource, index) => {
-                          return (
-                            <div key={index}>
-                              <a href={resource.url} target='_blank' rel='noreferrer'>
-                                {resource.title}
-                              </a>
-                            </div>
-                          )
-                        })
-                      }
-                    </td>
-                    <td className='text-muted' style={{minWidth: 100}}>
-                      {city.lastNewsDate || '-'}
-                    </td>
-                    <td>
-                      {daysSinceComponent}
-                    </td>
-                  </tr>
-                )
+          <hr />
 
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <hr />
-      <br />
-
-      {
-        !news ?
-          <Skeleton />
-          :
           <div className='table-responsive'>
             <table className='table table-sm table-borderless'>
               <thead className='thead-light'>
                 <tr>
-                  <th>Date</th>
                   <th>City</th>
-                  <th>Meeting type</th>
-                  <th>News</th>
-                  <th>{/** Empty "important" column **/}</th>
-                  <th>Actions</th>
+                  <th>News resources</th>
+                  <th>Latest date</th>
+                  <th>Days since</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  news.data.map((n) => {
+                  adminCityStructure.map((city) => {
+
+                    let daysSinceComponent: JSX.Element
+                    if (city.daysSince === null) {
+                      daysSinceComponent = <Tag color='red'>No entries</Tag>
+                    } else if (city.daysSince <= 7) {
+                      daysSinceComponent = <Tag color='green'>{city.daysSince} days</Tag>
+                    } else if (city.daysSince <= 14) {
+                      daysSinceComponent = <Tag color='yellow'>{city.daysSince} days</Tag>
+                    } else {
+                      daysSinceComponent = <Tag color='orange'>{city.daysSince} days</Tag>
+                    }
+
                     return (
-                      <tr key={n.id}>
-                        <td className='text-muted' style={{minWidth: 100, marginRight: 10}}>
-                          {n.date}
-                        </td>
-                        <td className='text-muted' style={{marginRight: 10}}>
-                          {n.cityName}
-                        </td>
-                        <td className='text-muted' style={{maxWidth: 150, marginRight: 10}}>
-                          {n.meetingType}
-                        </td>
-                        <td>
-                          <a
-                            href='#'
-                            onClick={(e) => {
-                              e.preventDefault()
-                              setIsModalOpen(true)
-                              setEditNews(n)
-                            }}>
-                            {n.title}
-                          </a>
-                        </td>
+                      <tr key={city.city}>
+                        <td className='text-muted'>{city.city}</td>
                         <td>
                           {
-                            n.important && <Tag>{n.important}</Tag>
+                            city.resources.map((resource, index) => {
+                              return (
+                                <div key={index}>
+                                  <a href={resource.url} target='_blank' rel='noreferrer'>
+                                    {resource.title}
+                                  </a>
+                                </div>
+                              )
+                            })
                           }
                         </td>
+                        <td className='text-muted' style={{ minWidth: 100 }}>
+                          {city.lastNewsDate || '-'}
+                        </td>
                         <td>
-                          <a className='text-danger' onClick={() => deleteNews(n.id)}>Delete</a>
+                          {daysSinceComponent}
                         </td>
                       </tr>
                     )
+
                   })
                 }
               </tbody>
             </table>
           </div>
-      }
+
+          <hr />
+          <br />
+
+          {
+            !news ?
+              <Skeleton />
+              :
+              <div className='table-responsive'>
+                <table className='table table-sm table-borderless'>
+                  <thead className='thead-light'>
+                    <tr>
+                      <th>Date</th>
+                      <th>City</th>
+                      <th>Meeting type</th>
+                      <th>News</th>
+                      <th>{/** Empty "important" column **/}</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      news.data.map((n) => {
+                        return (
+                          <tr key={n.id}>
+                            <td className='text-muted' style={{ minWidth: 100, marginRight: 10 }}>
+                              {n.date}
+                            </td>
+                            <td className='text-muted' style={{ marginRight: 10 }}>
+                              {n.cityName}
+                            </td>
+                            <td className='text-muted' style={{ maxWidth: 150, marginRight: 10 }}>
+                              {n.meetingType}
+                            </td>
+                            <td>
+                              <a
+                                href='#'
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  setIsModalOpen(true)
+                                  setEditNews(n)
+                                }}>
+                                {n.title}
+                              </a>
+                            </td>
+                            <td>
+                              {
+                                n.important && <Tag>{n.important}</Tag>
+                              }
+                            </td>
+                            <td>
+                              <a className='text-danger' onClick={() => deleteNews(n.id)}>Delete</a>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+          }
+
+        </div>
+
+        {/** The right half of the screen shows raw news and the ability to add news from them */}
+        <div className='col-md-6'>
+
+          <div>
+            <b>Raw scraped news</b>
+          </div>
+
+          <br />
+
+          {
+            rawNews ? (
+              <>
+                {
+                  rawNews.map((rawNewsItem, index) => {
+                    return (
+                      <div className='mb-2'>
+                        {rawNewsItem.title}
+                        <br />
+                        <a href={rawNewsItem.url} target='_blank' rel='noreferrer'>{rawNewsItem.url}</a>
+                        <br />
+                        <div className='text-muted'>{rawNewsItem.contents}</div>
+                      </div>
+                    )
+                  })
+                }
+              </>
+            ) : (
+              <Skeleton />
+            )
+          }
+
+        </div>
+
+      </div>
 
       <CreateNewsModal
         isModalOpen={isModalOpen}

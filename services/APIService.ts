@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import qs from 'qs'
-import { INews, INewsResponse, ICity, IRezoningResponse } from './Models'
+import { INews, INewsResponse, ICity, IRezoningResponse, IRawNews } from './Models'
 import { CityStructure } from './CityStructure'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!
@@ -32,6 +32,11 @@ export const APIService = {
     })
     console.log(newsResponse.config.url)
     return newsResponse.data as INewsResponse
+  },
+
+  async getRawNews() {
+    const newsResponse = await axios.get(`/api/v1/news/raw`)
+    return newsResponse.data.data as IRawNews[]
   },
 
   async postNews(createNews: any) {
