@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Skeleton, Tag, message } from 'antd'
+import { Skeleton, Tag, Typography, message } from 'antd'
 import { APIService } from '@/services/APIService'
 import { INews, INewsResponse, IRawNews } from '@/services/Models'
 import { getAdminCityStructure } from './AdminCityStructure'
@@ -23,6 +23,7 @@ export function AdminPage() {
 
   const getRawNews = async function() {
     const rawNewsResponse = await APIService.getRawNews()
+    console.log(rawNewsResponse)
     setRawNews(rawNewsResponse)
   }
 
@@ -201,12 +202,33 @@ export function AdminPage() {
                 {
                   rawNews.map((rawNewsItem, index) => {
                     return (
-                      <div className='mb-2'>
-                        {rawNewsItem.title}
-                        <br />
-                        <a href={rawNewsItem.url} target='_blank' rel='noreferrer'>{rawNewsItem.url}</a>
-                        <br />
-                        <div className='text-muted'>{rawNewsItem.contents}</div>
+                      <div className='mb-2' key={index}>
+                        <div className='text-muted'><b>{rawNewsItem.date} - {rawNewsItem.city}</b></div>
+                        <b><a href={rawNewsItem.url} target='_blank' rel='noreferrer'>{rawNewsItem.title}</a></b>
+                        {
+                          rawNewsItem.contents && (
+                            <div className='text-muted'>
+                              <Typography.Paragraph ellipsis={{rows: 3}}>
+                                {rawNewsItem.contents}
+                              </Typography.Paragraph>
+                            </div>
+                          )
+                        }
+                        {
+                          rawNewsItem.reportUrls.length > 0 && (
+                            <>
+                              {
+                                rawNewsItem.reportUrls.map((reportUrl, index) => {
+                                  return (
+                                    <div key={index}>
+                                      <a href={reportUrl.url} target='_blank' rel='noreferrer'>{reportUrl.title}</a>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </>
+                          )
+                        }
                       </div>
                     )
                   })
