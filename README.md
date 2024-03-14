@@ -21,4 +21,5 @@ Then, run the following commands:
 
 # Pro tips
 
+- If you are adding a permanent route redirect, you must add to `next.config.js` and `/public/_redirects`
 - If you are getting a React hydration error on application load, it is probably because you have a browser extension that modifies HTML. In my case, I had a dark mode plugin that once i disabled, made the application work again.
