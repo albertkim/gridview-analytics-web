@@ -54,8 +54,8 @@ export class CreateNewsModel {
   @observable meetingType: string | null = null
   @observable cityId: number | null = null
   @observable date: string | null = null
-  @observable sentiment: string | null = null
-  @observable important: number | null = null
+  @observable sentiment: string | null = 'neutral'
+  @observable important: number | null = 0
   @observable links: CreateLinkModel[] = [new CreateLinkModel()]
 
   constructor() {

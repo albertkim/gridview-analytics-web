@@ -4,7 +4,7 @@ import { APIService } from '@/services/APIService'
 import { INewsResponse } from '@/services/Models'
 import { ImportantNewsItem } from './ImportantNewsItem'
 
-const pageSize = 10
+const pageSize = 5
 
 interface IParameters {
   cityNames: string[],

@@ -255,11 +255,15 @@ export function AdminPage() {
         editNews={editNews || undefined}
         editRawNews={editRawNews || undefined}
         onSubmit={() => {
+          setEditNews(null)
+          setEditRawNews(null)
+          setCreateNews(null)
           getNews()
         }}
         onClose={() => {
           setEditNews(null)
           setEditRawNews(null)
+          setCreateNews(null)
         }} />
 
     </div>
