@@ -63,7 +63,9 @@ export function RezoningsTable() {
 
       <br />
 
-      <RezoningTable sortedRecords={sortedRecords} onSelect={(record) => setSelectedRecord(record)} />
+      <div className='table-responsive'>
+        <RezoningTable sortedRecords={sortedRecords} onSelect={(record) => setSelectedRecord(record)} />
+      </div>
       
     </div>
   )
