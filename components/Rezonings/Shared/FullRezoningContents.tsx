@@ -1,5 +1,5 @@
 import { IFullRecordDetail } from '@/services/Models'
-import { RezoningStatusBadge } from './RezoningStatusBadge'
+import { RezoningStatusBadge } from '../Map/RezoningStatusBadge'
 
 interface IProps {
   rezoning: IFullRecordDetail

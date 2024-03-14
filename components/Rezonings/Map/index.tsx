@@ -5,7 +5,7 @@ import { APIService } from '@/services/APIService'
 import { IFullRecordDetail } from '@/services/Models'
 import { Modal, message, Alert } from 'antd'
 import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
-import { FullRezoningContents } from './FullRezoningContents'
+import { FullRezoningContents } from '../Shared/FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { CityStatistics } from './CityStatistics'
@@ -98,7 +98,7 @@ export function RezoningsMap() {
 
       const filteredRezonings = filterRezonings(rezoningsWithCoordinates, filter)
 
-      const newCircles = filteredRezonings.map(rezoning => {
+      const newCircles = (filteredRezonings || []).map(rezoning => {
         const newCircle = new google.maps.Circle({
           strokeColor: 'black',
           strokeOpacity: 0.0,
@@ -205,7 +205,7 @@ export function RezoningsMap() {
           </>
         }
         footer={null}
-        width={1200}>
+        width={1000}>
         {
           !!selectedFullRezoning && <FullRezoningContents rezoning={selectedFullRezoning} />
         }

@@ -95,7 +95,7 @@ export class MapFilterModel implements IMapFilter {
 
 }
 
-function getLatestDate(rezoning: IFullRecordDetail) {
+export function getLatestDate(rezoning: IFullRecordDetail) {
   const reportUrlDates = rezoning.reportUrls.map((report) => report.date)
   const minutesUrlDates = rezoning.minutesUrls.map((minutes) => minutes.date)
   const combinedDates = [...reportUrlDates, ...minutesUrlDates]
@@ -110,38 +110,10 @@ function getLatestDate(rezoning: IFullRecordDetail) {
 export function filterRezonings(rezonings: IFullRecordDetail[] | null, filter: IMapFilter) {
 
   if (!rezonings) {
-    return []
+    return null
   }
 
-  let filteredRezonings = rezonings.filter((rezoning) => {
-
-    if (rezoning.type !== 'rezoning') {
-      return false
-    }
-
-    if (filter.cities && !filter.cities.includes(rezoning.city)) {
-      return false
-    }
-
-    if (filter.applicationYears && !filter.applicationYears.includes(moment(rezoning.dates.appliedDate).year().toString())) {
-      return false
-    }
-
-    if (filter.approvalYears && !filter.approvalYears.includes(moment(rezoning.dates.approvalDate).year().toString())) {
-      return false
-    }
-
-    if (filter.buildingTypes && (!rezoning.buildingType || !filter.buildingTypes.includes(rezoning.buildingType))) {
-      return false
-    }
-
-    if (filter.rezoningStatuses && !filter.rezoningStatuses.includes(rezoning.status)) {
-      return false
-    }
-
-    return true
-
-  })
+  let filteredRezonings = rezonings
 
   if (filter.sortBy === 'last update') {
     filteredRezonings = filteredRezonings.sort((a, b) => {
