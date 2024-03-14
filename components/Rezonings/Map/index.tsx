@@ -284,7 +284,13 @@ export function RezoningsMap() {
       <div className='container-fluid'>
 
         <div className='d-block d-sm-none mb-2'>
-          <Alert type='info' message='View on desktop for a complete map-based experience' />
+          <Alert type='info' message={
+            <>
+              <span>View on desktop for a complete map-based experience.</span>
+              <br />
+              <span><a href='/rezonings/table'>Go to the table view.</a></span>
+            </>
+          } />
         </div>
 
       </div>
