@@ -1,19 +1,18 @@
 import moment from 'moment'
 import React, { useEffect, useState, useRef } from 'react'
-import { RezoningTable } from './RezoningTable'
 import { RezoningPanelRow } from './RezoningPanelRow'
 import { APIService } from '@/services/APIService'
 import { IFullRecordDetail } from '@/services/Models'
-import { Skeleton, Modal, message, Alert } from 'antd'
+import { Modal, message, Alert } from 'antd'
 import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
 import { FullRezoningContents } from './FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
-import { RezoningMapFilter } from './RezoningMapFilter'
+import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { CityStatistics } from './CityStatistics'
 
 const mapFilter = new MapFilterModel()
 
-export function Rezonings() {
+export function RezoningsMap() {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
   const [rezonings, setRezonings] = useState<IFullRecordDetail[] | null>(null)
@@ -212,7 +211,7 @@ export function Rezonings() {
         }
       </Modal>
 
-      <div className='d-none d-sm-block' style={{position: 'relative', width: '100%', height: '85vh'}}>
+      <div className='d-none d-sm-block' style={{position: 'relative', width: '100%', height: '90vh'}}>
 
         {/** Google Map div/ref */}
         <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
@@ -221,7 +220,7 @@ export function Rezonings() {
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>Gridview Premium {!rezonings && <span className='text-muted'>(loading...)</span>}</h5>
+            <h5 className='mb-3'>Gridview Premium (<a href='/rezonings/table'>go to table view</a>) {!rezonings && <span className='text-muted'>(loading...)</span>}</h5>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
@@ -287,20 +286,6 @@ export function Rezonings() {
         <div className='d-block d-sm-none mb-2'>
           <Alert type='info' message='View on desktop for a complete map-based experience' />
         </div>
-
-        {
-          !sortedRezonings && (
-            <Skeleton />
-          )
-        }
-
-        {
-          !!sortedRezonings && (
-            <RezoningTable sortedRezonings={sortedRezonings} />
-          )
-        }
-
-        <div style={{ height: 100 }}></div>
 
       </div>
 

@@ -9,6 +9,7 @@ import '@mantine/core/styles.css'
 import '@mantine/tiptap/styles.css'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 
 export default function({ Component, pageProps }: AppProps) {
 
@@ -29,6 +30,8 @@ export default function({ Component, pageProps }: AppProps) {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [navRef])
+
+  const router = useRouter()
 
   return (
     <>
@@ -117,38 +120,45 @@ export default function({ Component, pageProps }: AppProps) {
 
         </Layout.Content>
 
-        <Layout.Footer className='p-0 m-0'>
+        {
+          // Don't show the footer on select routes, namely anything with an interactable map
+          (!['/rezonings/map'].includes(router.pathname)) && (
 
-          <div className='text-white dark-img' style={{
-            backgroundImage: `url(${footerImage.src})`,
-            backgroundPosition: 'center',
-            paddingTop: 200,
-            paddingBottom: 200
-          }}>
-            <div className='container'>
-              <div className='row'>
-                <div className='col-md-3'>
-                  <p className='lead'>Company</p>
-                  <div><a className='text-white' href='/'>Home</a></div>
-                  <div><a className='text-white' href='/about'>About</a></div>
-                </div>
-                <div className='col-md-3'>
-                  <p className='lead'>Products</p>
-                  <div><a className='text-white' href='/news'>City news</a></div>
-                  <div><a className='text-white' href='/premium'>Gridview Premium</a></div>
-                </div>
-                <div className='col-md-3'>
-                  <p className='lead'>Contact</p>
-                  <div className='text-white'>albert@gridviewanalytics.com</div>
-                  <div>
-                    <a  className='text-white' href='mailto:albert@gridviewanalytics.com'>[Email link]</a>
+            <Layout.Footer className='p-0 m-0'>
+
+              <div className='text-white dark-img' style={{
+                backgroundImage: `url(${footerImage.src})`,
+                backgroundPosition: 'center',
+                paddingTop: 200,
+                paddingBottom: 200
+              }}>
+                <div className='container'>
+                  <div className='row'>
+                    <div className='col-md-3'>
+                      <p className='lead'>Company</p>
+                      <div><a className='text-white' href='/'>Home</a></div>
+                      <div><a className='text-white' href='/about'>About</a></div>
+                    </div>
+                    <div className='col-md-3'>
+                      <p className='lead'>Products</p>
+                      <div><a className='text-white' href='/news'>City news</a></div>
+                      <div><a className='text-white' href='/premium'>Gridview Premium</a></div>
+                    </div>
+                    <div className='col-md-3'>
+                      <p className='lead'>Contact</p>
+                      <div className='text-white'>albert@gridviewanalytics.com</div>
+                      <div>
+                        <a  className='text-white' href='mailto:albert@gridviewanalytics.com'>[Email link]</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-        </Layout.Footer>
+            </Layout.Footer>
+
+          )
+        }
 
       </Layout>
 

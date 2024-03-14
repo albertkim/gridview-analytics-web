@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { Popover } from 'antd'
 import { IFullRecordDetail } from '@/services/Models'
-import { RezoningStatusBadge } from './RezoningStatusBadge'
+import { RezoningStatusBadge } from '../Map/RezoningStatusBadge'
 
 function truncateString(str: string | null, maxLength: number) {
   if (!str) {

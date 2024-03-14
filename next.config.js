@@ -9,6 +9,11 @@ const nextConfig = {
         source: '/news',
         destination: '/news/metro_vancouver',
         permanent: true
+      },
+      {
+        source: '/rezonings',
+        destination: '/rezonings/map',
+        permanent: true
       }
     ]
   },
