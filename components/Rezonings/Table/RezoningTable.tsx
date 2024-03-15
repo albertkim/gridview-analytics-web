@@ -156,7 +156,7 @@ export function RezoningTable({sortedRecords, onSelect}: IProps) {
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>
                   {
-                    moment(getLatestDate(record)).fromNow()
+                    moment(getLatestDate(record)).format('YYYY-MM-DD')
                   }
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>

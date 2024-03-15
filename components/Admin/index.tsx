@@ -207,7 +207,8 @@ export function AdminPage() {
                   rawNews.map((rawNewsItem, index) => {
                     return (
                       <div className='mb-2' key={index}>
-                        <div className='text-muted'><b>{rawNewsItem.date} - {rawNewsItem.city}</b></div>
+                        <div className='text-muted'>{rawNewsItem.date}</div>
+                        <div className='text-muted'><b>{rawNewsItem.city} - {rawNewsItem.meetingType}</b></div>
                         <div>
                           <b><a className='mr-2' onClick={() => setEditRawNews(rawNewsItem)}>{rawNewsItem.title}</a></b>
                           <a href={rawNewsItem.url} target='_blank' rel='noreferrer'>[Link]</a>

@@ -121,7 +121,13 @@ export function filterRezonings(rezonings: IFullRecordDetail[] | null, filter: I
       const aMaxDate = getLatestDate(a)
       const bMaxDate = getLatestDate(b)
 
-      return moment(aMaxDate).isBefore(bMaxDate) ? 1 : -1
+      // If dates are the same, use a secondary criterion for sorting
+      if (moment(aMaxDate).isSame(bMaxDate)) {
+        return a.id.localeCompare(b.id)
+      } else {
+        return moment(aMaxDate).isBefore(bMaxDate) ? 1 : -1
+      }
+
     })
   }
 
