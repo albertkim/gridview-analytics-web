@@ -89,10 +89,10 @@ export default function Premium() {
 
         <div className='text-muted text-center'>
           <div>
-            Gridview Premium is a product in early development.
+            Gridview Premium is currently in early beta.
           </div>
           <div>
-            For early access, contact us at
+            For access, contact us at
           </div>
           <div><a href='mailto:albert@gridviewanalytics.com'>albert@gridviewanalytics.com</a></div>
         </div>

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import logoImage from '@/public/logo.png'
 import headerImage from '@/public/city-white-background.png'
-import vancouverImage from '@/public/vancouver-zoning.png'
+import mapImage from '@/public/vancouver.png'
 import { EyeOutlined } from '@ant-design/icons'
 import { Card, Button, Tag, Image, Tabs, Space } from 'antd'
 
@@ -29,8 +29,11 @@ export function Home() {
                 src={logoImage.src}
                 width={200}
                 height={200} />
-              <h2 className='display-4 fw-bold mb-4'>Your competitive edge in understanding city developments</h2>
-              <p className='lead mb-4'>Gridview Analytics helps track zoning changes, understand municipal capital projects, and master your city politics across your entire North American city portfolio.</p>
+              <h2 className='display-4 fw-bold mb-4'>Your competitive edge in city developments</h2>
+              <p className='lead'>Gridview tracks news, policy, and zoning changes across your North American city portfolio.</p>
+              <br />
+              <p className='lead mb-0'>Currently available: Metro Vancouver</p>
+              <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto</p>
               <div>
                 <Space>
                   <a href='/news'>
@@ -40,7 +43,7 @@ export function Home() {
                   </a>
                   <a href='/premium'>
                     <Button className='mr-4' type='primary' size='large'>
-                      Join the waitlist
+                      Development data
                     </Button>
                   </a>
                 </Space>
@@ -53,11 +56,21 @@ export function Home() {
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
           <div className='col-md-6'>
-            <h2>Stay on top of building applications and zoning changes</h2>
+            <h2>Follow the primary sources</h2>
             <br />
             <p className='lead'>
-              Add cities to your watchlist and get a bird's eye view on what projects are being approved or denied. Be the first to know of potential or approved major zoning changes that can multiply nearby land values.
+              Local news is highly fragmented with low signal-to-noise. Analysts need reliable ways to stay on top of local news.
             </p>
+            <p className='lead'>
+              Gridview Analytics compiles key updates directly from city hall council documents, complete with PDF links and summaries, in a single place for real estate analysts.
+            </p>
+            <p className='lead'>
+              Add cities to your watch list. Be the first to know of potential or approved major news that can multiply nearby land values.
+            </p>
+            <br />
+            <a href='/news'>
+              <Button size='large' type='primary'>View city news</Button>
+            </a>
           </div>
           <div className='col-md-6'>
 
@@ -77,7 +90,7 @@ export function Home() {
               },
               {
                 key: '2',
-                label: 'Chicago',
+                label: 'Calgary',
                 children: (
                   <div>
 
@@ -86,7 +99,7 @@ export function Home() {
               },
               {
                 key: '3',
-                label: 'New York',
+                label: 'Toronto',
                 children: (
                   <div>
 
@@ -136,47 +149,76 @@ export function Home() {
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
           <div className='col-md-6'>
-            <h2>Track municipal capital projects</h2>
+            <h2>Analyze rezoning and development application data</h2>
             <br />
             <p className='lead'>
-              Municipal governments are a powerful force in driving major investment projects.
+              There is no better way to see the future of a city than the rezoning and development applications being discussed at city hall.
             </p>
             <p className='lead'>
-              Understand where major government capital is being deployed on large projects such as entertainment districts, stadiums, community centers, parks, and more. Get ahead of everyone else by following the political conversations and measuring risk years in advance.
+              Gridview is the only platform that aggregates and standardizes rezoning and development application data across multiple cities. Get access to high quality, up-to-date data updates across multiple municipalities, and stay ahead of the competition.
             </p>
+            <p className='lead'>
+              Export, analyze, and visualize data to make informed decisions on your real estate investments.
+            </p>
+            <br />
+            <a href='/premium'>
+              <Button size='large' type='primary'>Development data</Button>
+            </a>
           </div>
           <div className='col-md-6'>
 
-            <Image src={vancouverImage.src} />
+            <div>
+              <Image src={mapImage.src} preview={false} />
+            </div>
 
-            <div className='table-responsive'>
-              <table className='table mt-4'>
+            <br />
+
+            <div>
+              <table className='table table-sm'>
                 <thead>
                   <tr>
-                    <th>Date proposed</th>
-                    <th>Description</th>
-                    <th>Est. cost</th>
-                    <th>Last discussion</th>
+                    <th className='text-muted'>Applicant</th>
+                    <th className='text-muted'>Address</th>
+                    <th className='text-muted'>Building Type</th>
+                    <th className='text-muted'>Status</th>
+                    <th className='text-muted'>...</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>06/30/2023</td>
-                    <td>Approval for project A-437266</td>
-                    <td>~$10,000,000 CAD</td>
-                    <td>12/11/2022<br /><a href='#'>View meeting notes</a></td>
+                    <td className='text-muted'>PC Urban Properties</td>
+                    <td className='text-muted'>2596-2660 E 41st Ave</td>
+                    <td className='text-muted'>Multi-family residential</td>
+                    <td><Tag color='green'>Approved</Tag></td>
+                    <td className='text-muted'>...</td>
                   </tr>
                   <tr>
-                    <td>07/01/2023</td>
-                    <td>Approval for project A-373264</td>
-                    <td>~$85,000,000 CAD</td>
-                    <td className='text-muted'>No meetings</td>
+                    <td className='text-muted'>Strand Holdings Ltd.</td>
+                    <td className='text-muted'>5950-5990 Granville St</td>
+                    <td className='text-muted'>Multi-family residential</td>
+                    <td><Tag color='yellow'>Applied</Tag></td>
+                    <td className='text-muted'>...</td>
                   </tr>
                   <tr>
-                    <td>07/23/2023</td>
-                    <td>Approval for project A-479856</td>
-                    <td>~$150,000,000 CAD</td>
-                    <td className='text-muted'>No meetings</td>
+                    <td className='text-muted'>Chard Development</td>
+                    <td className='text-muted'>2520 Ontario St and 2-24 E Broadway</td>
+                    <td className='text-muted'>Mixed use</td>
+                    <td><Tag color='yellow'>Applied</Tag></td>
+                    <td className='text-muted'>...</td>
+                  </tr>
+                  <tr>
+                    <td className='text-muted'>Fougere Architecture Inc.</td>
+                    <td className='text-muted'>4569 Oak St</td>
+                    <td className='text-muted'>Townhouse</td>
+                    <td><Tag color='yellow'>Applied</Tag></td>
+                    <td className='text-muted'>...</td>
+                  </tr>
+                  <tr>
+                    <td className='text-muted'>...</td>
+                    <td className='text-muted'>...</td>
+                    <td className='text-muted'>...</td>
+                    <td className='text-muted'>...</td>
+                    <td className='text-muted'>...</td>
                   </tr>
                 </tbody>
               </table>
@@ -187,110 +229,15 @@ export function Home() {
       </div>
 
       <div className='container my-5 px-5 py-5'>
-        <div className='row'>
-          <div className='col-md-6'>
-            <h2>Understand municipal politics like never before</h2>
-            <br />
-            <p className='lead'>City politics are obsure, hard to understand, and different for every city. Gridview Analytics simplifies all happenings as they relate to real estate and zoning and filters out the noise.</p>
-            <p className='lead'>Look up political discussions based on zone/address, and stay in tune with sentiment from both politicians and the public. Get the intelligence you need to protect your investments.</p>
-          </div>
-          <div className='col-md-6'>
-
-            <div className='table-responsive d-flex mb-4'>
-              <Card title='🏙️ City of Vancouver' style={{ width: 300, marginRight: 20 }}>
-                <div>
-                  Population: 662,248 (2021)
-                </div>
-                <div>
-                  2022 tax revenues: $1.747 billion
-                </div>
-                <div>
-                  2022 spending: $1.75 billion
-                </div>
-                <div>Re-election: June 24, 2024</div>
-              </Card>
-              <Card title='👨 John Smith' style={{ width: 300 }}>
-                <div>
-                  Position: City councillor
-                </div>
-                <div>Re-election: June 24, 2024</div>
-                <div>Public salary: $90,000 CAD</div>
-                <div><a href='#'>See voting record</a></div>
-              </Card>
-            </div>
-
-            <table className='table mb-4'>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Subject</th>
-                  <th>Vote</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>06/30/2023</td>
-                  <td>Approval for project A-437266</td>
-                  <td><Tag color='green'>Yes</Tag></td>
-                </tr>
-                <tr>
-                  <td>07/01/2023</td>
-                  <td>Approval for project A-373264</td>
-                  <td><Tag color='red'>No</Tag></td>
-                </tr>
-                <tr>
-                  <td>07/23/2023</td>
-                  <td>Approval for project A-479856</td>
-                  <td><Tag color='gold'>Abstain</Tag></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Type</th>
-                  <th>Summary</th>
-                  <th>Votes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>06/30/2023</td>
-                  <td>Weekly council meeting</td>
-                  <td>Routine discussions</td>
-                  <td><a href='#'>See votes (1)</a></td>
-                </tr>
-                <tr>
-                  <td>07/01/2023</td>
-                  <td>Downtown Chinatown action plan</td>
-                  <td>Land zoning discussion</td>
-                  <td className='text-muted'>No votes</td>
-                </tr>
-                <tr>
-                  <td>07/02/2023</td>
-                  <td>Downtown Chinatown action plan</td>
-                  <td>Land zoning discussion</td>
-                  <td><a href='#'>See votes (3)</a></td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-        </div>
-      </div>
-
-      <div className='container my-5 px-5 py-5'>
-        <h2 className='text-center'>👨‍💻 North America's only API for projects and politics</h2>
+        <h2 className='text-center'>Coming soon: Gridview API</h2>
         <br />
-        <p className='text-center lead'>Supercharge your applications with unique data only available through our platform.</p>
-        <div style={{ height: 100 }} />
+        <p className='text-center lead'>Supercharge your applications with unique data only available through Gridview.</p>
+        <div style={{ height: 50 }} />
         <div className='row'>
           <div className='col-md-6'>
             <pre>
               <code>
-                GET: CAPITAL PROJECTS NEAR [COORDINATES]
+                GET: MAJOR PROJECTS NEAR [COORDINATES]
                 <br /><br />
                 RESPONSE:
                 <br />
@@ -344,8 +291,6 @@ export function Home() {
                         type: 'Mayor',
                         election_date: '2023',
                         reelection_date: '2026',
-                        public_salary: 120000,
-                        public_salary_currency: 'CAD',
                         voting_record: "[...]"
                       },
                       {
@@ -354,8 +299,6 @@ export function Home() {
                         type: 'Councillor',
                         election_date: '2023',
                         reelection_date: '2026',
-                        public_salary: 90000,
-                        public_salary_currency: 'CAD',
                         voting_record: "[...]"
                       },
                     ]
@@ -368,7 +311,7 @@ export function Home() {
       </div>
 
       <div className='text-center' style={{
-        paddingTop: 200,
+        paddingTop: 100,
         paddingBottom: 200
       }}>
         <div className='container'>
