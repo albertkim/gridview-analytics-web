@@ -52,6 +52,7 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
             <ImportantNewsItem
               key={n.id}
               id={n.id}
+              cityName={n.cityName}
               title={n.title}
               sentiment={n.sentiment}
               summary={n.summary}

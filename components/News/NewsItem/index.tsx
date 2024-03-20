@@ -10,9 +10,6 @@ interface IProps {
 
 export function NewsItem({city, news}: IProps) {
 
-  const router = useRouter()
-  const newsIdParam = router.query['news-id'] as string
-
   return (
     <div className='container my-4' style={{ maxWidth: 600 }}>
 
@@ -36,12 +33,10 @@ export function NewsItem({city, news}: IProps) {
       <hr />
       <br />
 
+      <div className='text-muted'>{news.cityName || ''}</div>
       <h1 className='fw-bold'>{news.title}</h1>
       <div className='text-muted'>{news.meetingType || ''}</div>
       <div className='text-muted'>Date: {news.date || 'No date'}</div>
-      {
-        news.sentiment && <div className='text-muted'>Sentiment: {news.sentiment}</div>
-      }
 
       <br />
       <hr />

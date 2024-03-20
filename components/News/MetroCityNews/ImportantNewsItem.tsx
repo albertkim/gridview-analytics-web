@@ -2,9 +2,9 @@ import { LinkItem } from '../../LinkItem'
 
 interface NewsItemProps {
   id: number
+  cityName: string
   date: string
   title: string
-  sentiment: string | null
   summary: string | null
   links: Array<{
     id: number,
@@ -14,10 +14,11 @@ interface NewsItemProps {
   }>
 }
 
-export function ImportantNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
+export function ImportantNewsItem({id, cityName, date, title, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='p-2 mb-4'>
+      <div className='text-muted'>{cityName}</div>
       <div className='d-flex justify-content-between align-items-start'>
         <p className='mb-0 flex-grow-1 text-wrap pe-2'>
           <b>
@@ -28,9 +29,6 @@ export function ImportantNewsItem({id, date, title, sentiment, summary: contents
         </p>
         <span className='text-muted text-nowrap text-right'>{date || 'No date'}</span>
       </div>
-      {
-        sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
-      }
       {
         contents && (
           <div

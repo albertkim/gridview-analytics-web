@@ -29,9 +29,6 @@ export function CityNewsItem({id, date, title, sentiment, summary: contents, lin
         <span className='text-muted text-nowrap text-right'>{date || 'No date'}</span>
       </div>
       {
-        sentiment && <div className='text-muted'>Sentiment: {sentiment}</div>
-      }
-      {
         contents && (
           <div
             className='text-muted mt-2 mb-2'

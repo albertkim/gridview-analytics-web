@@ -226,12 +226,6 @@ export const CreateNewsModal = observer(({editNews, editRawNews, isModalOpen, on
                 <RichTextEditor.Content />
             </RichTextEditor>
           </div>
-          <div className='mb-2'>
-            <div>Sentiment</div>
-            <Input
-              value={createNews.sentiment || ''}
-              onChange={(e) => createNews.setSentiment(e.target.value)} />
-          </div>
           <hr />
           <div className='mb-2' style={{paddingLeft: 24}}>
             <div>Links <a href='#' onClick={() => createNews.addLink()}>[+ add link]</a></div>
