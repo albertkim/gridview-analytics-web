@@ -45,6 +45,9 @@ export function CityNews({city, news: initialNews}: IProps) {
       limit: defaultPageSize,
       city: cityNameParam
     })
+    setNews(news)
+    // Scroll to top - in the future, use url params to keep track of page
+    window.scrollTo(0, 0)
   }
 
   let newsComponent: JSX.Element
