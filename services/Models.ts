@@ -34,8 +34,8 @@ export interface INews {
   cityName: string
   date: string
   createDate: string
-  sentiment: string | null
   important: number | null
+  tags: string[]
   links: ILink[]
 }
 
@@ -130,6 +130,7 @@ export interface IRawNews {
   title: string
   resolutionId: string | null
   contents: string
+  tags: string[]
   minutesUrl: string | null
   reportUrls: Array<{
     title: string

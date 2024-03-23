@@ -54,8 +54,8 @@ export class CreateNewsModel {
   @observable meetingType: string | null = null
   @observable cityId: number | null = null
   @observable date: string | null = null
-  @observable sentiment: string | null = 'neutral'
   @observable important: number | null = 0
+  @observable tags: string[] = []
   @observable links: CreateLinkModel[] = [new CreateLinkModel()]
 
   constructor() {
@@ -70,8 +70,8 @@ export class CreateNewsModel {
     this.meetingType = news.meetingType
     this.cityId = news.cityId
     this.date = news.date
-    this.sentiment = news.sentiment
     this.important = news.important || 0
+    this.tags = news.tags
     this.links = news.links.map((link) => {
       const createLink = new CreateLinkModel()
       createLink.populateUpdateObject(link)
@@ -117,13 +117,13 @@ export class CreateNewsModel {
   }
 
   @action
-  setSentiment(sentiment: string) {
-    this.sentiment = sentiment || null
+  setImportant(important: number | null) {
+    this.important = important || 0
   }
 
   @action
-  setImportant(important: number | null) {
-    this.important = important || 0
+  setTags(tags: string[]) {
+    this.tags = tags
   }
 
   @action
@@ -143,8 +143,8 @@ export class CreateNewsModel {
       meetingType: this.meetingType,
       cityId: this.cityId,
       date: this.date ? moment(this.date).format('YYYY-MM-DD') : null,
-      sentiment: this.sentiment,
       important: this.important,
+      tags: this.tags,
       links: this.links
     }
   }
@@ -162,8 +162,8 @@ export class CreateNewsModel {
     this.meetingType = null
     this.title = null
     this.summary = null
-    this.sentiment = null
     this.important = null
+    this.tags = []
     this.links = [new CreateLinkModel()]
   }
 

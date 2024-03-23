@@ -48,6 +48,7 @@ export const APIService = {
       meetingType: string
       title: string
       contents: string
+      tags: string[]
       minuteUrl: string
       reportUrls: { url: string, title: string }[]
     }

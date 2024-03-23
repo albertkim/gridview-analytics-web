@@ -52,6 +52,9 @@ export const CreateNewsModal = observer(({editNews, editRawNews, isModalOpen, on
       createNews.links[0].setTitle('Main minute')
       createNews.links[0].setURL(analyzedRawNews.minuteUrl)
 
+      // Add tags
+      createNews.setTags(analyzedRawNews.tags)
+
       // Add report URLs
       analyzedRawNews.reportUrls.forEach((reportUrl) => {
         createNews.addLink()
@@ -204,6 +207,12 @@ export const CreateNewsModal = observer(({editNews, editRawNews, isModalOpen, on
             <Input
               value={createNews.title || ''}
               onChange={(e) => createNews.setTitle(e.target.value)} />
+          </div>
+          <div className='mb-2'>
+            <div>Tags</div>
+            <Input
+              value={createNews.tags.join(', ')}
+              onChange={(e) => createNews.setTags(e.target.value.split(',').map((tag) => tag.trim()))} />
           </div>
           <div className='mb-2'>
             <div>Summary</div>

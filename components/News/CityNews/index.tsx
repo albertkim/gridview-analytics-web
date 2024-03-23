@@ -72,7 +72,6 @@ export function CityNews({city, news: initialNews}: IProps) {
                 key={n.id}
                 id={n.id}
                 title={n.title}
-                sentiment={n.sentiment}
                 summary={n.summary}
                 date={n.date}
                 links={n.links} />

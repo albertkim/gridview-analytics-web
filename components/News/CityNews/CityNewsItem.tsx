@@ -4,7 +4,6 @@ interface NewsItemProps {
   id: number
   date: string
   title: string
-  sentiment: string | null
   summary: string | null
   links: Array<{
     id: number,
@@ -14,7 +13,7 @@ interface NewsItemProps {
   }>
 }
 
-export function CityNewsItem({id, date, title, sentiment, summary: contents, links}: NewsItemProps) {
+export function CityNewsItem({id, date, title, summary: contents, links}: NewsItemProps) {
 
   return (
     <div className='p-2 mb-4'>

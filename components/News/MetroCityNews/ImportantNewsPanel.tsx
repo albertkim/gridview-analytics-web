@@ -54,7 +54,6 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
               id={n.id}
               cityName={n.cityName}
               title={n.title}
-              sentiment={n.sentiment}
               summary={n.summary}
               date={n.date}
               links={n.links} />
