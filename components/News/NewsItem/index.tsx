@@ -10,6 +10,8 @@ interface IProps {
 
 export function NewsItem({city, news}: IProps) {
 
+  const noHTMLNewsSummary = news.summary ? news.summary.replace(/<[^>]*>?/gm, '').slice(0, 160) : ''
+
   return (
     <div className='container my-4' style={{ maxWidth: 600 }}>
 
@@ -17,7 +19,7 @@ export function NewsItem({city, news}: IProps) {
         <title>{news.title}</title>
         <meta name='description' content={news.summary || undefined} />
         <meta property='og:title' content={news.title || undefined} />
-        <meta property='og:description' content={news.summary || undefined} />
+        <meta property='og:description' content={noHTMLNewsSummary || undefined} />
       </Head>
 
       <Breadcrumb

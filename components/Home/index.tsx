@@ -3,7 +3,7 @@ import logoImage from '@/public/logo.png'
 import headerImage from '@/public/city-white-background.png'
 import mapImage from '@/public/vancouver.png'
 import { EyeOutlined } from '@ant-design/icons'
-import { Card, Button, Tag, Image, Tabs, Space } from 'antd'
+import { Button, Tag, Image, Tabs, Space } from 'antd'
 
 export function Home() {
 
