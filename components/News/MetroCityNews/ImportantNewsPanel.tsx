@@ -36,6 +36,8 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
+    // Scroll to top of the page
+    window.scrollTo(0, 0)
   }
 
   let newsComponent: JSX.Element

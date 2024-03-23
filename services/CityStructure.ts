@@ -108,7 +108,7 @@ export const CityStructure = [
       },
       {
         name: 'Surrey',
-        newsVisible: false,
+        newsVisible: true,
         stats: [
           {
             statDate: '2016',

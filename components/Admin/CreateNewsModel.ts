@@ -8,7 +8,8 @@ export const cityIDMapping: {[key: string]: number} = {
   Vancouver: 1,
   Richmond: 2,
   Burnaby: 3,
-  Coquitlam: 4
+  Coquitlam: 4,
+  Surrey: 6
 }
 
 export class CreateLinkModel {
