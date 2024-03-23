@@ -55,7 +55,7 @@ export function Home() {
 
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
-          <div className='col-md-6'>
+          <div className='col-md-6 mb-4'>
             <h2>Follow the primary sources</h2>
             <br />
             <p className='lead'>
@@ -148,7 +148,7 @@ export function Home() {
 
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
-          <div className='col-md-6'>
+          <div className='col-md-6 mb-4'>
             <h2>Analyze rezoning and development application data</h2>
             <br />
             <p className='lead'>
@@ -162,7 +162,7 @@ export function Home() {
             </p>
             <br />
             <a href='/premium'>
-              <Button size='large' type='primary'>Development data</Button>
+              <Button size='large' type='primary'>View development data</Button>
             </a>
           </div>
           <div className='col-md-6'>
