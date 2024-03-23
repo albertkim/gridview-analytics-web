@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
 import { ICity, INews } from '@/services/Models'
 import { Breadcrumb } from 'antd'
 import { LinkItem } from '@/components/LinkItem'
+import Head from 'next/head'
 
 interface IProps {
   city: ICity,
@@ -12,6 +12,13 @@ export function NewsItem({city, news}: IProps) {
 
   return (
     <div className='container my-4' style={{ maxWidth: 600 }}>
+
+      <Head>
+        <title>{news.title}</title>
+        <meta name='description' content={news.summary || undefined} />
+        <meta property='og:title' content={news.title || undefined} />
+        <meta property='og:description' content={news.summary || undefined} />
+      </Head>
 
       <Breadcrumb
         items={[
