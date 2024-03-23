@@ -10,6 +10,8 @@ const MyDocument = () => (
       {/** Required for Mantine Tiptap component: https://mantine.dev/guides/next/ */}
       <ColorSchemeScript defaultColorScheme='auto' />
       <script
+        async
+        defer
         type='text/javascript'
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
       />
