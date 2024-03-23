@@ -245,7 +245,7 @@ export const CityStructure = [
       {
         id: 4,
         name: 'Coquitlam',
-        newsVisible: true,
+        newsVisible: false,
         stats: [
           {
             statDate: '2016',
