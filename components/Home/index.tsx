@@ -18,8 +18,8 @@ export function Home() {
       <div className='text-center text-white dark-img' style={{
         backgroundImage: `url(${headerImage.src})`,
         backgroundPosition: 'center',
-        paddingTop: 100,
-        paddingBottom: 200
+        paddingTop: 50,
+        paddingBottom: 100
       }}>
         <div className='container'>
           <div className='row'>
@@ -34,6 +34,7 @@ export function Home() {
               <br />
               <p className='lead mb-0'>Currently available: Metro Vancouver</p>
               <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto</p>
+              <br />
               <div>
                 <Space>
                   <a href='/news'>
