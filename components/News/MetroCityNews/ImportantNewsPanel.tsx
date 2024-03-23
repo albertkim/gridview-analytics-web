@@ -21,7 +21,7 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
       try {
         const offset = (currentPage - 1) * pageSize
         const newsResponse = await APIService.getNews({
-          important: 1,
+          important: 0,
           city: cityNames || undefined,
           offset: offset,
           limit: pageSize
@@ -74,7 +74,7 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
   return (
     <div className='border rounded p-2' style={{minHeight: 200}}>
       <h3 className='my-2 p-2'>
-        KEY UPDATES
+        LATEST UPDATES
       </h3>
       {newsComponent}
     </div>
