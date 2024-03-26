@@ -1,12 +1,11 @@
 import moment from 'moment'
 import { Popover, Skeleton } from 'antd'
-import { IFullRecordDetail } from '@/services/Models'
+import { IFullRecord } from '@/services/Models'
 import { RezoningStatusBadge } from '../Map/RezoningStatusBadge'
-import { getLatestDate } from '@/components/MapFilterModel'
 
 interface IProps {
-  sortedRecords: IFullRecordDetail[] | null
-  onSelect: (record: IFullRecordDetail) => void
+  sortedRecords: IFullRecord[] | null
+  onSelect: (record: IFullRecord) => void
 }
 
 export function RezoningTable({sortedRecords, onSelect}: IProps) {
@@ -156,7 +155,7 @@ export function RezoningTable({sortedRecords, onSelect}: IProps) {
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>
                   {
-                    moment(getLatestDate(record)).format('YYYY-MM-DD')
+                    moment(record.lastUpdateDate).format('YYYY-MM-DD')
                   }
                 </td>
                 <td className='text-muted' style={{maxWidth: 50, marginRight: 10}}>

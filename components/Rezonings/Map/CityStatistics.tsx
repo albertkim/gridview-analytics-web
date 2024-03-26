@@ -1,10 +1,10 @@
 import moment from 'moment'
-import { IFullRecordDetail, ZoningType } from '@/services/Models'
+import { IFullRecord, ZoningType } from '@/services/Models'
 import { useState } from 'react'
 
 interface IProps {
   city: string
-  rezonings: IFullRecordDetail[]
+  rezonings: IFullRecord[]
 }
 
 interface ITypeStatistic {

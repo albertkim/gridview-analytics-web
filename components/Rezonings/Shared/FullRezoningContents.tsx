@@ -1,8 +1,8 @@
-import { IFullRecordDetail } from '@/services/Models'
+import { IFullRecord } from '@/services/Models'
 import { RezoningStatusBadge } from '../Map/RezoningStatusBadge'
 
 interface IProps {
-  rezoning: IFullRecordDetail
+  rezoning: IFullRecord
 }
 
 export function FullRezoningContents({rezoning}: IProps) {

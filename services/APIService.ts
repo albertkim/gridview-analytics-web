@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import qs from 'qs'
-import { INews, INewsResponse, ICity, IRezoningResponse, IRawNews } from './Models'
+import { INews, INewsResponse, ICity, IRezoningResponse, IRawNews, IFullRecord, IListRecordResponse } from './Models'
 import { CityStructure } from './CityStructure'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!
@@ -118,9 +118,20 @@ export const APIService = {
     }
   },
 
+  // DEPRECATED
   async getRezonings(): Promise<IRezoningResponse> {
     const rezoningResponse = await axios.get(`/api/v1/rezonings`)
     return rezoningResponse.data
+  },
+
+  async getRecordById(recordId: string): Promise<IFullRecord> {
+    const recordResponse = await axios.get(`/api/v1/records/${recordId}`)
+    return recordResponse.data as IFullRecord
+  },
+
+  async getListRecords(type: 'rezonings' | 'development-permits'): Promise<IListRecordResponse> {
+    const recordsResponse = await axios.get(`/api/v1/records/${type}`)
+    return recordsResponse.data as IListRecordResponse
   }
 
 }

@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { action, makeObservable, observable } from 'mobx'
-import { IFullRecordDetail, ZoningStatus, ZoningType } from '@/services/Models'
+import { IListRecord, ZoningStatus, ZoningType } from '@/services/Models'
 
 export interface IMapFilter {
   cities: string[] | null
@@ -95,31 +95,19 @@ export class MapFilterModel implements IMapFilter {
 
 }
 
-export function getLatestDate(rezoning: IFullRecordDetail) {
-  const reportUrlDates = rezoning.reportUrls.map((report) => report.date)
-  const minutesUrlDates = rezoning.minutesUrls.map((minutes) => minutes.date)
-  const combinedDates = [...reportUrlDates, ...minutesUrlDates]
-  const latestDate = combinedDates.length > 0 ? combinedDates.reduce((latest, current) => {
-    if (!latest) return current
-    if (moment(current).isAfter(moment(latest))) return current
-    return latest
-  }) : '2000-01-01' // If no dates for some reason, set to a very old date
-  return latestDate
-}
+export function filterRecords(listRecords: IListRecord[] | null, filter: IMapFilter) {
 
-export function filterRezonings(rezonings: IFullRecordDetail[] | null, filter: IMapFilter) {
-
-  if (!rezonings) {
+  if (!listRecords) {
     return null
   }
 
-  let filteredRezonings = rezonings
+  let orderedListRecords = listRecords
 
   if (filter.sortBy === 'last update') {
-    filteredRezonings = filteredRezonings.sort((a, b) => {
+    orderedListRecords = orderedListRecords.sort((a, b) => {
 
-      const aMaxDate = getLatestDate(a)
-      const bMaxDate = getLatestDate(b)
+      const aMaxDate = a.lastUpdateDate
+      const bMaxDate = b.lastUpdateDate
 
       // If dates are the same, use a secondary criterion for sorting
       if (moment(aMaxDate).isSame(bMaxDate)) {
@@ -131,6 +119,6 @@ export function filterRezonings(rezonings: IFullRecordDetail[] | null, filter: I
     })
   }
 
-  return filteredRezonings
+  return orderedListRecords
 
 }

@@ -63,7 +63,7 @@ export type ZoningStatus =
   'denied' |
   'withdrawn'
 
-export interface IFullRecordDetail {
+export interface IFullRecord {
   id: string
   city: string
   metroCity: string | null
@@ -114,11 +114,42 @@ export interface IFullRecordDetail {
   }[]
   createDate: string
   updateDate: string
+  lastUpdateDate: string
+}
+
+export interface IListRecord {
+  id: string
+  address: string
+  city: string
+  metroCity: string
+  location: {
+    latitude: number | null
+    longitude: number | null
+  }
+  buildingType: ZoningType | null
+  stats: {
+    buildings: number | null
+    stratas: number | null
+    rentals: number | null
+    hotels: number | null
+    fsr: number | null
+    height: number | null
+    storeys: number | null
+  }
+  status: ZoningStatus
+  lastUpdateDate: string
 }
 
 export interface IRezoningResponse {
   total: number
-  data: IFullRecordDetail[]
+  data: IFullRecord[]
+}
+
+export interface IListRecordResponse {
+  total: number
+  limit: number
+  offset: number
+  data: IListRecord[]
 }
 
 export interface IRawNews {

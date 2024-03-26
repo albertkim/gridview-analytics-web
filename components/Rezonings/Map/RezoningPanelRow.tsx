@@ -1,17 +1,19 @@
-import { IFullRecordDetail, ZoningStatus } from '@/services/Models'
-import { Badge } from 'antd'
+import { IFullRecord, IListRecord } from '@/services/Models'
+import { Badge, Skeleton } from 'antd'
 import { RezoningStatusBadge } from './RezoningStatusBadge'
 import { getBuildingTypeColours } from '@/services/MapUtilities'
+import moment from 'moment'
 
 interface IProps {
-  rezoning: IFullRecordDetail
+  listRecord: IListRecord
+  fullRecord: IFullRecord | null
   expanded: boolean | null
   onFullDetailsClick: () => void
 }
 
-export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProps) {
+export function RezoningPanelRow({listRecord, fullRecord, expanded, onFullDetailsClick}: IProps) {
 
-  if (!rezoning) {
+  if (!listRecord) {
     return null
   }
 
@@ -21,54 +23,61 @@ export function RezoningPanelRow({rezoning, expanded, onFullDetailsClick}: IProp
       <div style={{padding: 15}}>
 
         <div style={{position: 'absolute', top: 5, right: 0}}>
-          <RezoningStatusBadge status={rezoning.status} />
+          <RezoningStatusBadge status={listRecord.status} />
         </div>
 
         <div>
           <Badge
             style={{marginRight: 5}}
-            color={getBuildingTypeColours(rezoning.buildingType) as any} />
+            color={getBuildingTypeColours(listRecord.buildingType) as any} />
           <span className='text-muted'>
-            {rezoning.buildingType || 'ERROR'}
+            {listRecord.buildingType || 'ERROR'}
           </span>
         </div>
 
         <div>
-          {rezoning.address || ' - '}, {rezoning.city}
+          {listRecord.address || ' - '}, {listRecord.city}
         </div>
 
         <div className='text-muted'>
           {
             [
-              !!rezoning.stats.storeys ? `${rezoning.stats.storeys} storeys` : null,
-              !!rezoning.stats.stratas ? `${rezoning.stats.stratas} stratas` : null,
-              !!rezoning.stats.rentals ? `${rezoning.stats.rentals} rentals` : null,
+              !!listRecord.stats.storeys ? `${listRecord.stats.storeys} storeys` : null,
+              !!listRecord.stats.stratas ? `${listRecord.stats.stratas} stratas` : null,
+              !!listRecord.stats.rentals ? `${listRecord.stats.rentals} rentals` : null,
             ].filter((r) => r).join(', ')
           }
         </div>
 
+        <div className='text-muted'>
+          Updated: {moment(listRecord.lastUpdateDate).format('MMM DD, YYYY')}
+        </div>
+
         {
           expanded && (
-            <>
-              <br />
-              <div className='text-muted'>
-                {`Applied: ${rezoning.dates.appliedDate || ' - '}`}
-              </div>
-              {
+            !fullRecord ? (
+              <Skeleton />
+            ) : (
+              <>
+                <br />
                 <div className='text-muted'>
-                  {rezoning.dates.approvalDate && `Approved: ${rezoning.dates.approvalDate}`}
+                  {`Applied: ${fullRecord.dates.appliedDate || ' - '}`}
                 </div>
-              }
-              <br />
-              <div className='text-muted'>
-                {rezoning.description}
-              </div>
-              <br />
-              <a className='text-description-underscore' onClick={onFullDetailsClick}>View full details</a>
-            </>
+                {
+                  <div className='text-muted'>
+                    {fullRecord.dates.approvalDate && `Approved: ${fullRecord.dates.approvalDate}`}
+                  </div>
+                }
+                <br />
+                <div className='text-muted'>
+                  {fullRecord.description}
+                </div>
+                <br />
+                <a className='text-description-underscore' onClick={onFullDetailsClick}>View full details</a>
+              </>
+            )
           )
         }
-
 
       </div>
 

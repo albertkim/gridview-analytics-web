@@ -1,12 +1,11 @@
-import moment from 'moment'
 import React, { useEffect, useState, useRef } from 'react'
 import { RezoningPanelRow } from './RezoningPanelRow'
 import { APIService } from '@/services/APIService'
-import { IFullRecordDetail } from '@/services/Models'
+import { IFullRecord, IListRecord } from '@/services/Models'
 import { Modal, message, Alert } from 'antd'
 import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
-import { MapFilterModel, IMapFilter, filterRezonings } from '@/components/MapFilterModel'
+import { MapFilterModel, IMapFilter, filterRecords } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { CityStatistics } from './CityStatistics'
 
@@ -15,28 +14,30 @@ const mapFilter = new MapFilterModel()
 export function RezoningsMap() {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
-  const [rezonings, setRezonings] = useState<IFullRecordDetail[] | null>(null)
-  const [selectedRezoning, setSelectedRezoning] = useState<IFullRecordDetail | null>(null)
-
-  // Used for full details modal
-  const [selectedFullRezoning, setSelectedFullRezoning] = useState<IFullRecordDetail | null>(null)
+  const [listRecords, setListRecords] = useState<IListRecord[] | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
+
+  // Used to select an item on the map (no modal)
+  const [selectedRecord, setSelectedRecord] = useState<IFullRecord | null>(null)
+
+  // Used for full details modal
+  const [selectedModalFullRecord, setSelectedModalFullRecord] = useState<IFullRecord | null>(null)
 
   // Refs
   const mapRef = useRef<HTMLDivElement>(null)
   const circlesRef = useRef(circles)
 
   useEffect(() => {
-    async function getRezonings() {
+    async function getListRecords() {
       try {
-        const rezonings = await APIService.getRezonings()
-        setRezonings(rezonings.data)
+        const rezonings = await APIService.getListRecords('rezonings')
+        setListRecords(rezonings.data)
       } catch (error) {
         message.error('Failed to get data from server')
       }
     }
-    getRezonings()
+    getListRecords()
   }, [])
 
   // Google Maps - Update the circles ref whenever the circles state changes
@@ -86,17 +87,17 @@ export function RezoningsMap() {
     }
   }, [mapRef, map, defaultGoogleMapOptions])
 
-  // Google Maps - Handle rezonings and circle updates
+  // Google Maps - Handle records and circle updates
   useEffect(() => {
-    if (map && rezonings) {
+    if (map && listRecords) {
       // Clear existing circles
       circles?.forEach(circle => circle.setMap(null))
 
-      const rezoningsWithCoordinates = rezonings
-        .filter(rezoning => rezoning.location.latitude && rezoning.location.longitude)
-        .filter(rezoning => !!rezoning.buildingType)
+      const recordsWithCoordinates = listRecords
+        .filter(record => record.location.latitude && record.location.longitude)
+        .filter(record => !!record.buildingType)
 
-      const filteredRezonings = filterRezonings(rezoningsWithCoordinates, filter)
+      const filteredRezonings = filterRecords(recordsWithCoordinates, filter)
 
       const newCircles = (filteredRezonings || []).map(rezoning => {
         const newCircle = new google.maps.Circle({
@@ -110,56 +111,56 @@ export function RezoningsMap() {
           radius: calculateCircleRadius(map.getZoom())
         })
         google.maps.event.addListener(newCircle, 'click', () => {
-          setSelectedRezoning(rezoning)
+          selectRecord(rezoning.id)
         })
         return newCircle
       })
 
       setCircles(newCircles)
     }
-  }, [map, rezonings, filter])
+  }, [map, listRecords, filter])
 
-  // If a rezoning is selected, scroll to it on the right panel and show a bubble above the circle
+  // If a record is selected, scroll to it on the right panel and show a bubble above the circle
   useEffect(() => {
 
-    if (selectedRezoning) {
-      console.log(`${selectedRezoning.id}: ${selectedRezoning.address}`)
+    if (selectedRecord) {
+      console.log(`${selectedRecord.id}: ${selectedRecord.address}`)
     }
 
     let selectedCircle: google.maps.Circle | null = null
 
-    if (selectedRezoning && circlesRef.current) {
+    if (selectedRecord && circlesRef.current) {
       selectedCircle = circlesRef.current.find(circle => {
         const lat = circle.getCenter()?.lat()
         const lng = circle.getCenter()?.lng()
-        return lat === selectedRezoning.location.latitude && lng === selectedRezoning.location.longitude
+        return lat === selectedRecord.location.latitude && lng === selectedRecord.location.longitude
       }) || null
     }
 
-    if (selectedRezoning && circlesRef.current) {
+    if (selectedRecord && circlesRef.current) {
       const selectedCircle = circlesRef.current.find(circle => {
         const lat = circle.getCenter()?.lat()
         const lng = circle.getCenter()?.lng()
-        return lat === selectedRezoning.location.latitude && lng === selectedRezoning.location.longitude
+        return lat === selectedRecord.location.latitude && lng === selectedRecord.location.longitude
       })
 
-      if (selectedRezoning && selectedCircle) {
-        // Find the matching rezoning list item in the right panel
-        let selectedRezoningListItem: HTMLElement | null = null
-        const rezoningListItems = document.getElementsByClassName('rezoning-list-item')
-        for (let i = 0; i < rezoningListItems.length; i++) {
-          const div = rezoningListItems[i] as HTMLElement
-          if (div.innerText.includes(selectedRezoning.address)) {
-            selectedRezoningListItem = div
+      if (selectedRecord && selectedCircle) {
+        // Find the matching record list item in the right panel
+        let selectedRecordListItem: HTMLElement | null = null
+        const recordListItems = document.getElementsByClassName('rezoning-list-item')
+        for (let i = 0; i < recordListItems.length; i++) {
+          const div = recordListItems[i] as HTMLElement
+          if (div.innerText.includes(selectedRecord.address)) {
+            selectedRecordListItem = div
             break
           }
         }
 
         // Scroll to the selected rezoning list item
-        if (selectedRezoningListItem) {
+        if (selectedRecordListItem) {
           const rezoningRightPanel = document.getElementById('rezoning-right-panel-list')!
           rezoningRightPanel.scrollTo({
-            top: selectedRezoningListItem.offsetTop - 20,
+            top: selectedRecordListItem.offsetTop - 20,
             behavior: 'smooth'
           })
         }
@@ -173,30 +174,35 @@ export function RezoningsMap() {
 
     return () => {
       // Revert selected circle color)
-      if (selectedRezoning && selectedCircle) {
+      if (selectedRecord && selectedCircle) {
         selectedCircle.setOptions({
-          fillColor: getBuildingTypeColours(selectedRezoning.buildingType)
+          fillColor: getBuildingTypeColours(selectedRecord.buildingType)
         })
       }
     }
 
-  }, [selectedRezoning])
+  }, [selectedRecord])
 
-  const sortedRezonings: IFullRecordDetail[] | null = filterRezonings(rezonings, filter)
+  const selectRecord = async function(recordId: string) {
+    const fullRecord = await APIService.getRecordById(recordId)
+    setSelectedRecord(fullRecord)
+  }
+
+  const sortedListRecords: IListRecord[] | null = filterRecords(listRecords, filter)
 
   return (
     <div>
 
       {/** Full details modal */}
       <Modal
-        open={!!selectedFullRezoning}
-        onCancel={() => setSelectedFullRezoning(null)}
+        open={!!selectedModalFullRecord}
+        onCancel={() => setSelectedModalFullRecord(null)}
         title={
           <>
-            <span>{selectedFullRezoning?.address} </span>
+            <span>{selectedModalFullRecord?.address} </span>
             <a
               className='text-muted text-decoration-underline'
-              href={`https://www.google.com/maps/search/?api=1&query=${selectedFullRezoning?.address}, ${selectedFullRezoning?.city}}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${selectedModalFullRecord?.address}, ${selectedModalFullRecord?.city}}`}
               target='_blank'
               rel='noreferrer'
               >
@@ -207,7 +213,7 @@ export function RezoningsMap() {
         footer={null}
         width={1000}>
         {
-          !!selectedFullRezoning && <FullRezoningContents rezoning={selectedFullRezoning} />
+          !!selectedModalFullRecord && <FullRezoningContents rezoning={selectedModalFullRecord} />
         }
       </Modal>
 
@@ -220,14 +226,14 @@ export function RezoningsMap() {
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>Gridview Premium (<a href='/rezonings/table'>go to table view</a>) {!rezonings && <span className='text-muted'>(loading...)</span>}</h5>
+            <h5 className='mb-3'>Gridview Premium (<a href='/rezonings/table'>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
-          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Vancouver' rezonings={rezonings} /></div>}
+          {/* {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Vancouver' rezonings={rezonings} /></div>}
           {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Richmond' rezonings={rezonings} /></div>}
           {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Burnaby' rezonings={rezonings} /></div>}
-          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Surrey' rezonings={rezonings} /></div>}
+          {rezonings && <div id='rezoning-left-metrics'><CityStatistics city='Surrey' rezonings={rezonings} /></div>} */}
 
         </div>
 
@@ -236,16 +242,13 @@ export function RezoningsMap() {
         {/** Rezonings right-hand panel header */}
         <div id='rezoning-right-panel-header'>
           {
-            !!sortedRezonings && (
+            !!sortedListRecords && (
               <>
-                <h5>{sortedRezonings.length} rezonings found</h5>
+                <h5>{sortedListRecords.length} rezonings found</h5>
                 <div className='text-muted'>
                   <div>
-                    {sortedRezonings.filter((r) => r.status === 'approved').length} approved
+                    {sortedListRecords.filter((r) => r.status === 'approved').length} approved
                   </div>
-                  {sortedRezonings.length > 0 && sortedRezonings[0].reportUrls.length > 0 && (
-                    <span>Data from {moment.min(sortedRezonings.map(rezoning => moment(rezoning.minutesUrls[0].date))).format('MMM DD, YYYY')} to {moment.max(sortedRezonings.map(rezoning => moment(rezoning.minutesUrls[0].date))).format('MMM DD, YYYY')}</span>
-                  )}
                 </div>
               </>
             )
@@ -255,19 +258,20 @@ export function RezoningsMap() {
         {/** Rezonings right-hand panel list */}
         <div id='rezoning-right-panel-list'>
           {
-            !!sortedRezonings && (
-              sortedRezonings.map((rezoning) => (
+            !!sortedListRecords && (
+              sortedListRecords.map((listRecord) => (
                 <div
-                  key={rezoning.id}
+                  key={listRecord.id}
                   // .rezoning-list-item is used in a useEffect to scroll to the selected rezoning
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}
-                  onClick={() => setSelectedRezoning(rezoning)}>
+                  onClick={() => selectRecord(listRecord.id)}>
                   <div>
                     <RezoningPanelRow
-                      rezoning={rezoning}
-                      expanded={selectedRezoning && selectedRezoning.address === rezoning.address}
-                      onFullDetailsClick={() => setSelectedFullRezoning(rezoning)}
+                      listRecord={listRecord}
+                      fullRecord={selectedRecord}
+                      expanded={selectedRecord && selectedRecord.address === listRecord.address}
+                      onFullDetailsClick={() => setSelectedModalFullRecord(selectedRecord)}
                     />
                   </div>
 

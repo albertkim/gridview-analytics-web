@@ -1,6 +1,6 @@
-import { IMapFilter, MapFilterModel, filterRezonings } from '@/components/MapFilterModel'
+import { IMapFilter, MapFilterModel, filterRecords } from '@/components/MapFilterModel'
 import { APIService } from '@/services/APIService'
-import { IFullRecordDetail } from '@/services/Models'
+import { IFullRecord } from '@/services/Models'
 import { Modal, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { RezoningTable } from './RezoningTable'
@@ -12,8 +12,8 @@ const mapFilter = new MapFilterModel()
 export function RezoningsTable() {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
-  const [records, setRecords] = useState<IFullRecordDetail[] | null>(null)
-  const [selectedRecord, setSelectedRecord] = useState<IFullRecordDetail | null>(null)
+  const [records, setRecords] = useState<IFullRecord[] | null>(null)
+  const [selectedRecord, setSelectedRecord] = useState<IFullRecord | null>(null)
 
   useEffect(() => {
     async function getRecords() {
@@ -27,7 +27,7 @@ export function RezoningsTable() {
     getRecords()
   }, [])
 
-  const sortedRecords: IFullRecordDetail[] | null = filterRezonings(records, filter)
+  const sortedRecords: IFullRecord[] | null = filterRecords(records, filter)
 
   return (
     <div className='container pt-4 pb-4'>
