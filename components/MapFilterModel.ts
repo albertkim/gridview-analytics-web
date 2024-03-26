@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { action, makeObservable, observable } from 'mobx'
-import { IListRecord, ZoningStatus, ZoningType } from '@/services/Models'
+import { IFullRecord, IListRecord, ZoningStatus, ZoningType } from '@/services/Models'
 
 export interface IMapFilter {
   cities: string[] | null
@@ -95,13 +95,13 @@ export class MapFilterModel implements IMapFilter {
 
 }
 
-export function filterRecords(listRecords: IListRecord[] | null, filter: IMapFilter) {
+export function filterRecords<T extends IListRecord | IFullRecord>(records: T[] | null, filter: IMapFilter): T[] | null {
 
-  if (!listRecords) {
+  if (!records) {
     return null
   }
 
-  let orderedListRecords = listRecords
+  let orderedListRecords = records
 
   if (filter.sortBy === 'last update') {
     orderedListRecords = orderedListRecords.sort((a, b) => {
