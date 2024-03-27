@@ -2,10 +2,23 @@ import Head from 'next/head'
 import logoImage from '@/public/logo.png'
 import headerImage from '@/public/city-white-background.png'
 import mapImage from '@/public/vancouver.png'
+import { INews } from '@/services/Models'
 import { EyeOutlined } from '@ant-design/icons'
-import { Button, Tag, Image, Tabs, Space } from 'antd'
+import { Button, Tag, Image, Tabs, Space, Skeleton, Typography } from 'antd'
+import { useEffect, useState } from 'react'
+import { APIService } from '@/services/APIService'
 
 export function Home() {
+
+  const [news, setNews] = useState<INews[] | null>(null)
+
+  useEffect(() => {
+    const getImportantNews = async () => {
+      const news = await APIService.getNews({ offset: 0, limit: 5, important: 1 })
+      setNews(news.data)
+    }
+    getImportantNews()
+  }, [])
 
   return (
     <div>
@@ -15,24 +28,25 @@ export function Home() {
         <meta name='description' content='Stay up to date with city developments with premium rezoning data sets for select metro regions.' />
       </Head>
 
-      <div className='text-center text-white dark-img' style={{
+      <div className='text-white dark-img' style={{
         backgroundImage: `url(${headerImage.src})`,
         backgroundPosition: 'center',
-        paddingTop: 50,
-        paddingBottom: 100
+        paddingTop: 25,
+        paddingBottom: 50
       }}>
         <div className='container'>
           <div className='row'>
-            <div className='col-md-8 mx-auto'>
+            <div className='col-md-8'>
               <Image
                 preview={false}
                 src={logoImage.src}
                 width={200}
-                height={200} />
+                height={200}
+                style={{marginLeft: -50}} />
               <h2 className='display-4 fw-bold mb-4'>Your competitive edge in city developments</h2>
               <p className='lead'>Gridview tracks news, policy, and zoning changes across your North American city portfolio.</p>
               <br />
-              <p className='lead mb-0'>Currently available: Metro Vancouver</p>
+              <p className='lead mb-0'>Available: Metro Vancouver</p>
               <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto</p>
               <br />
               <div>
@@ -49,6 +63,35 @@ export function Home() {
                   </a>
                 </Space>
               </div>
+            </div>
+            <div className='col-md-4 d-none d-md-block'>
+              {
+                !news ? (
+                  <Skeleton />
+                ) : (
+                  <>
+                    <h3>Latest:</h3>
+                    {
+                      news.map((n) => {
+                        return (
+                          <div className='bg-white p-3 text-dark rounded mb-2'>
+                            <div><b>{n.cityName}</b></div>
+                            <Typography.Paragraph ellipsis={{rows: 2}} style={{marginBottom: '2px'}}>
+                              <a className='text-dark' href={`/news/id/${n.id}`}>{n.title}</a>
+                            </Typography.Paragraph>
+                            {
+                              n.tags.map((tag) => <Tag key={tag} color='blue'>{tag}</Tag>)
+                            }
+                          </div>
+                        )
+                      })
+                    }
+                    <div className='mt-2'>
+                      <a className='text-white' href='/news'>Read more</a>
+                    </div>
+                  </>
+                )
+              }
             </div>
           </div>
         </div>

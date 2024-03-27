@@ -7,6 +7,7 @@ import type { DocumentContext } from 'next/document'
 const MyDocument = () => (
   <Html lang='en'>
     <Head>
+      <link rel='icon' type='image/png' href='/logo.png' />
       {/** Required for Mantine Tiptap component: https://mantine.dev/guides/next/ */}
       <ColorSchemeScript defaultColorScheme='auto' />
       <script
