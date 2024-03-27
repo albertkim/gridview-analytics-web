@@ -1,44 +1,40 @@
 import { LinkItem } from "@/components/LinkItem"
+import { INews } from '@/services/Models'
+import { Tag } from 'antd'
 
 interface NewsItemProps {
-  id: number
-  date: string
-  title: string
-  summary: string | null
-  links: Array<{
-    id: number,
-    title: string,
-    summary: string | null,
-    url: string
-  }>
+  news: INews
 }
 
-export function CityNewsItem({id, date, title, summary: contents, links}: NewsItemProps) {
+export function CityNewsItem({news}: NewsItemProps) {
 
   return (
     <div className='p-2 mb-4'>
-      <div className='d-flex justify-content-between align-items-start'>
+      <div className='d-flex justify-content-between align-items-start mb-1'>
         <p className='mb-0 flex-grow-1 text-wrap pe-2'>
           <b>
-            <a className='text-decoration-underline' href={`/news/id/${id}`}>
-              {title}
+            <a className='text-decoration-underline' href={`/news/id/${news.id}`}>
+              {news.title}
             </a>
           </b>
         </p>
-        <span className='text-muted text-nowrap text-right'>{date || 'No date'}</span>
+        <span className='text-muted text-nowrap text-right'>{news.date || 'No date'}</span>
       </div>
       {
-        contents && (
+        news.tags.map((tag) => <Tag key={tag} color='blue'>{tag}</Tag>)
+      }
+      {
+        news.summary && (
           <div
             className='text-muted mt-2 mb-2'
-            dangerouslySetInnerHTML={{__html: (contents || '')}} />
+            dangerouslySetInnerHTML={{__html: (news.summary || '')}} />
         )
       }
       {
-        links && links.length > 0 ? (
+        news.links && news.links.length > 0 ? (
           <>
             {
-              links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />)
+              news.links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />)
             }
           </>
         ) : undefined

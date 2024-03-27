@@ -70,11 +70,7 @@ export function CityNews({city, news: initialNews}: IProps) {
             <React.Fragment key={n.id}>
               <CityNewsItem
                 key={n.id}
-                id={n.id}
-                title={n.title}
-                summary={n.summary}
-                date={n.date}
-                links={n.links} />
+                news={n} />
               <hr />
             </React.Fragment>
           )

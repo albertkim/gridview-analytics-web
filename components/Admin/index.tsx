@@ -169,7 +169,12 @@ export function AdminPage() {
                                   e.preventDefault()
                                   setEditNews(n)
                                 }}>
-                                {n.title}
+                                {
+                                  n.tags.map((tag) => <Tag key={tag} color='blue'>{tag}</Tag>)
+                                }
+                                <div>
+                                  {n.title}
+                                </div>
                               </a>
                             </td>
                             <td>

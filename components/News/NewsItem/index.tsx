@@ -1,5 +1,5 @@
 import { ICity, INews } from '@/services/Models'
-import { Breadcrumb } from 'antd'
+import { Breadcrumb, Tag } from 'antd'
 import { LinkItem } from '@/components/LinkItem'
 import Head from 'next/head'
 
@@ -45,7 +45,12 @@ export function NewsItem({city, news}: IProps) {
       <div className='text-muted'>{news.cityName || ''}</div>
       <h1 className='fw-bold'>{news.title}</h1>
       <div className='text-muted'>{news.meetingType || ''}</div>
-      <div className='text-muted'>Date: {news.date || 'No date'}</div>
+      <div className='text-muted mb-1'>Date: {news.date || 'No date'}</div>
+      <div>
+        {
+          news.tags.map((tag) => <Tag key={tag} color='blue'>{tag}</Tag>)
+        }
+      </div>
 
       <br />
       <hr />

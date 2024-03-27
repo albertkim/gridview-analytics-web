@@ -59,13 +59,12 @@ export function RezoningPanelRow({listRecord, fullRecord, expanded, onFullDetail
               <Skeleton />
             ) : (
               <>
-                <br />
                 <div className='text-muted'>
-                  {`Applied: ${fullRecord.dates.appliedDate || ' - '}`}
+                  {`Applied: ${moment(fullRecord.dates.appliedDate).format('MMM DD, YYYY') || ' - '}`}
                 </div>
                 {
                   <div className='text-muted'>
-                    {fullRecord.dates.approvalDate && `Approved: ${fullRecord.dates.approvalDate}`}
+                    {fullRecord.dates.approvalDate && `Approved: ${moment(fullRecord.dates.approvalDate).format('MMM DD, YYYY')}`}
                   </div>
                 }
                 <br />

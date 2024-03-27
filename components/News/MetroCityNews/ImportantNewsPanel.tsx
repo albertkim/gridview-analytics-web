@@ -55,10 +55,7 @@ export function ImportantNewsPanel({cityNames, news: initialNews}: IParameters) 
               key={n.id}
               id={n.id}
               cityName={n.cityName}
-              title={n.title}
-              summary={n.summary}
-              date={n.date}
-              links={n.links} />
+              news={n} />
           )
         })}
         <Pagination
