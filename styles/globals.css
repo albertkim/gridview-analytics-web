@@ -146,7 +146,8 @@ td .text-right {
   text-align: right !important;
 }
 
-/** Rezoning page css **/
+/** Rezoning map page css **/
+
 #rezoning-map-container {
   width: calc(100% - 410px);
   position: absolute;
@@ -205,4 +206,27 @@ td .text-right {
   bottom: 20px;
   right: 20px;
   border-radius: 5px;
+}
+
+/** Gridview Premium page css **/
+
+#premium-map-container {
+  width: calc(100% - 410px);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  pointer-events: none;
+}
+
+#premium-top-section {
+  z-index: 10;
+  min-width: 500px;
+  max-width: 800px;
+  height: calc(100vh - 130px);
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 20px;
+  pointer-events: all;
+  overflow: auto;
 }

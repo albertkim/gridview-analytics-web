@@ -1,105 +1,148 @@
-import { Tag } from 'antd'
-import Head from 'next/head'
-import headerImage from '@/public/vancouver.png'
+import React, { useEffect, useState, useRef } from 'react'
+import { APIService } from '@/services/APIService'
+import { IListRecord } from '@/services/Models'
+import { message, Alert } from 'antd'
+import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours } from '@/services/MapUtilities'
+import { PremiumContents } from './PremiumContents'
 
-export default function Premium() {
+export function Premium() {
+
+  const [listRecords, setListRecords] = useState<IListRecord[] | null>(null)
+  const [map, setMap] = useState<google.maps.Map | null>(null)
+  const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
+
+  // Refs
+  const mapRef = useRef<HTMLDivElement>(null)
+  const circlesRef = useRef(circles)
+
+  useEffect(() => {
+    async function getListRecords() {
+      try {
+        const rezonings = await APIService.getListRecords('rezonings')
+        setListRecords(rezonings.data)
+      } catch (error) {
+        message.error('Failed to get data from server')
+      }
+    }
+    getListRecords()
+  }, [])
+
+  // Google Maps - Update the circles ref whenever the circles state changes
+  useEffect(() => {
+    circlesRef.current = circles
+  }, [circles])
+
+  // Google Maps - Initializing the map and adding the zoom listener
+  useEffect(() => {
+    if (mapRef.current && !map) {
+      console.log('Initializing Google Maps')
+
+      const premiumMapOptions = { ...defaultGoogleMapOptions }
+      premiumMapOptions.zoom = 11
+      premiumMapOptions.center = {
+        lat: 49.228509,
+        lng: -123.235848
+      }
+
+      const initializedMap = new google.maps.Map(mapRef.current, premiumMapOptions)
+
+      // Debounce to reduce zoom lagging
+      const debounce = (func: (...args: any[]) => void, wait: number): (...args: any[]) => void => {
+        let timeout: NodeJS.Timeout | null = null
+
+        return function executedFunction(...args: any[]) {
+          const later = () => {
+            timeout = null
+            func(...args)
+          }
+
+          if (timeout) {
+            clearTimeout(timeout)
+          }
+          timeout = setTimeout(later, wait)
+        }
+      }
+
+      // Add zoom listener
+      const handleZoomChange = (): void => {
+        const currentZoom = initializedMap.getZoom()
+        circlesRef?.current?.forEach(circle => {
+          circle.setRadius(calculateCircleRadius(currentZoom))
+        })
+      }
+      const debouncedZoomHandler = debounce(handleZoomChange, 250)
+      google.maps.event.addListener(initializedMap, 'zoom_changed', debouncedZoomHandler)
+
+      setMap(initializedMap)
+    }
+
+    // Cleanup function
+    return () => {
+      circles?.forEach(circle => circle.setMap(null))
+    }
+  }, [mapRef, map, defaultGoogleMapOptions])
+
+  // Google Maps - Handle records and circle updates
+  useEffect(() => {
+    if (map && listRecords) {
+      // Clear existing circles
+      circles?.forEach(circle => circle.setMap(null))
+
+      const recordsWithCoordinates = listRecords
+        .filter(record => record.location.latitude && record.location.longitude)
+        .filter(record => !!record.buildingType)
+
+      const newCircles = (recordsWithCoordinates || []).map(rezoning => {
+        const newCircle = new google.maps.Circle({
+          strokeColor: 'black',
+          strokeOpacity: 0.0,
+          strokeWeight: 0.5,
+          fillColor: getBuildingTypeColours(rezoning.buildingType),
+          fillOpacity: 0.8,
+          map: map,
+          center: { lat: rezoning.location.latitude!, lng: rezoning.location.longitude! },
+          radius: calculateCircleRadius(map.getZoom())
+        })
+        return newCircle
+      })
+
+      setCircles(newCircles)
+    }
+  }, [map, listRecords])
 
   return (
     <div>
 
-      <Head>
-        <title>Gridview Premium</title>
-        <meta name='description' content='Gridview Premium gives you access to our premium metro region datasets.' />
-      </Head>
 
-      <div className='text-center text-white less-dark-img' style={{
-        backgroundImage: `url(${headerImage.src})`,
-        backgroundPosition: 'center',
-        paddingTop: 100,
-        paddingBottom: 100
-      }}>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-8 mx-auto'>
-              <h1 className='display-4 fw-bold mb-4'>Gridview Premium</h1>
-              <p className='lead mb-4'>Get access to high quality, up-to-date rezoning data updates across multiple municipalities.</p>
-            </div>
+      <div className='d-none d-sm-block' style={{ position: 'relative', width: '100%', height: '90vh' }}>
+
+        {/** Google Map div/ref */}
+        <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
+
+        {/** Title, filters, and city metrics (underneath) */}
+        <div id='premium-map-container'>
+
+          <div id='premium-top-section'>
+            <PremiumContents />
           </div>
+
         </div>
+
       </div>
 
       <br />
 
-      <div className='container'>
+      <div className='d-block d-sm-none mb-4'>
+        <div className='container-fluid'>
 
-        <br />
-
-        <div className='table-responsive'>
-          <table className='table table-sm'>
-            <thead>
-              <tr>
-                <th className='text-muted'>Applicant</th>
-                <th className='text-muted'>Address</th>
-                <th className='text-muted'>Building Type</th>
-                <th className='text-muted'>Status</th>
-                <th className='text-muted'>...</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className='text-muted'>PC Urban Properties</td>
-                <td className='text-muted'>2596-2660 E 41st Ave</td>
-                <td className='text-muted'>Multi-family residential</td>
-                <td><Tag color='green'>Approved</Tag></td>
-                <td className='text-muted'>...</td>
-              </tr>
-              <tr>
-                <td className='text-muted'>Strand Holdings Ltd.</td>
-                <td className='text-muted'>5950-5990 Granville St</td>
-                <td className='text-muted'>Multi-family residential</td>
-                <td><Tag color='yellow'>Applied</Tag></td>
-                <td className='text-muted'>...</td>
-              </tr>
-              <tr>
-                <td className='text-muted'>Chard Development</td>
-                <td className='text-muted'>2520 Ontario St and 2-24 E Broadway</td>
-                <td className='text-muted'>Mixed use</td>
-                <td><Tag color='yellow'>Applied</Tag></td>
-                <td className='text-muted'>...</td>
-              </tr>
-              <tr>
-                <td className='text-muted'>Fougere Architecture Inc.</td>
-                <td className='text-muted'>4569 Oak St</td>
-                <td className='text-muted'>Townhouse</td>
-                <td><Tag color='yellow'>Applied</Tag></td>
-                <td className='text-muted'>...</td>
-              </tr>
-              <tr>
-                <td className='text-muted'>...</td>
-                <td className='text-muted'>...</td>
-                <td className='text-muted'>...</td>
-                <td className='text-muted'>...</td>
-                <td className='text-muted'>...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <br />
-
-        <div className='text-muted text-center'>
-          <div>
-            Gridview Premium is currently in early beta.
+          <div className='row'>
+            <div className='col-md-12'>
+              <PremiumContents />
+            </div>
           </div>
-          <div>
-            For access, contact us at
-          </div>
-          <div><a href='mailto:albert@gridviewanalytics.com'>albert@gridviewanalytics.com</a></div>
-        </div>
 
+        </div>
       </div>
-
-      <div style={{height: 100}} />
 
     </div>
   )

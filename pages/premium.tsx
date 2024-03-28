@@ -1,3 +1,3 @@
-import Premium from '@/components/Premium'
+import { Premium } from '@/components/Premium'
 
 export default () => <Premium />

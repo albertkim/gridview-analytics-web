@@ -376,7 +376,7 @@ export function Home() {
                   </a>
                   <a href='/premium'>
                     <Button className='mr-4' type='primary' size='large'>
-                      Join the waitlist
+                      Development data
                     </Button>
                   </a>
                 </Space>
