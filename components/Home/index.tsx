@@ -67,14 +67,16 @@ export function Home() {
             <div className='col-md-4 d-none d-md-block'>
               {
                 !news ? (
-                  <Skeleton />
+                  <div style={{paddingTop: 100}}>
+                    <Skeleton />
+                  </div>
                 ) : (
                   <>
                     <h3>Latest:</h3>
                     {
                       news.map((n) => {
                         return (
-                          <div className='bg-white p-3 text-dark rounded mb-2'>
+                          <div className='bg-white p-3 text-dark rounded mb-2 animate__animated animate__fadeInDown'>
                             <div><b>{n.cityName}</b></div>
                             <Typography.Paragraph ellipsis={{rows: 2}} style={{marginBottom: '2px'}}>
                               <a className='text-dark' href={`/news/id/${n.id}`}>{n.title}</a>
