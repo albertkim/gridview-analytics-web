@@ -36,7 +36,7 @@ export function Home() {
       }}>
         <div className='container'>
           <div className='row'>
-            <div className='col-md-8'>
+            <div className='col-md-8 px-4' style={{paddingBottom: 100}}>
               <Image
                 preview={false}
                 src={logoImage.src}
@@ -45,9 +45,6 @@ export function Home() {
                 style={{marginLeft: -50}} />
               <h2 className='display-4 fw-bold mb-4'>Your competitive edge in city developments</h2>
               <p className='lead'>Gridview tracks news, policy, and zoning changes across your North American city portfolio.</p>
-              <br />
-              <p className='lead mb-0'>Available: Metro Vancouver</p>
-              <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto, Metro Los Angeles</p>
               <br />
               <div>
                 <Space>
@@ -63,6 +60,10 @@ export function Home() {
                   </a>
                 </Space>
               </div>
+              <br />
+              <br />
+              <p className='mb-0'>Available: Metro Vancouver</p>
+              <p className='mb-4'>Coming soon: Metro Calgary, Metro Toronto, Metro Los Angeles</p>
             </div>
             <div className='col-md-4 d-none d-md-block'>
               {
@@ -99,9 +100,9 @@ export function Home() {
         </div>
       </div>
 
-      <div className='container my-5 px-5 py-5'>
+      <div className='container my-5 px-4 py-4'>
         <div className='row'>
-          <div className='col-md-6 mb-4'>
+          <div className='col-md-6 mb-4' style={{paddingRight: 60}}>
             <h2 className='fw-bold'>Follow the primary sources</h2>
             <br />
             <p className='lead'>
@@ -192,9 +193,9 @@ export function Home() {
         </div>
       </div>
 
-      <div className='container my-5 px-5 py-5'>
+      <div className='container my-5 px-4 py-4'>
         <div className='row'>
-          <div className='col-md-6 mb-4'>
+          <div className='col-md-6 mb-4' style={{paddingRight: 60}}>
             <h2 className='fw-bold'>Analyze rezoning and development application data</h2>
             <br />
             <p className='lead'>
@@ -271,11 +272,11 @@ export function Home() {
         </div>
       </div>
 
-      <div className='container my-5 px-5 py-5'>
+      <div className='container my-5 px-4 py-4'>
         <h2 className='fw-bold'>Coming soon: Gridview API</h2>
         <br />
         <div className='row'>
-          <div className='col-md-8'>
+          <div className='col-md-8' style={{paddingRight: 60}}>
             <p className='lead'>Supercharge your real estate platforms with unique data only available through Gridview. Enhance real estate listing data with historical rezoning and devlopment permit data, or enhance your internal analytics models.</p>
           </div>
         </div>
