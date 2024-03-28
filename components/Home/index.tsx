@@ -47,7 +47,7 @@ export function Home() {
               <p className='lead'>Gridview tracks news, policy, and zoning changes across your North American city portfolio.</p>
               <br />
               <p className='lead mb-0'>Available: Metro Vancouver</p>
-              <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto</p>
+              <p className='lead mb-4'>Coming soon: Metro Calgary, Metro Toronto, Metro Los Angeles</p>
               <br />
               <div>
                 <Space>
@@ -102,7 +102,7 @@ export function Home() {
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
           <div className='col-md-6 mb-4'>
-            <h2>Follow the primary sources</h2>
+            <h2 className='fw-bold'>Follow the primary sources</h2>
             <br />
             <p className='lead'>
               Local news is highly fragmented with low signal-to-noise. Analysts need reliable ways to stay on top of local news.
@@ -195,16 +195,13 @@ export function Home() {
       <div className='container my-5 px-5 py-5'>
         <div className='row'>
           <div className='col-md-6 mb-4'>
-            <h2>Analyze rezoning and development application data</h2>
+            <h2 className='fw-bold'>Analyze rezoning and development application data</h2>
             <br />
             <p className='lead'>
               There is no better way to see the future of a city than the rezoning and development applications being discussed at city hall.
             </p>
             <p className='lead'>
               Gridview is the only platform that aggregates and standardizes rezoning and development application data across multiple cities. Get access to high quality, up-to-date data updates across multiple municipalities, and stay ahead of the competition.
-            </p>
-            <p className='lead'>
-              Export, analyze, and visualize data to make informed decisions on your real estate investments.
             </p>
             <br />
             <a href='/premium'>
@@ -275,9 +272,13 @@ export function Home() {
       </div>
 
       <div className='container my-5 px-5 py-5'>
-        <h2 className='text-center'>Coming soon: Gridview API</h2>
+        <h2 className='fw-bold'>Coming soon: Gridview API</h2>
         <br />
-        <p className='text-center lead'>Supercharge your applications with unique data only available through Gridview.</p>
+        <div className='row'>
+          <div className='col-md-8'>
+            <p className='lead'>Supercharge your real estate platforms with unique data only available through Gridview. Enhance real estate listing data with historical rezoning and devlopment permit data, or enhance your internal analytics models.</p>
+          </div>
+        </div>
         <div style={{ height: 50 }} />
         <div className='row'>
           <div className='col-md-6'>
