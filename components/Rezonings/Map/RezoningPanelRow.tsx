@@ -74,7 +74,6 @@ export function RezoningPanelRow({listRecord, expanded, onFullDetailsClick}: IPr
               <>
                 <br />
                 <Skeleton />
-                <br />
               </>
             ) : (
               <>

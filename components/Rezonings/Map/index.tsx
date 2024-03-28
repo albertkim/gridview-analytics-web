@@ -154,7 +154,7 @@ export function RezoningsMap() {
     }
 
     return () => {
-      // Revert selected circle color)
+      // Revert selected circle color
       if (selectedRecord && selectedCircle) {
         selectedCircle.setOptions({
           fillColor: getBuildingTypeColours(selectedRecord.buildingType)
@@ -185,7 +185,9 @@ export function RezoningsMap() {
   }
 
   const selectRecord = async function(listRecord: IListRecord) {
-    // TODO: Set the map circle to be selected
+    if (selectedRecord && selectedRecord.id === listRecord.id) {
+      return
+    }
     await setSelectedRecord(listRecord)
     scrollToRecord(listRecord.id)
   }
