@@ -18,8 +18,8 @@ export function RezoningsMap() {
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [circles, setCircles] = useState<google.maps.Circle[] | null>(null)
 
-  // Used to select an item on the map (no modal)
-  const [selectedRecord, setSelectedRecord] = useState<IFullRecord | null>(null)
+  // Used to select an item on the map and right panel (no modal)
+  const [selectedRecord, setSelectedRecord] = useState<IListRecord | null>(null)
 
   // Used for full details modal
   const [selectedModalFullRecord, setSelectedModalFullRecord] = useState<IFullRecord | null>(null)
@@ -97,21 +97,22 @@ export function RezoningsMap() {
         .filter(record => record.location.latitude && record.location.longitude)
         .filter(record => !!record.buildingType)
 
-      const filteredRezonings = filterRecords(recordsWithCoordinates, filter)
+      const filteredRecords = filterRecords(recordsWithCoordinates, filter)
 
-      const newCircles = (filteredRezonings || []).map(rezoning => {
+      const newCircles = (filteredRecords || []).map(record => {
         const newCircle = new google.maps.Circle({
           strokeColor: 'black',
           strokeOpacity: 0.0,
           strokeWeight: 0.5,
-          fillColor: getBuildingTypeColours(rezoning.buildingType),
+          fillColor: getBuildingTypeColours(record.buildingType),
           fillOpacity: 0.8,
           map: map,
-          center: { lat: rezoning.location.latitude!, lng: rezoning.location.longitude! },
+          center: { lat: record.location.latitude!, lng: record.location.longitude! },
           radius: calculateCircleRadius(map.getZoom())
         })
         google.maps.event.addListener(newCircle, 'click', () => {
-          selectRecord(rezoning.id)
+          scrollToRecord(record.id)
+          selectRecord(record)
         })
         return newCircle
       })
@@ -145,26 +146,6 @@ export function RezoningsMap() {
       })
 
       if (selectedRecord && selectedCircle) {
-        // Find the matching record list item in the right panel
-        let selectedRecordListItem: HTMLElement | null = null
-        const recordListItems = document.getElementsByClassName('rezoning-list-item')
-        for (let i = 0; i < recordListItems.length; i++) {
-          const div = recordListItems[i] as HTMLElement
-          if (div.innerText.includes(selectedRecord.address)) {
-            selectedRecordListItem = div
-            break
-          }
-        }
-
-        // Scroll to the selected rezoning list item
-        if (selectedRecordListItem) {
-          const rezoningRightPanel = document.getElementById('rezoning-right-panel-list')!
-          rezoningRightPanel.scrollTo({
-            top: selectedRecordListItem.offsetTop - 20,
-            behavior: 'smooth'
-          })
-        }
-
         // Make the selected circle red
         selectedCircle.setOptions({
           fillColor: 'red'
@@ -183,9 +164,30 @@ export function RezoningsMap() {
 
   }, [selectedRecord])
 
-  const selectRecord = async function(recordId: string) {
-    const fullRecord = await APIService.getRecordById(recordId)
-    setSelectedRecord(fullRecord)
+  // Triggers: Select a circle from map, or select an item from the right panel
+  // Scrolls to the corresponding record in the right panel
+  const scrollToRecord = function(recordId: string) {
+    const recordListItem = document.getElementById(`record-${recordId}`)
+    if (recordListItem) {
+      const rezoningRightPanel = document.getElementById('rezoning-right-panel-list')!
+
+      const listItemRect = recordListItem.getBoundingClientRect()
+      const panelRect = rezoningRightPanel.getBoundingClientRect()
+
+      // Calculate the position to scroll to, relative to the container
+      const scrollToPosition = rezoningRightPanel.scrollTop + listItemRect.top - panelRect.top - 20
+
+      rezoningRightPanel.scrollTo({
+        top: scrollToPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
+  const selectRecord = async function(listRecord: IListRecord) {
+    // TODO: Set the map circle to be selected
+    await setSelectedRecord(listRecord)
+    scrollToRecord(listRecord.id)
   }
 
   const sortedListRecords: IListRecord[] | null = filterRecords(listRecords, filter)
@@ -262,16 +264,15 @@ export function RezoningsMap() {
               sortedListRecords.map((listRecord) => (
                 <div
                   key={listRecord.id}
-                  // .rezoning-list-item is used in a useEffect to scroll to the selected rezoning
+                  id={`record-${listRecord.id}`}
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}
-                  onClick={() => selectRecord(listRecord.id)}>
+                  onClick={() => selectRecord(listRecord)}>
                   <div>
                     <RezoningPanelRow
                       listRecord={listRecord}
-                      fullRecord={selectedRecord}
                       expanded={selectedRecord && selectedRecord.address === listRecord.address}
-                      onFullDetailsClick={() => setSelectedModalFullRecord(selectedRecord)}
+                      onFullDetailsClick={(fullRecord) => setSelectedModalFullRecord(fullRecord)}
                     />
                   </div>
 

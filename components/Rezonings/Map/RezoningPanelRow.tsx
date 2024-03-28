@@ -2,16 +2,31 @@ import { IFullRecord, IListRecord } from '@/services/Models'
 import { Badge, Skeleton } from 'antd'
 import { RezoningStatusBadge } from './RezoningStatusBadge'
 import { getBuildingTypeColours } from '@/services/MapUtilities'
+import { useEffect, useState } from 'react'
+import { APIService } from '@/services/APIService'
 import moment from 'moment'
 
 interface IProps {
   listRecord: IListRecord
-  fullRecord: IFullRecord | null
   expanded: boolean | null
-  onFullDetailsClick: () => void
+  onFullDetailsClick: (fullRecord: IFullRecord) => void
 }
 
-export function RezoningPanelRow({listRecord, fullRecord, expanded, onFullDetailsClick}: IProps) {
+export function RezoningPanelRow({listRecord, expanded, onFullDetailsClick}: IProps) {
+
+  const [fullRecord, setFullRecord] = useState<IFullRecord | null>(null)
+
+  useEffect(() => {
+    const getFullRecord = async function() {
+      const fullRecordResponse = await APIService.getRecordById(listRecord.id)
+      setFullRecord(fullRecordResponse)
+    }
+    if (expanded) {
+      getFullRecord()
+    } else {
+      setFullRecord(null)
+    }
+  }, [expanded])
 
   if (!listRecord) {
     return null
@@ -56,7 +71,11 @@ export function RezoningPanelRow({listRecord, fullRecord, expanded, onFullDetail
         {
           expanded && (
             !fullRecord ? (
-              <Skeleton />
+              <>
+                <br />
+                <Skeleton />
+                <br />
+              </>
             ) : (
               <>
                 <div className='text-muted'>
@@ -72,7 +91,7 @@ export function RezoningPanelRow({listRecord, fullRecord, expanded, onFullDetail
                   {fullRecord.description}
                 </div>
                 <br />
-                <a className='text-description-underscore' onClick={onFullDetailsClick}>View full details</a>
+                <a className='text-description-underscore' onClick={() => onFullDetailsClick(fullRecord)}>View full details</a>
               </>
             )
           )

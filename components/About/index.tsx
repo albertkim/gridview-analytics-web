@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button, Space } from 'antd'
 import Head from 'next/head'
 import backgroundImage from '@/public/city-blue-background.png'
 
@@ -71,11 +71,18 @@ export function About() {
               <h1 className='display-4 fw-bold mb-4'>Ready to get started?</h1>
               <p className='lead mb-4'>Be on the cutting edge of municipal land zoning, development, and political intelligence. Never miss an opportunity. Win deals before competitors. Our team is here to help.</p>
               <div>
-                <a href='/premium'>
-                  <Button className='mr-4' type='primary' size='large'>
-                    Join the waitlist
-                  </Button>
-                </a>
+                <Space>
+                  <a href='/news'>
+                    <Button size='large'>
+                      City news
+                    </Button>
+                  </a>
+                  <a href='/premium'>
+                    <Button className='mr-4' type='primary' size='large'>
+                      Development data
+                    </Button>
+                  </a>
+                </Space>
               </div>
             </div>
           </div>
