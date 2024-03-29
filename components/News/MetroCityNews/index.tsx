@@ -65,7 +65,7 @@ export function MetroCityNews({cities, importantNews}: IProps) {
       <div className='text-center'>
         <Space split=' | ' wrap style={{justifyContent: 'center'}}>
           {
-            cities.map((city) => {
+            cities.filter((city) => city.newsVisible).map((city) => {
               return (
                 <a
                   key={city.name}

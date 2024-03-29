@@ -2,6 +2,7 @@ import { ICity, INews } from '@/services/Models'
 import { Breadcrumb, Tag } from 'antd'
 import { LinkItem } from '@/components/LinkItem'
 import Head from 'next/head'
+import React from 'react'
 
 interface IProps {
   city: ICity,
@@ -67,7 +68,11 @@ export function NewsItem({city, news}: IProps) {
         news.links && news.links.length > 0 ? (
           <>
             {
-              news.links.map((l) => <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />)
+              news.links.map((l) => (
+                <React.Fragment key={l.id}>
+                  <LinkItem key={l.id} title={l.title} url={l.url} summary={l.summary} />
+                </React.Fragment>
+              ))
             }
           </>
         ) : undefined

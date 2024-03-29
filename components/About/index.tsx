@@ -28,7 +28,7 @@ export function About() {
         </div>
       </div>
 
-      <div style={{height: 100}} />
+      <div style={{height: 50}} />
 
       <div className='container py-5'>
         <div className='row'>
@@ -62,7 +62,7 @@ export function About() {
       </div>
 
       <div className='text-center' style={{
-        paddingTop: 200,
+        paddingTop: 100,
         paddingBottom: 200
       }}>
         <div className='container'>
