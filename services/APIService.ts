@@ -21,16 +21,16 @@ export const APIService = {
     return newsResponse.data as INews
   },
 
-  async getNews({offset, limit, city, important}: {offset: number, limit: number, city?: string | string[], important?: number}) {
+  async getNews({offset, limit, city, tag, important}: {offset: number, limit: number, city?: string | string[], tag?: string | string[], important?: number}) {
     const newsResponse = await axios.get(`/api/v1/news`, {
       params: {
         offset: offset,
         limit: limit,
+        tag: tag,
         city: city,
         important: important
       }
     })
-    console.log(newsResponse.config.url)
     return newsResponse.data as INewsResponse
   },
 

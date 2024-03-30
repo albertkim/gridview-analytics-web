@@ -1,8 +1,9 @@
 import { ICity, INews } from '@/services/Models'
-import { Breadcrumb, Tag } from 'antd'
+import { Breadcrumb, Skeleton, Tag } from 'antd'
 import { LinkItem } from '@/components/LinkItem'
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { APIService } from '@/services/APIService'
 
 interface IProps {
   city: ICity,
@@ -11,7 +12,17 @@ interface IProps {
 
 export function NewsItem({city, news}: IProps) {
 
+  const [relatedTagnews, setRelatedTagnews] = useState<INews[] | null>(null)
+
   const noHTMLNewsSummary = news.summary ? news.summary.replace(/<[^>]*>?/gm, '').slice(0, 160) : ''
+
+  useEffect(() => {
+    const getTagNews = async () => {
+      const tagNews = await APIService.getNews({offset: 0, limit: 5, tag: news.tags})
+      setRelatedTagnews(tagNews.data)
+    }
+    getTagNews()
+  }, [])
 
   return (
     <div className='container my-4' style={{ maxWidth: 600 }}>
@@ -81,6 +92,32 @@ export function NewsItem({city, news}: IProps) {
       <br />
       <br />
       <hr />
+
+      <br />
+
+      {
+        !relatedTagnews ? (
+          <Skeleton />
+        ) : (
+          <div>
+            <h3>Related news</h3>
+            <br />
+            {
+              relatedTagnews && relatedTagnews.length > 0 ? (
+                relatedTagnews.map((news) => (
+                  <div key={news.id} className='mb-2'>
+                    <a href={`/news/id/${news.id}`}>
+                      {news.title}
+                    </a>
+                  </div>
+                ))
+              ) : (
+                <div>No related news</div>
+              )
+            }
+          </div>
+        )
+      }
 
       <div style={{height: 400}} />
 
