@@ -172,10 +172,12 @@ export interface IRawNews {
 export interface IBuildingTypeAnalytics {
   data: {
     // year
-    [key: string]: {
+    year: string,
+    data: {
       // city
       [key: string]: {
-        [key in BuildingType | 'total']: number
+        // building types
+        [key in BuildingType]: number
       }
     }
   }[]
