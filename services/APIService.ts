@@ -134,7 +134,7 @@ export const APIService = {
     return recordsResponse.data as IListRecordResponse
   },
 
-  async getAnalysisByBuildingType(type: 'rezoning' | 'development-permit', date: 'applied' | 'approved') {
+  async getAnalysisByBuildingType(type: 'rezoning' | 'development permit', date: 'applied' | 'approved') {
     const analysisResponse = await axios.get(`/api/v1/analytics/buildingType`, {
       params: {
         type: type,
