@@ -75,7 +75,7 @@ export const RezoningMapFilter = observer(({mapFilterModel, onApply}: IProps) =>
             else return `${selectedItems.length} statuses selected`
           }}
           style={{ width: 200 }}
-          value={mapFilterModel.rezoningStatuses}
+          value={mapFilterModel.statuses}
           onChange={(statuses) => mapFilterModel.setRezoningStatuses(statuses)}>
           <Select.Option value='applied'>Applied</Select.Option>
           <Select.Option value='public hearing'>Public hearing</Select.Option>

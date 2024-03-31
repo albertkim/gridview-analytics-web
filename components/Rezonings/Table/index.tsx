@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { RezoningTable } from './RezoningTable'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
+import { toJS } from 'mobx'
 
 const mapFilter = new MapFilterModel()
 

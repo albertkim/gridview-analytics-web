@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { action, makeObservable, observable } from 'mobx'
+import { action, makeObservable, observable, toJS } from 'mobx'
 import { IFullRecord, IListRecord, ZoningStatus, BuildingType } from '@/services/Models'
 
 export interface IMapFilter {
@@ -7,7 +7,7 @@ export interface IMapFilter {
   applicationYears: string [] | null
   approvalYears: string[] | null
   buildingTypes: BuildingType[] | null
-  rezoningStatuses: ZoningStatus[] | null
+  statuses: ZoningStatus[] | null
   sortBy: string | null
 }
 
@@ -24,7 +24,7 @@ export class MapFilterModel implements IMapFilter {
     'mixed use',
     'industrial'
   ]
-  @observable rezoningStatuses: ZoningStatus[] | null = ['applied', 'public hearing', 'approved']
+  @observable statuses: ZoningStatus[] | null = ['applied', 'public hearing', 'approved']
   @observable sortBy: string | null = 'last update'
   @observable order: 'asc' | 'desc' = 'desc'
 
@@ -71,9 +71,9 @@ export class MapFilterModel implements IMapFilter {
   @action
   setRezoningStatuses(rezoningStatuses: ZoningStatus[] | null) {
     if (rezoningStatuses && rezoningStatuses.length === 0) {
-      this.rezoningStatuses = null
+      this.statuses = null
     } else {
-      this.rezoningStatuses = rezoningStatuses
+      this.statuses = rezoningStatuses
     }
   }
 
@@ -88,7 +88,7 @@ export class MapFilterModel implements IMapFilter {
       applicationYears: this.applicationYears,
       approvalYears: this.approvalYears,
       buildingTypes: this.buildingTypes,
-      rezoningStatuses: this.rezoningStatuses,
+      statuses: this.statuses,
       sortBy: this.sortBy
     }
   }
@@ -102,6 +102,30 @@ export function filterRecords<T extends IListRecord | IFullRecord>(records: T[] 
   }
 
   let orderedListRecords = records
+
+  const cities = filter.cities
+  if (cities && cities.length > 0) {
+    orderedListRecords = orderedListRecords.filter((record) => {
+      return cities.includes(record.city)
+    })
+  }
+
+  const buildingTypes = filter.buildingTypes
+  if (buildingTypes && buildingTypes.length > 0) {
+    orderedListRecords = orderedListRecords.filter((record) => {
+      if (!record.buildingType) {
+        return false
+      }
+      return buildingTypes.includes(record.buildingType)
+    })
+  }
+
+  const statuses = filter.statuses
+  if (statuses && statuses.length > 0) {
+    orderedListRecords = orderedListRecords.filter((record) => {
+      return statuses.includes(record.status)
+    })
+  }
 
   if (filter.sortBy === 'last update') {
     orderedListRecords = orderedListRecords.sort((a, b) => {
