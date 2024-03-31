@@ -1,8 +1,8 @@
-import { IBuildingTypeAnalytics } from '@/services/Models'
+import { IBuildingTypeAnalyticsCityEntry } from '@/services/Models'
 import { Skeleton } from 'antd'
 
 interface IProps {
-  analytics: IBuildingTypeAnalytics | null
+  analytics: IBuildingTypeAnalyticsCityEntry | null
 }
 
 export function BuildingTypeTable({ analytics }: IProps) {
@@ -15,44 +15,34 @@ export function BuildingTypeTable({ analytics }: IProps) {
 
   return (
     <>
-      {
-        analytics.cityData.map((cityData) => (
-          <div key={cityData.city.cityName}>
-            <h3>{cityData.city.cityName}</h3>
-            <br />
-            <div className='table-responsive'>
-              <table className='table table-sm'>
-                <thead>
-                  <tr>
-                    <th className='text-muted'>Year</th>
-                    {
-                      Object.keys(cityData.yearData[0].buildingTypeData).map((buildingType) => (
-                        <th className='text-muted' key={buildingType}>{buildingType}</th>
-                      ))
-                    }
-                  </tr>
-                </thead>
-                <tbody>
+      <div className='table-responsive'>
+        <table className='table table-sm'>
+          <thead>
+            <tr>
+              <th className='text-muted'>Year</th>
+              {
+                Object.keys(analytics.yearData[0].buildingTypeData).map((buildingType) => (
+                  <th className='text-muted' key={buildingType}>{buildingType}</th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              analytics.yearData.map((yearData) => (
+                <tr key={yearData.year}>
+                  <td>{yearData.year}</td>
                   {
-                    cityData.yearData.map((yearData) => (
-                      <tr key={yearData.year}>
-                        <td>{yearData.year}</td>
-                        {
-                          Object.entries(yearData.buildingTypeData).map(([buildingType, count]) => (
-                            <td key={buildingType}>{count}</td>
-                          ))
-                        }
-                      </tr>
+                    Object.entries(yearData.buildingTypeData).map(([buildingType, count]) => (
+                      <td key={buildingType}>{count}</td>
                     ))
                   }
-                </tbody>
-              </table>
-            </div>
-            <br />
-            <br />
-          </div>
-        ))
-      }
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </>
   )
 
