@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react'
 export function Analytics() {
 
   const [buildingTypeAnalytics, setBuildingTypeAnalytics] = useState<IBuildingTypeAnalytics | null>(null)
-  
+
   useEffect(() => {
-    const getAnalytics = async function() {
+    const getAnalytics = async function () {
       const analytics = await APIService.getAnalysisByBuildingType('rezoning', 'applied')
       setBuildingTypeAnalytics(analytics)
     }
@@ -21,7 +21,7 @@ export function Analytics() {
     yearData: {
       year: string
       buildingTypeData: {
-        [key in BuildingType] : number
+        [key in BuildingType]: number
       }
     }[]
   }[] = []
@@ -88,11 +88,42 @@ export function Analytics() {
         !buildingTypeAnalytics ? (
           <Skeleton />
         ) : (
-          <pre>
-            {JSON.stringify(transformedData, null, 2)}
-            
-            {JSON.stringify(buildingTypeAnalytics, null, 2)}
-          </pre>
+          <>
+            {
+              transformedData.map((cityData) => (
+                <>
+                  <h3>{cityData.city}</h3>
+                  <table className='table table-sm'>
+                    <thead>
+                      <tr>
+                        <th>Year</th>
+                        {
+                          Object.keys(cityData.yearData[0].buildingTypeData).map((buildingType) => (
+                            <th>{buildingType}</th>
+                          ))
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        cityData.yearData.map((yearData) => (
+                          <tr key={yearData.year}>
+                            <td>{yearData.year}</td>
+                            {
+                              Object.entries(yearData.buildingTypeData).map(([buildingType, count]) => (
+                                <td>{count}</td>
+                              ))
+                            }
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                  <br />
+                </>
+              ))
+            }
+          </>
         )
       }
       <br />
