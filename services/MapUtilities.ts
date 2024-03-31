@@ -1,4 +1,4 @@
-import { ZoningType } from './Models'
+import { BuildingType } from './Models'
 
 export function calculateCircleRadius(zoom: number | undefined) {
   if (!zoom) {
@@ -15,7 +15,7 @@ export function calculateCircleRadius(zoom: number | undefined) {
   }
 }
 
-export function getBuildingTypeColours(type: ZoningType | null) {
+export function getBuildingTypeColours(type: BuildingType | null) {
   switch (type) {
     case 'townhouse': return '#b5ffc9'
     case 'single-family residential': return '#b5ffc9'

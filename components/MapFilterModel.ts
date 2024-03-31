@@ -1,12 +1,12 @@
 import moment from 'moment'
 import { action, makeObservable, observable } from 'mobx'
-import { IFullRecord, IListRecord, ZoningStatus, ZoningType } from '@/services/Models'
+import { IFullRecord, IListRecord, ZoningStatus, BuildingType } from '@/services/Models'
 
 export interface IMapFilter {
   cities: string[] | null
   applicationYears: string [] | null
   approvalYears: string[] | null
-  buildingTypes: ZoningType[] | null
+  buildingTypes: BuildingType[] | null
   rezoningStatuses: ZoningStatus[] | null
   sortBy: string | null
 }
@@ -16,7 +16,7 @@ export class MapFilterModel implements IMapFilter {
   @observable cities: string[] | null = null
   @observable applicationYears: string[] | null = null
   @observable approvalYears: string[] | null = null
-  @observable buildingTypes: ZoningType[] | null = [
+  @observable buildingTypes: BuildingType[] | null = [
     'single-family residential',
     'townhouse',
     'multi-family residential',
@@ -60,7 +60,7 @@ export class MapFilterModel implements IMapFilter {
   }
 
   @action
-  setBuildingTypes(buildingTypes: ZoningType[] | null) {
+  setBuildingTypes(buildingTypes: BuildingType[] | null) {
     if (buildingTypes && buildingTypes.length === 0) {
       this.buildingTypes = null
     } else {

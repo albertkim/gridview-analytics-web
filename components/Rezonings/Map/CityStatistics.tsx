@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { IFullRecord, ZoningType } from '@/services/Models'
+import { IFullRecord, BuildingType } from '@/services/Models'
 import { useState } from 'react'
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
 }
 
 interface ITypeStatistic {
-  buildingType: ZoningType
+  buildingType: BuildingType
   avgDaysToApproval: number
   minDaysToApproval: number
   maxDaysToApproval: number
@@ -64,7 +64,7 @@ export function CityStatistics({ city, rezonings }: IProps) {
     type.maxDaysToApproval = Math.max(...type.daysToApprovalArray)
   })
 
-  function getStatsByType(type: ZoningType) {
+  function getStatsByType(type: BuildingType) {
     const matchingType = typesWithAvgMinMaxDaysToApproval.find(t => t.buildingType === type)
     if (matchingType) {
       return matchingType

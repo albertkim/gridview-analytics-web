@@ -46,7 +46,7 @@ export interface INewsResponse {
   data: INews[]
 }
 
-export type ZoningType =
+export type BuildingType =
   'single-family residential' |
   'townhouse' |
   'mixed use' |
@@ -73,7 +73,7 @@ export interface IFullRecord {
   behalf: string | null
   description: string
   type: 'rezoning' | 'development permit'
-  buildingType: ZoningType | null
+  buildingType: BuildingType | null
   stats: {
     buildings: number | null
     stratas: number | null
@@ -126,7 +126,7 @@ export interface IListRecord {
     latitude: number | null
     longitude: number | null
   }
-  buildingType: ZoningType | null
+  buildingType: BuildingType | null
   stats: {
     buildings: number | null
     stratas: number | null
@@ -167,4 +167,16 @@ export interface IRawNews {
     title: string
     url: string
   }>
+}
+
+export interface IBuildingTypeAnalytics {
+  data: {
+    // year
+    [key: string]: {
+      // city
+      [key: string]: {
+        [key in BuildingType | 'total']: number
+      }
+    }
+  }[]
 }

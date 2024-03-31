@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import qs from 'qs'
-import { INews, INewsResponse, ICity, IRezoningResponse, IRawNews, IFullRecord, IListRecordResponse } from './Models'
+import { INews, INewsResponse, ICity, IRezoningResponse, IRawNews, IFullRecord, IListRecordResponse, IBuildingTypeAnalytics } from './Models'
 import { CityStructure } from './CityStructure'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL!
@@ -134,14 +134,14 @@ export const APIService = {
     return recordsResponse.data as IListRecordResponse
   },
 
-  async getAnalysisByBuildingType(type: 'rezoning' | 'development-permit', date: 'applied' | 'approved'): Promise<any> {
+  async getAnalysisByBuildingType(type: 'rezoning' | 'development-permit', date: 'applied' | 'approved') {
     const analysisResponse = await axios.get(`/api/v1/analytics/buildingType`, {
       params: {
         type: type,
         date: date
       }
     })
-    return analysisResponse.data
+    return analysisResponse.data as IBuildingTypeAnalytics
   }
 
 }

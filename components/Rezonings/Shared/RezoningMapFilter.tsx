@@ -1,5 +1,5 @@
 import { MapFilterModel, IMapFilter } from '@/components/MapFilterModel'
-import { ZoningStatus, ZoningType } from '@/services/Models'
+import { ZoningStatus, BuildingType } from '@/services/Models'
 import { Button, Select, Space } from 'antd'
 import { observer } from 'mobx-react'
 
@@ -39,7 +39,7 @@ export const RezoningMapFilter = observer(({mapFilterModel, onApply}: IProps) =>
           <Select.Option value='Surrey'>Surrey</Select.Option>
         </Select>
 
-        <Select<ZoningType[] | null>
+        <Select<BuildingType[] | null>
           mode='multiple'
           allowClear
           placeholder='Rezoning types'
