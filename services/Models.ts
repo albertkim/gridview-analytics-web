@@ -170,15 +170,19 @@ export interface IRawNews {
 }
 
 export interface IBuildingTypeAnalytics {
-  data: {
-    // year
-    year: string,
-    data: {
-      // city
-      [key: string]: {
-        // building types
-        [key in BuildingType]: number
-      }
-    }
-  }[]
+  cityData: IBuildingTypeAnalyticsCityEntry[]
+}
+
+export interface IBuildingTypeAnalyticsCityEntry {
+  city: {
+    cityName: string
+  }
+  yearData: IBuildingTypeAnalyticsYearEntry[]
+}
+
+export interface IBuildingTypeAnalyticsYearEntry {
+  year: string // 'YYYY-MM-DD'
+  buildingTypeData: {
+    [key in BuildingType]: number
+  }
 }

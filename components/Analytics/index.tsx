@@ -10,7 +10,7 @@ export function Analytics() {
 
   useEffect(() => {
     const getAnalytics = async function () {
-      const rezoningAnalytics = await APIService.getAnalysisByBuildingType('rezoning', 'applied')
+      const rezoningAnalytics = await APIService.getAnalysisByBuildingType('rezoning', 'approved')
       const developmentPermitAnalytics = await APIService.getAnalysisByBuildingType('development permit', 'approved')
       setRezoningBuildingTypeAnalytics(rezoningAnalytics)
       setDevelopmentPermitBuildingTypeAnalytics(developmentPermitAnalytics)
@@ -25,7 +25,7 @@ export function Analytics() {
 
         <div className='col-md-6'>
           <br />
-          <h1>Rezonings</h1>
+          <h1>Rezoning approvals</h1>
           <br />
           <BuildingTypeTable analytics={rezoningBuildingTypeAnalytics} />
           <br />
@@ -33,7 +33,7 @@ export function Analytics() {
 
         <div className='col-md-6'>
           <br />
-          <h1>Development permits</h1>
+          <h1>Development permit approvals</h1>
           <br />
           <BuildingTypeTable analytics={developmentPermitBuildingTypeAnalytics} />
           <br />
