@@ -20,7 +20,7 @@ export function FullRezoningContents({rezoning}: IProps) {
       
         <div className='col-md-4'>
           <div className='border border-gray p-3' style={{borderRadius: 5, height: '100%'}}>
-            <div className='text-muted'>Rezoning</div>
+            <div className='text-muted'>Building type</div>
             <div>{rezoning.buildingType}</div>
             <br />
             <div className='text-muted'>From: {rezoning.zoning.previousZoningCode}</div>

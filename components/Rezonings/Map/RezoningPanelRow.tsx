@@ -78,11 +78,11 @@ export function RezoningPanelRow({listRecord, expanded, onFullDetailsClick}: IPr
             ) : (
               <>
                 <div className='text-muted'>
-                  {`Applied: ${moment(fullRecord.dates.appliedDate).format('MMM DD, YYYY') || ' - '}`}
+                  {`Applied: ${fullRecord.dates.appliedDate ? moment(fullRecord.dates.appliedDate).format('MMM DD, YYYY') : ' - '}`}
                 </div>
                 {
                   <div className='text-muted'>
-                    {fullRecord.dates.approvalDate && `Approved: ${moment(fullRecord.dates.approvalDate).format('MMM DD, YYYY')}`}
+                    {fullRecord.dates.approvalDate && `Approved: ${fullRecord.dates.approvalDate ? moment(fullRecord.dates.approvalDate).format('MMM DD, YYYY') : '-'}`}
                   </div>
                 }
                 <br />

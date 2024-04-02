@@ -57,7 +57,7 @@ export function RezoningsTable({type}: {type: 'rezoning' | 'development permit'}
       </Modal>
 
       <div>
-        <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href='/rezonings/map'>go to map view</a>) {!records && <span className='text-muted'>(loading...)</span>}</h5>
+        <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href={`/${type === 'rezoning' ? 'rezonings' : 'development-permits'}/map`}>go to map view</a>) {!records && <span className='text-muted'>(loading...)</span>}</h5>
         <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
       </div>
 

@@ -231,7 +231,7 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href='/rezonings/table'>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
+            <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href={`/${type === 'rezoning' ? 'rezonings' : 'development-permits'}/table`}>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
