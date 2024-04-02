@@ -6,11 +6,10 @@ import { useEffect, useState } from 'react'
 import { RezoningTable } from './RezoningTable'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
-import { toJS } from 'mobx'
 
 const mapFilter = new MapFilterModel()
 
-export function RezoningsTable() {
+export function RezoningsTable({type}: {type: 'rezoning' | 'development permit'}) {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
   const [records, setRecords] = useState<IFullRecord[] | null>(null)
@@ -19,8 +18,8 @@ export function RezoningsTable() {
   useEffect(() => {
     async function getRecords() {
       try {
-        const rezonings = await APIService.getRezonings()
-        setRecords(rezonings.data)
+        const records = type === 'rezoning' ? await APIService.getRezonings() : await APIService.getDevelopmentPermits()
+        setRecords(records.data)
       } catch (error) {
         message.error('Failed to get data from server')
       }
@@ -58,7 +57,7 @@ export function RezoningsTable() {
       </Modal>
 
       <div>
-        <h5 className='mb-3'>Gridview Premium (<a href='/rezonings/map'>go to map view</a>) {!records && <span className='text-muted'>(loading...)</span>}</h5>
+        <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href='/rezonings/map'>go to map view</a>) {!records && <span className='text-muted'>(loading...)</span>}</h5>
         <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
       </div>
 
@@ -71,4 +70,8 @@ export function RezoningsTable() {
     </div>
   )
 
+}
+
+function capitalizeFirstLetter(stringValue: string) {
+  return stringValue.charAt(0).toUpperCase() + stringValue.slice(1)
 }

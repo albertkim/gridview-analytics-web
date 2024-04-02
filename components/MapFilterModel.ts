@@ -17,7 +17,6 @@ export class MapFilterModel implements IMapFilter {
   @observable applicationYears: string[] | null = null
   @observable approvalYears: string[] | null = null
   @observable buildingTypes: BuildingType[] | null = [
-    'single-family residential',
     'townhouse',
     'multi-family residential',
     'commercial',

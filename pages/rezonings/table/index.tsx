@@ -1,3 +1,3 @@
 import { RezoningsTable } from '@/components/Rezonings/Table'
 
-export default () => <RezoningsTable />
+export default () => <RezoningsTable type='rezoning' />

@@ -30,34 +30,41 @@ export function Analytics() {
   return (
     <div className='container-fluid'>
 
-      <div className='row'>
+      <br />
 
-        {
-          cities.map((city) => {
-            const cityRezoningData = rezoningBuildingTypeAnalytics.cityData.find((cityData) => cityData.city.cityName === city)
-            const cityDevelopmentPermitData = developmentPermitBuildingTypeAnalytics.cityData.find((cityData) => cityData.city.cityName === city)
-            return (
-              <>
+      {
+        cities.map((city) => {
+          const cityRezoningData = rezoningBuildingTypeAnalytics.cityData.find((cityData) => cityData.city.cityName === city)
+          const cityDevelopmentPermitData = developmentPermitBuildingTypeAnalytics.cityData.find((cityData) => cityData.city.cityName === city)
+          return (
+            <>
+              <div className='row'>
                 <div className='col-md-6'>
                   <br />
-                  <h5>{city} rezoning approvals</h5>
+                  <h5>{city}</h5>
+                  <div className='text-muted'>Rezoning approvals</div>
                   <br />
                   <BuildingTypeTable analytics={cityRezoningData!} />
                   <br />
                 </div>
                 <div className='col-md-6'>
                   <br />
-                  <h5>{city} development permit approvals</h5>
+                  <h5>{city}</h5>
+                  <div className='text-muted'>Development permit approvals</div>
                   <br />
                   <BuildingTypeTable analytics={cityDevelopmentPermitData!} />
                   <br />
                 </div>
-              </>
-            )
-          })
-        }
+              </div>
+              <br />
+              <hr />
+              <br />
+            </>
+          )
+        })
+      }
 
-      </div>
+      <br />
 
     </div>
   )

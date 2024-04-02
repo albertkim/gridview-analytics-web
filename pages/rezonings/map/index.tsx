@@ -1,3 +1,3 @@
 import { RezoningsMap } from '@/components/Rezonings/Map'
 
-export default () => <RezoningsMap />
+export default () => <RezoningsMap type='rezoning' />

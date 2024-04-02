@@ -118,9 +118,13 @@ export const APIService = {
     }
   },
 
-  // DEPRECATED
   async getRezonings(): Promise<IRezoningResponse> {
     const rezoningResponse = await axios.get(`/api/v1/rezonings`)
+    return rezoningResponse.data
+  },
+
+  async getDevelopmentPermits(): Promise<IRezoningResponse> {
+    const rezoningResponse = await axios.get(`/api/v1/developmentPermits`)
     return rezoningResponse.data
   },
 

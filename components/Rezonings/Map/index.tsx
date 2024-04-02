@@ -11,7 +11,7 @@ import { CityStatistics } from './CityStatistics'
 
 const mapFilter = new MapFilterModel()
 
-export function RezoningsMap() {
+export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) {
 
   const [filter, setFilter] = useState<IMapFilter>(mapFilter.getFilter())
   const [listRecords, setListRecords] = useState<IListRecord[] | null>(null)
@@ -31,7 +31,8 @@ export function RezoningsMap() {
   useEffect(() => {
     async function getListRecords() {
       try {
-        const rezonings = await APIService.getListRecords('rezonings')
+        const apiRecordType = type === 'rezoning' ? 'rezonings' : 'development-permits'
+        const rezonings = await APIService.getListRecords(apiRecordType)
         setListRecords(rezonings.data)
       } catch (error) {
         message.error('Failed to get data from server')
@@ -230,7 +231,7 @@ export function RezoningsMap() {
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>Gridview Premium (<a href='/rezonings/table'>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
+            <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href='/rezonings/table'>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
@@ -248,7 +249,7 @@ export function RezoningsMap() {
           {
             !!sortedListRecords && (
               <>
-                <h5>{sortedListRecords.length} rezonings found</h5>
+                <h5>{sortedListRecords.length} {type}s found</h5>
                 <div className='text-muted'>
                   <div>
                     {sortedListRecords.filter((r) => r.status === 'approved').length} approved
@@ -305,4 +306,8 @@ export function RezoningsMap() {
     </div>
   )
 
+}
+
+function capitalizeFirstLetter(stringValue: string) {
+  return stringValue.charAt(0).toUpperCase() + stringValue.slice(1)
 }
