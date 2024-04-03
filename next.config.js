@@ -14,6 +14,11 @@ const nextConfig = {
         source: '/rezonings',
         destination: '/rezonings/map',
         permanent: true
+      },
+      {
+        source: '/development-permits',
+        destination: '/development-permits/map',
+        permanent: true
       }
     ]
   },

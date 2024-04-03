@@ -103,6 +103,12 @@ export default function({ Component, pageProps }: AppProps) {
                   <a className='nav-link' href='/premium'>Premium</a>
                 </li>
                 <li className='nav-item'>
+                  <a className='nav-link' href='/rezonings'>Rezonings</a>
+                </li>
+                <li className='nav-item'>
+                  <a className='nav-link' href='/development-permits'>Development permits</a>
+                </li>
+                <li className='nav-item'>
                   <a className='nav-link' href='/about'>About</a>
                 </li>
               </ul>

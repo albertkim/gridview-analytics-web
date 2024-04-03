@@ -44,6 +44,16 @@ export function PremiumContents() {
 
       <br />
 
+      <p className='lead fw-bold'>See a demo for yourself:</p>
+      <div className='mb-2'>
+        <a href='/rezonings' className='btn btn-light'>View rezoning data</a>
+      </div>
+      <div>
+        <a href='/development-permits' className='btn btn-light'>View development permit data</a>
+      </div>
+
+      <br />
+
       <p className='lead'>
         Gridview Premium is currently in early beta for Metro Vancouver. Please contact us at <a href='mailto:albert@gridviewanalytics.com'>albert@gridviewanalytics.com</a> for more information.
       </p>
