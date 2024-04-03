@@ -315,7 +315,3 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
   )
 
 }
-
-function capitalizeFirstLetter(stringValue: string) {
-  return stringValue.charAt(0).toUpperCase() + stringValue.slice(1)
-}

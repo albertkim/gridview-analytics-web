@@ -34,8 +34,12 @@ export const APIService = {
     return newsResponse.data as INewsResponse
   },
 
-  async getRawNews() {
-    const newsResponse = await axios.get(`/api/v1/news/raw`)
+  async getRawNews(city?: string) {
+    const newsResponse = await axios.get(`/api/v1/news/raw`, {
+      params: {
+        city: city
+      }
+    })
     return newsResponse.data.data as IRawNews[]
   },
 

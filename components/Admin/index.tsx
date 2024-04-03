@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Skeleton, Tag, Typography, message } from 'antd'
+import { Select, Skeleton, Tag, Typography, message } from 'antd'
 import { APIService } from '@/services/APIService'
 import { INews, INewsResponse, IRawNews } from '@/services/Models'
 import { getAdminCityStructure } from './AdminCityStructure'
@@ -7,9 +7,13 @@ import { CreateNewsModal } from './CreateNewsModal'
 
 export function AdminPage() {
 
-  // Data returned from the API and stored on client]
+  // Data returned from the API and stored on client
   const [news, setNews] = useState<INewsResponse | null>(null)
   const [rawNews, setRawNews] = useState<IRawNews[] | null>(null)
+
+  // City filter for getting raw news
+  const [city, setCity] = useState<string | null>(null)
+  const cityArray = ['Vancouver', 'Burnaby', 'Richmond', 'Surrey']
 
   // Fields to control the create/edit modal
   const [createNews, setCreateNews] = useState<boolean | null>(null)
@@ -27,8 +31,8 @@ export function AdminPage() {
     setNews(newsResponse)
   }
 
-  const getRawNews = async function() {
-    const rawNewsResponse = await APIService.getRawNews()
+  const getRawNews = async function(cityFilter?: string) {
+    const rawNewsResponse = await APIService.getRawNews(cityFilter)
     setRawNews(rawNewsResponse)
   }
 
@@ -49,6 +53,11 @@ export function AdminPage() {
         messageApi.error(`There was an error deleting news with ID ${newsId}`)
       }
     }
+  }
+
+  const selectCity = async function (city: string) {
+    await setCity(city)
+    await getRawNews(city)
   }
 
   return (
@@ -201,6 +210,28 @@ export function AdminPage() {
 
           <div>
             <b>Raw scraped news</b>
+          </div>
+
+          <br />
+
+          {/** City selector */}
+          <div>
+            <Select
+              placeholder='All cities'
+              style={{width: 300}}
+              value={city}
+              onChange={(e) => selectCity(e)}>
+              {
+                cityArray.map((c) => {
+                  return (
+                    <Select.Option
+                      key={c}
+                      value={c}>{c}
+                    </Select.Option>
+                  )
+                })
+              }
+            </Select>
           </div>
 
           <br />
