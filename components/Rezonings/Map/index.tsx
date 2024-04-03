@@ -8,6 +8,7 @@ import { FullRezoningContents } from '../Shared/FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRecords } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { CityStatistics } from './CityStatistics'
+import { RecordTypeSelector } from '../Shared/RecordTypeSelector'
 
 const mapFilter = new MapFilterModel()
 
@@ -185,7 +186,11 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
     }
   }
 
-  const selectRecord = async function(listRecord: IListRecord) {
+  const selectRecord = async function(listRecord: IListRecord | null) {
+    if (!listRecord) {
+      await setSelectedRecord(null)
+      return
+    }
     if (selectedRecord && selectedRecord.id === listRecord.id) {
       return
     }
@@ -231,7 +236,10 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
         <div id='rezoning-map-container'>
 
           <div id='rezoning-top-filter'>
-            <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href={`/${type === 'rezoning' ? 'rezonings' : 'development-permits'}/table`}>go to table view</a>) {!listRecords && <span className='text-muted'>(loading...)</span>}</h5>
+            <div className='mb-2'>
+              <RecordTypeSelector type={type} format='map' />
+            {!listRecords && <span className='text-muted'>(loading...)</span>}
+            </div>
             <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
           </div>
 
@@ -270,7 +278,7 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
                   id={`record-${listRecord.id}`}
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}
-                  onClick={() => selectRecord(listRecord)}>
+                  onClick={() => selectRecord(selectedRecord ? null : listRecord)}>
                   <div>
                     <RezoningPanelRow
                       listRecord={listRecord}

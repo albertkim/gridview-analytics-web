@@ -10,8 +10,10 @@ export function calculateCircleRadius(zoom: number | undefined) {
     return 200
   } else if (zoom <= 14) {
     return 100
-  } else {
+  } else if (zoom <= 16) {
     return 50
+  } else {
+    return 10
   }
 }
 

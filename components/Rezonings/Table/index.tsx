@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { RezoningTable } from './RezoningTable'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
+import { RecordTypeSelector } from '../Shared/RecordTypeSelector'
 
 const mapFilter = new MapFilterModel()
 
@@ -57,7 +58,10 @@ export function RezoningsTable({type}: {type: 'rezoning' | 'development permit'}
       </Modal>
 
       <div>
-        <h5 className='mb-3'>{capitalizeFirstLetter(type)}s (<a href={`/${type === 'rezoning' ? 'rezonings' : 'development-permits'}/map`}>go to map view</a>) {!records && <span className='text-muted'>(loading...)</span>}</h5>
+        <div className='mb-2'>
+          <RecordTypeSelector type={type} format='table' />
+          {!records && <span className='text-muted'>(loading...)</span>}
+        </div>
         <RezoningMapFilter mapFilterModel={mapFilter} onApply={(newFilter) => setFilter(newFilter)} />
       </div>
 
