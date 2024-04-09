@@ -106,6 +106,7 @@ export function NewsItem({city, news}: IProps) {
               relatedTagnews && relatedTagnews.length > 0 ? (
                 relatedTagnews.map((news) => (
                   <div key={news.id} className='mb-2'>
+                    <div className='text-muted'>{news.cityName}</div>
                     <a href={`/news/id/${news.id}`}>
                       {news.title}
                     </a>
