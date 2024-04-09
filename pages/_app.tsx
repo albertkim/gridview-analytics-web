@@ -129,7 +129,7 @@ export default function({ Component, pageProps }: AppProps) {
 
         {
           // Don't show the footer on certain URL routes, namely anything with an interactable map
-          (!['/premium', '/rezonings/map'].includes(router.pathname)) && (
+          (!['/premium', '/rezonings/map', 'development-permits/map'].includes(router.pathname)) && (
 
             <Layout.Footer className='p-0 m-0'>
 
