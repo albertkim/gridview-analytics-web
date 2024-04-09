@@ -23,6 +23,15 @@ const nextConfig = {
     ]
   },
 
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: 'https://api.gridviewanalytics.com/sitemap.xml'
+      }
+    ]
+  },
+
   // Have to add these to get Ant Design to work with Next.js
   // https://github.com/vercel/next.js/issues/58817
   transpilePackages: [

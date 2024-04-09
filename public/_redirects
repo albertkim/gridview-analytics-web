@@ -1,3 +1,4 @@
 /news /news/metro_vancouver
 /rezonings /rezonings/map
 /development-permits /development-permits/map
+/sitemap.xml https://api.gridviewanalytics.com/sitemap.xml 200
