@@ -8,23 +8,29 @@ export const getServerSideProps = async function(ctx: NextPageContext) {
 
   const cityNameParam = ctx.query['city-name'] as string
 
+  // Get city name from URL params
   if (!cityNameParam) {
     return {
       notFound: true
     }
   }
 
+  // Get any tag filters from URL query params
+  const tag: string | null = ctx.query['tag'] as string || null
+
   try {
     const city = await APIService.getCity(cityNameParam)
     const news = await APIService.getNews({
       offset: 0,
       limit: defaultPageSize,
-      city: cityNameParam
+      city: cityNameParam,
+      tag: tag
     })
     return {
       props: {
         city: city,
-        news: news
+        news: news,
+        tag: tag
       }
     }
   } catch (error) {
@@ -36,8 +42,9 @@ export const getServerSideProps = async function(ctx: NextPageContext) {
 }
 
 interface IProps {
-  city: ICity | false,
+  city: ICity | false
   news: INewsResponse | false
+  tag: string | null
 }
 
 export default function(props: IProps) {

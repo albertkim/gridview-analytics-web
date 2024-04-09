@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import { APIService } from '@/services/APIService'
 import { ICity, INewsResponse } from '@/services/Models'
-import { Skeleton, Pagination, Tooltip, Breadcrumb } from 'antd'
+import { Skeleton, Pagination, Tooltip, Breadcrumb, Tag } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { CityNewsItem } from './CityNewsItem'
 
@@ -13,13 +13,24 @@ function capitalizeFirstLetter(str: string) {
 }
 
 interface IProps {
-  city: ICity | false,
+  city: ICity | false
   news: INewsResponse | false
+  tag: string | null
 }
+
+const defaultTags = [
+  'development',
+  'infrastructure',
+  'services',
+  'transportation',
+  'finance',
+  'community',
+  'other'
+]
 
 export const defaultPageSize = 10
 
-export function CityNews({city, news: initialNews}: IProps) {
+export function CityNews({city, news: initialNews, tag: selectedTag}: IProps) {
 
   const router = useRouter()
   const cityNameParam = router.query['city-name'] as string
@@ -43,7 +54,8 @@ export function CityNews({city, news: initialNews}: IProps) {
     const news = await APIService.getNews({
       offset: offset,
       limit: defaultPageSize,
-      city: cityNameParam
+      city: cityNameParam,
+      tag: selectedTag
     })
     setNews(news)
     // Scroll to top - in the future, use url params to keep track of page
@@ -59,7 +71,7 @@ export function CityNews({city, news: initialNews}: IProps) {
   } else if (news.data.length === 0) {
     newsComponent = (
       <div className='text-muted'>
-        News not available for this city yet. Please contact us to request updates.
+        No news available
       </div>
     )
   } else {
@@ -107,6 +119,29 @@ export function CityNews({city, news: initialNews}: IProps) {
       <br />
       <div className='row'>
         <div className='col-md-4'>
+
+          <div className='border rounded px-3 pt-3 pb-3 bg-light mb-4'>
+            <p><b>Tags</b></p>
+            {
+              defaultTags.map((tag, index) => {
+                return (
+                  <a key={index} href={
+                    tag === selectedTag ?
+                      `/news/${metroCityShortCode}/city/${city.name}` :
+                      `/news/${metroCityShortCode}/city/${city.name}?tag=${tag}`
+                  }>
+                    <Tag
+                      className='mb-1'
+                      color={tag === selectedTag ? 'blue' : 'default'}
+                      closeIcon={tag === selectedTag}
+                      style={{marginRight: 8}}>
+                      {capitalizeFirstLetter(tag)}
+                    </Tag>
+                  </a>
+                )
+              })
+            }
+          </div>
 
           <div className='border rounded px-3 pt-3 pb-3 bg-light mb-4'>
 
