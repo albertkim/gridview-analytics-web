@@ -23,3 +23,4 @@ Then, run the following commands:
 
 - If you are adding a permanent route redirect, you must add to `next.config.js` and `/public/_redirects`
 - If you are getting a React hydration error on application load, it is probably because you have a browser extension that modifies HTML. In my case, I had a dark mode plugin that once i disabled, made the application work again.
+- The sitemap.xml is dynamically generated on https://api.gridviewanalytics.com/sitemap.xml. The /sitemap.xml url is rewritten to that URL in the _redirects file based on Netlify standards. Documentation here: https://docs.netlify.com/routing/redirects/rewrites-proxies/
