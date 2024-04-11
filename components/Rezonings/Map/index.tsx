@@ -9,6 +9,7 @@ import { MapFilterModel, IMapFilter, filterRecords } from '@/components/MapFilte
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { CityStatistics } from './CityStatistics'
 import { RecordTypeSelector } from '../Shared/RecordTypeSelector'
+import Head from 'next/head'
 
 const mapFilter = new MapFilterModel()
 
@@ -202,6 +203,11 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
 
   return (
     <div>
+
+      <Head>
+        <title>Gridview - Rezoning and development permit map</title>
+        <meta name='description' content='View rezoning and development permit data' />
+      </Head>
 
       {/** Full details modal */}
       <Modal

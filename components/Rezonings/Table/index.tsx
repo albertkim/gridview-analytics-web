@@ -7,6 +7,7 @@ import { RezoningTable } from './RezoningTable'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
 import { RecordTypeSelector } from '../Shared/RecordTypeSelector'
+import Head from 'next/head'
 
 const mapFilter = new MapFilterModel()
 
@@ -32,6 +33,11 @@ export function RezoningsTable({type}: {type: 'rezoning' | 'development permit'}
 
   return (
     <div className='container pt-4 pb-4'>
+
+      <Head>
+        <title>Gridview - Rezoning and development permit table</title>
+        <meta name='description' content='View rezoning and development permit tabular data' />
+      </Head>
 
       {/** Full details modal */}
       <Modal
