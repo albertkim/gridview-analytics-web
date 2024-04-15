@@ -29,9 +29,9 @@ export function NewsItem({city, news}: IProps) {
 
       <Head>
         <title>{news.title}</title>
-        <meta property='og:title' content={`${news.cityName.toUpperCase()} - ${news.title}` || undefined} />
-        <meta name='description' content={noHTMLNewsSummary || undefined} />
-        <meta property='og:description' content={noHTMLNewsSummary || undefined} />
+        <meta property='og:title' content={`${news.cityName.toUpperCase()} - ${news.title} - Gridview Analytics` || undefined} />
+        <meta name='description' content={`${news.cityName.toUpperCase()} - ${noHTMLNewsSummary}` || undefined} />
+        <meta property='og:description' content={`${news.cityName.toUpperCase()} - ${noHTMLNewsSummary}` || undefined} />
       </Head>
 
       <Breadcrumb
