@@ -29,8 +29,8 @@ export function NewsItem({city, news}: IProps) {
 
       <Head>
         <title>{news.title}</title>
-        <meta name='description' content={`${news.cityName.toUpperCase()} - ${news.summary}` || undefined} />
-        <meta property='og:title' content={news.title || undefined} />
+        <meta property='og:title' content={`${news.cityName.toUpperCase()} - ${news.title}` || undefined} />
+        <meta name='description' content={noHTMLNewsSummary || undefined} />
         <meta property='og:description' content={noHTMLNewsSummary || undefined} />
       </Head>
 
