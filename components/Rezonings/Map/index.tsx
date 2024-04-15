@@ -188,15 +188,19 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
   }
 
   const selectRecord = async function(listRecord: IListRecord | null) {
-    if (!listRecord) {
+    console.log(selectedRecord?.id, listRecord?.id)
+    if (selectedRecord && listRecord && selectedRecord.id === listRecord.id) {
+      console.log(1)
       await setSelectedRecord(null)
       return
+    } else if (listRecord) {
+      console.log(2)
+      scrollToRecord(listRecord.id)
+      await setSelectedRecord(listRecord)
+    } else {
+      console.log(3)
+      await setSelectedRecord(null)
     }
-    if (selectedRecord && selectedRecord.id === listRecord.id) {
-      return
-    }
-    await setSelectedRecord(listRecord)
-    scrollToRecord(listRecord.id)
   }
 
   const sortedListRecords: IListRecord[] | null = filterRecords(listRecords, filter)
@@ -284,7 +288,7 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
                   id={`record-${listRecord.id}`}
                   className='rezoning-list-item border border-light'
                   style={{cursor: 'pointer'}}
-                  onClick={() => selectRecord(selectedRecord ? null : listRecord)}>
+                  onClick={() => selectRecord(listRecord)}>
                   <div>
                     <RezoningPanelRow
                       listRecord={listRecord}
