@@ -13,7 +13,7 @@ export function AdminPage() {
 
   // City filter for getting raw news
   const [city, setCity] = useState<string | null>(null)
-  const cityArray = ['Vancouver', 'Burnaby', 'Richmond', 'Surrey']
+  const cityArray = ['BC (province)', 'Vancouver', 'Burnaby', 'Richmond', 'Surrey']
 
   // Fields to control the create/edit modal
   const [createNews, setCreateNews] = useState<boolean | null>(null)
