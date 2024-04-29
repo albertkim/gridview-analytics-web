@@ -1,6 +1,6 @@
 # Gridview Analytics - Web
 
-A Next.js SSR application to connect to the `gridview-analytics-api` service.
+A Next.js SSR application to connect to the `gridview-analytics-api` service. The deployed site can be visited at https://gridviewanalytics.com
 
 # Getting started
 
