@@ -7,7 +7,6 @@ import { calculateCircleRadius, defaultGoogleMapOptions, getBuildingTypeColours 
 import { FullRezoningContents } from '../Shared/FullRezoningContents'
 import { MapFilterModel, IMapFilter, filterRecords } from '@/components/MapFilterModel'
 import { RezoningMapFilter } from '../Shared/RezoningMapFilter'
-import { CityStatistics } from './CityStatistics'
 import { RecordTypeSelector } from '../Shared/RecordTypeSelector'
 import Head from 'next/head'
 
@@ -190,15 +189,12 @@ export function RezoningsMap({type}: {type: 'rezoning' | 'development permit'}) 
   const selectRecord = async function(listRecord: IListRecord | null) {
     console.log(selectedRecord?.id, listRecord?.id)
     if (selectedRecord && listRecord && selectedRecord.id === listRecord.id) {
-      console.log(1)
       await setSelectedRecord(null)
       return
     } else if (listRecord) {
-      console.log(2)
-      scrollToRecord(listRecord.id)
       await setSelectedRecord(listRecord)
+      scrollToRecord(listRecord.id)
     } else {
-      console.log(3)
       await setSelectedRecord(null)
     }
   }

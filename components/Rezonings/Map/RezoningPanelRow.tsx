@@ -90,7 +90,10 @@ export function RezoningPanelRow({listRecord, expanded, onFullDetailsClick}: IPr
                   {fullRecord.description}
                 </div>
                 <br />
-                <a className='text-description-underscore' onClick={() => onFullDetailsClick(fullRecord)}>View full details</a>
+                <a className='text-description-underscore' onClick={(e) =>{
+                  e.stopPropagation()
+                   onFullDetailsClick(fullRecord)
+                }}>View full details</a>
               </>
             )
           )
