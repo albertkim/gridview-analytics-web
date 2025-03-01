@@ -55,7 +55,7 @@ export function PremiumContents() {
       <br />
 
       <p className='lead'>
-        Gridview Premium is currently in early beta for Metro Vancouver. Please contact us at <a href='mailto:albert@gridviewanalytics.com'>albert@gridviewanalytics.com</a> for more information.
+        Gridview Premium is currently in early beta for Metro Vancouver. Please contact us at <a href='mailto:albert275@gmail.com'>albert275@gmail.com</a> for more information.
       </p>
 
       <div style={{height: 200}} />

@@ -153,9 +153,9 @@ export default function({ Component, pageProps }: AppProps) {
                     </div>
                     <div className='col-md-3'>
                       <p className='lead'>Contact</p>
-                      <div className='text-white'>albert@gridviewanalytics.com</div>
+                      <div className='text-white'>albert275@gmail.com</div>
                       <div>
-                        <a  className='text-white' href='mailto:albert@gridviewanalytics.com'>[Email link]</a>
+                        <a  className='text-white' href='mailto:albert275@gmail.com'>[Email link]</a>
                       </div>
                     </div>
                   </div>
